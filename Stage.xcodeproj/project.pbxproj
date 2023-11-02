@@ -14,6 +14,35 @@
 		02FC7A112AF428430043FA48 /* StageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A102AF428430043FA48 /* StageTests.swift */; };
 		02FC7A1B2AF428430043FA48 /* StageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A1A2AF428430043FA48 /* StageUITests.swift */; };
 		02FC7A1D2AF428430043FA48 /* StageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A1C2AF428430043FA48 /* StageUITestsLaunchTests.swift */; };
+		02FC7A332AF428D40043FA48 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A322AF428D40043FA48 /* Stage.swift */; };
+		02FC7A442AF448A60043FA48 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A412AF448A60043FA48 /* AccountView.swift */; };
+		02FC7A452AF448A60043FA48 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A402AF448A60043FA48 /* ProfileView.swift */; };
+		02FC7A462AF448A60043FA48 /* HighlightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A422AF448A60043FA48 /* HighlightsView.swift */; };
+		02FC7A472AF448A60043FA48 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A432AF448A60043FA48 /* CollectionsView.swift */; };
+		02FC7A552AF448AF0043FA48 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4B2AF448AE0043FA48 /* ProfileImage.swift */; };
+		02FC7A562AF448AF0043FA48 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A482AF448AE0043FA48 /* ImagePicker.swift */; };
+		02FC7A572AF448AF0043FA48 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A532AF448AF0043FA48 /* TabBarView.swift */; };
+		02FC7A582AF448AF0043FA48 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4C2AF448AE0043FA48 /* ColorPickerView.swift */; };
+		02FC7A592AF448AF0043FA48 /* SlidingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A542AF448AF0043FA48 /* SlidingImage.swift */; };
+		02FC7A5A2AF448AF0043FA48 /* ContactButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A522AF448AF0043FA48 /* ContactButton.swift */; };
+		02FC7A5B2AF448AF0043FA48 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */; };
+		02FC7A5C2AF448AF0043FA48 /* MoreInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4D2AF448AE0043FA48 /* MoreInfoButton.swift */; };
+		02FC7A5D2AF448AF0043FA48 /* BannerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A512AF448AF0043FA48 /* BannerImageView.swift */; };
+		02FC7A5E2AF448AF0043FA48 /* ImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4A2AF448AE0043FA48 /* ImageSlider.swift */; };
+		02FC7A5F2AF448AF0043FA48 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4E2AF448AF0043FA48 /* ProfileHeader.swift */; };
+		02FC7A602AF448AF0043FA48 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A492AF448AE0043FA48 /* EditButton.swift */; };
+		02FC7A612AF448AF0043FA48 /* ModeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A502AF448AF0043FA48 /* ModeToggle.swift */; };
+		02FC7A692AF448B70043FA48 /* ModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A672AF448B70043FA48 /* ModeController.swift */; };
+		02FC7A6A2AF448B70043FA48 /* StageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A632AF448B70043FA48 /* StageController.swift */; };
+		02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A682AF448B70043FA48 /* AuthController.swift */; };
+		02FC7A6C2AF448B70043FA48 /* ImageSliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A662AF448B70043FA48 /* ImageSliderController.swift */; };
+		02FC7A6D2AF448B70043FA48 /* RemoteStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */; };
+		02FC7A6E2AF448B70043FA48 /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A652AF448B70043FA48 /* ImageController.swift */; };
+		02FC7A6F2AF448B70043FA48 /* ThemeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A642AF448B70043FA48 /* ThemeController.swift */; };
+		02FC7A722AF448EB0043FA48 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 02FC7A712AF448EB0043FA48 /* Supabase */; };
+		02FC7A742AF449040043FA48 /* _Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A732AF449040043FA48 /* _Secrets.swift */; };
+		02FC7A7A2AF44A200043FA48 /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A792AF44A200043FA48 /* SettingsButton.swift */; };
+		02FC7A7C2AF453740043FA48 /* AccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A7B2AF453740043FA48 /* AccountButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +73,34 @@
 		02FC7A162AF428430043FA48 /* StageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FC7A1A2AF428430043FA48 /* StageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageUITests.swift; sourceTree = "<group>"; };
 		02FC7A1C2AF428430043FA48 /* StageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		02FC7A322AF428D40043FA48 /* Stage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
+		02FC7A402AF448A60043FA48 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		02FC7A412AF448A60043FA48 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		02FC7A422AF448A60043FA48 /* HighlightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsView.swift; sourceTree = "<group>"; };
+		02FC7A432AF448A60043FA48 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
+		02FC7A482AF448AE0043FA48 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		02FC7A492AF448AE0043FA48 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
+		02FC7A4A2AF448AE0043FA48 /* ImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlider.swift; sourceTree = "<group>"; };
+		02FC7A4B2AF448AE0043FA48 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
+		02FC7A4C2AF448AE0043FA48 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		02FC7A4D2AF448AE0043FA48 /* MoreInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoButton.swift; sourceTree = "<group>"; };
+		02FC7A4E2AF448AF0043FA48 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		02FC7A502AF448AF0043FA48 /* ModeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeToggle.swift; sourceTree = "<group>"; };
+		02FC7A512AF448AF0043FA48 /* BannerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerImageView.swift; sourceTree = "<group>"; };
+		02FC7A522AF448AF0043FA48 /* ContactButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactButton.swift; sourceTree = "<group>"; };
+		02FC7A532AF448AF0043FA48 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		02FC7A542AF448AF0043FA48 /* SlidingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingImage.swift; sourceTree = "<group>"; };
+		02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStorageController.swift; sourceTree = "<group>"; };
+		02FC7A632AF448B70043FA48 /* StageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageController.swift; sourceTree = "<group>"; };
+		02FC7A642AF448B70043FA48 /* ThemeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeController.swift; sourceTree = "<group>"; };
+		02FC7A652AF448B70043FA48 /* ImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
+		02FC7A662AF448B70043FA48 /* ImageSliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderController.swift; sourceTree = "<group>"; };
+		02FC7A672AF448B70043FA48 /* ModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeController.swift; sourceTree = "<group>"; };
+		02FC7A682AF448B70043FA48 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		02FC7A732AF449040043FA48 /* _Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Secrets.swift; sourceTree = "<group>"; };
+		02FC7A792AF44A200043FA48 /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
+		02FC7A7B2AF453740043FA48 /* AccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FC7A722AF448EB0043FA48 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,9 +152,13 @@
 		02FC79FE2AF428420043FA48 /* Stage */ = {
 			isa = PBXGroup;
 			children = (
+				02FC7A772AF449620043FA48 /* Views */,
+				02FC7A782AF449970043FA48 /* Components */,
+				02FC7A752AF449550043FA48 /* Controllers */,
+				02FC7A762AF4495C0043FA48 /* Model */,
 				02FC79FF2AF428420043FA48 /* StageApp.swift */,
-				02FC7A012AF428420043FA48 /* ContentView.swift */,
 				02FC7A032AF428430043FA48 /* Assets.xcassets */,
+				02FC7A732AF449040043FA48 /* _Secrets.swift */,
 				02FC7A052AF428430043FA48 /* Preview Content */,
 			);
 			path = Stage;
@@ -127,6 +189,62 @@
 			path = StageUITests;
 			sourceTree = "<group>";
 		};
+		02FC7A752AF449550043FA48 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				02FC7A682AF448B70043FA48 /* AuthController.swift */,
+				02FC7A652AF448B70043FA48 /* ImageController.swift */,
+				02FC7A662AF448B70043FA48 /* ImageSliderController.swift */,
+				02FC7A672AF448B70043FA48 /* ModeController.swift */,
+				02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */,
+				02FC7A632AF448B70043FA48 /* StageController.swift */,
+				02FC7A642AF448B70043FA48 /* ThemeController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		02FC7A762AF4495C0043FA48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02FC7A322AF428D40043FA48 /* Stage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		02FC7A772AF449620043FA48 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02FC7A012AF428420043FA48 /* ContentView.swift */,
+				02FC7A432AF448A60043FA48 /* CollectionsView.swift */,
+				02FC7A422AF448A60043FA48 /* HighlightsView.swift */,
+				02FC7A412AF448A60043FA48 /* AccountView.swift */,
+				02FC7A402AF448A60043FA48 /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		02FC7A782AF449970043FA48 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				02FC7A512AF448AF0043FA48 /* BannerImageView.swift */,
+				02FC7A4C2AF448AE0043FA48 /* ColorPickerView.swift */,
+				02FC7A522AF448AF0043FA48 /* ContactButton.swift */,
+				02FC7A492AF448AE0043FA48 /* EditButton.swift */,
+				02FC7A482AF448AE0043FA48 /* ImagePicker.swift */,
+				02FC7A4A2AF448AE0043FA48 /* ImageSlider.swift */,
+				02FC7A502AF448AF0043FA48 /* ModeToggle.swift */,
+				02FC7A4D2AF448AE0043FA48 /* MoreInfoButton.swift */,
+				02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */,
+				02FC7A4E2AF448AF0043FA48 /* ProfileHeader.swift */,
+				02FC7A4B2AF448AE0043FA48 /* ProfileImage.swift */,
+				02FC7A542AF448AF0043FA48 /* SlidingImage.swift */,
+				02FC7A532AF448AF0043FA48 /* TabBarView.swift */,
+				02FC7A792AF44A200043FA48 /* SettingsButton.swift */,
+				02FC7A7B2AF453740043FA48 /* AccountButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +261,9 @@
 			dependencies = (
 			);
 			name = Stage;
+			packageProductDependencies = (
+				02FC7A712AF448EB0043FA48 /* Supabase */,
+			);
 			productName = Stage;
 			productReference = 02FC79FC2AF428420043FA48 /* Stage.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +336,9 @@
 				Base,
 			);
 			mainGroup = 02FC79F32AF428420043FA48;
+			packageReferences = (
+				02FC7A702AF448EB0043FA48 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			productRefGroup = 02FC79FD2AF428420043FA48 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,8 +381,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FC7A6C2AF448B70043FA48 /* ImageSliderController.swift in Sources */,
+				02FC7A562AF448AF0043FA48 /* ImagePicker.swift in Sources */,
+				02FC7A6A2AF448B70043FA48 /* StageController.swift in Sources */,
+				02FC7A572AF448AF0043FA48 /* TabBarView.swift in Sources */,
+				02FC7A6E2AF448B70043FA48 /* ImageController.swift in Sources */,
+				02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */,
+				02FC7A602AF448AF0043FA48 /* EditButton.swift in Sources */,
+				02FC7A552AF448AF0043FA48 /* ProfileImage.swift in Sources */,
+				02FC7A5A2AF448AF0043FA48 /* ContactButton.swift in Sources */,
+				02FC7A692AF448B70043FA48 /* ModeController.swift in Sources */,
+				02FC7A5B2AF448AF0043FA48 /* NavigationBar.swift in Sources */,
+				02FC7A7C2AF453740043FA48 /* AccountButton.swift in Sources */,
+				02FC7A6D2AF448B70043FA48 /* RemoteStorageController.swift in Sources */,
+				02FC7A452AF448A60043FA48 /* ProfileView.swift in Sources */,
+				02FC7A5E2AF448AF0043FA48 /* ImageSlider.swift in Sources */,
+				02FC7A7A2AF44A200043FA48 /* SettingsButton.swift in Sources */,
 				02FC7A022AF428420043FA48 /* ContentView.swift in Sources */,
+				02FC7A5F2AF448AF0043FA48 /* ProfileHeader.swift in Sources */,
+				02FC7A332AF428D40043FA48 /* Stage.swift in Sources */,
+				02FC7A442AF448A60043FA48 /* AccountView.swift in Sources */,
+				02FC7A5C2AF448AF0043FA48 /* MoreInfoButton.swift in Sources */,
+				02FC7A592AF448AF0043FA48 /* SlidingImage.swift in Sources */,
+				02FC7A462AF448A60043FA48 /* HighlightsView.swift in Sources */,
+				02FC7A612AF448AF0043FA48 /* ModeToggle.swift in Sources */,
+				02FC7A472AF448A60043FA48 /* CollectionsView.swift in Sources */,
+				02FC7A5D2AF448AF0043FA48 /* BannerImageView.swift in Sources */,
+				02FC7A6F2AF448B70043FA48 /* ThemeController.swift in Sources */,
+				02FC7A742AF449040043FA48 /* _Secrets.swift in Sources */,
 				02FC7A002AF428420043FA48 /* StageApp.swift in Sources */,
+				02FC7A582AF448AF0043FA48 /* ColorPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +740,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02FC7A702AF448EB0043FA48 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02FC7A712AF448EB0043FA48 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02FC7A702AF448EB0043FA48 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02FC79F42AF428420043FA48 /* Project object */;
 }
