@@ -14,6 +14,7 @@ struct ContentView: View {
     @StateObject var imgBB: RemoteStorageController = RemoteStorageController()
     @StateObject var modeController: ModeController = ModeController()
     @StateObject var auth: AuthController = AuthController()
+    @StateObject var stageController: StageController = StageController()
     
     var body: some View {
         ZStack {
@@ -21,7 +22,6 @@ struct ContentView: View {
             NavigationBar()
             SettingsButton()
             AccountButton()
-//            ModeToggle()
         }
         .environmentObject(imageSliderController)
         .environmentObject(themeController)
@@ -29,6 +29,7 @@ struct ContentView: View {
         .environmentObject(imgBB)
         .environmentObject(modeController)
         .environmentObject(auth)
+        .environmentObject(stageController)
         
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct AccountButton: View {
     @EnvironmentObject var modeController: ModeController
     @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var auth: AuthController
     
     @State private var showPopover = false
     @State private var presentAccountView = false
@@ -19,7 +20,11 @@ struct AccountButton: View {
     var body: some View {
         accountButton
             .fullScreenCover(isPresented: $presentAccountView) {
-                AccountView()
+                if auth.authChangeEvent == .signedIn {
+                    AccountView()
+                } else {
+                    AuthView()
+                }
             }
     }
     

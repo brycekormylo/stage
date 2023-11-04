@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
     @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
     @State var arrowUp: Bool = false
     
     var body: some View {
@@ -48,36 +50,51 @@ struct ProfileView: View {
     
     var info: some View {
         StyledStack {
-            Text("Millie Worms")
+            Text(stageController.stage?.name ?? "Name")
                 .font(.title)
-                .modifier(Editable(offsetX: 100, offsetY: .zero))
-            Text("Ball Photographer")
+            Text(stageController.stage?.profession ?? "Profession")
                 .opacity(0.6)
-            Text("Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection.")
+            Text(stageController.stage?.intro ?? "About me")
                 .padding(.vertical, 8)
         }
         .frame(height: 200)
     }
     
     var moreInfo: some View {
-        StyledStack {
-            Text("Millie Worms")
-                .font(.title)
-            Text("Ball Photographer")
-                .opacity(0.6)
-            Text("Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection.")
-                .padding(.vertical, 8)
-            Spacer()
-            Text("Millie Worms")
-                .font(.title)
-            Text("Ball Photographer")
-                .opacity(0.6)
-            Text("Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection.")
-                .padding(.vertical, 20)
+        VStack {
+            if let segments = stageController.stage?.segments {
+                ForEach(segments) { segment in
+                    SegmentView(segment)
+                    SegmentView(segment)
+                }
+            }
             ContactButton()
                 .padding(.bottom, 40)
+            
         }
-        .frame(height: 600)
+        .padding(.top, 48)
+    }
+}
+
+struct SegmentView: View {
+    let segment: Segment
+    
+    init(_ segment: Segment) {
+        self.segment = segment
+    }
+    
+    var body: some View {
+        StyledStack {
+            HStack {
+                Spacer()
+                Text(segment.title ?? "Title")
+                    .font(.title)
+            }
+            .padding(.horizontal)
+            Text(segment.content ?? "Content")
+                .padding(.vertical, 8)
+        }
+        .frame(height: 300)
     }
 }
 
