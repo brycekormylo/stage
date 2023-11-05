@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountButton: View {
+    
     @EnvironmentObject var modeController: ModeController
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var auth: AuthController
@@ -15,11 +16,10 @@ struct AccountButton: View {
     @State private var showPopover = false
     @State private var presentAccountView = false
     
-    private var size: CGFloat = 48
     
     var body: some View {
         accountButton
-            .fullScreenCover(isPresented: $presentAccountView) {
+            .sheet(isPresented: $presentAccountView) {
                 if auth.authChangeEvent == .signedIn {
                     AccountView()
                 } else {
@@ -34,14 +34,9 @@ struct AccountButton: View {
                 Button(action: {
                     presentAccountView.toggle()
                 }) {
-                    ZStack {
-                        Circle()
-                            .fill(theme.background)
-                        Image(systemName: "person")
-                            .foregroundStyle(theme.text)
-                    }
-                    .frame(width: size, height: size)
+                    Image(systemName: "person")
                 }
+                .modifier(CircleButton())
                 Spacer()
             }
             Spacer()

@@ -16,13 +16,16 @@ class StageController: ObservableObject {
 
     @Published var stage: Stage?
 
-    
     let auth = AuthController.shared
     
-    let sampleStage = Stage(id: UUID(), userID: UUID(), name: "Millie Worms", profession: "Ball Photographer", intro: "Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection.", segments: [Segment(id: UUID(), title: "Just the best", content: "She just loves charlie so damn much it is the cutest funniest thing on earth")], header: URL(string: "https://source.unsplash.com/random/600x480/?landscape")!, profileImage: URL(string: "https://source.unsplash.com/random/300x300/?person,profile")!, highlights: nil, collections: nil)
+    let sampleStage = Stage(id: UUID(), userID: UUID(), name: "Millie Worms", profession: "Ball Photographer", intro: "Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection.", segments: [Segment(id: UUID(), title: "Just the best", content: "She just loves charlie so damn much it is the cutest funniest thing on earth")], header: URL(string: "https://source.unsplash.com/random/600x480/?landscape")!, profileImage: URL(string: "https://source.unsplash.com/random/300x300/?person,profile")!, highlights: sampleImages.enumerated().map { index, url in
+        ID_URL(id: UUID(), url: url, order: index)
+    }, collections: nil)
     
     init() {
-        self.stage = sampleStage
+        if self.stage == nil {
+            self.stage = sampleStage
+        }
     }
     
     func loadStageFromUser(_ id: UUID? = nil) async {

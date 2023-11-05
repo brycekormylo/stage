@@ -18,7 +18,7 @@ struct Stage: Codable, Identifiable {
     var segments: [Segment]?
     var header: URL?
     var profileImage: URL?
-    var highlights: [URL]?
+    var highlights: [ID_URL]?
     var collections: [ImageCollection]?
     
     mutating func setProfileImage(url: URL) {
@@ -29,6 +29,19 @@ struct Stage: Codable, Identifiable {
         self.header = url
     }
     
+    mutating func setName(_ name: String) {
+        self.name = name
+    }
+    
+    mutating func setHighlights(_ urls: [ID_URL]) {
+        self.highlights = urls
+    }
+}
+
+struct ID_URL: Codable, Identifiable, Hashable {
+    let id: UUID
+    let url: URL
+    var order: Int
 }
 
 struct ImageCollection: Codable, Identifiable {

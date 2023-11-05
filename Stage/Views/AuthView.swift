@@ -47,36 +47,44 @@ struct AuthView: View {
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .padding()
-                    .background(
-                        ZStack {
-                            BorderedCapsule()
-                            FieldLabel(fieldLabel: "Email")
-                                .offset(x: -100, y: -26)
-                        })
+                    .background {
+                        HStack {
+                            Text("Email")
+                                .foregroundColor(theme.text.opacity(0.6))
+                                .offset(x: 0, y: -26)
+                            Spacer()
+                        }
+                    }
+
                 SecureField("",text: $password)
                     .foregroundColor(theme.text)
                     .textContentType(.password)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .padding()
-                    .background(
-                        ZStack {
-                            BorderedCapsule()
-                            FieldLabel(fieldLabel: "Password")
-                                .offset(x: -88, y: -26)
-                        })
+                    .background {
+                        HStack {
+                            Text("Password")
+                                .foregroundColor(theme.text.opacity(0.6))
+                                .offset(x: 0, y: -26)
+                            Spacer()
+                        }
+                    }
+                    .offset(x: -88, y: -26)
                 SecureField("", text: $password)
                     .foregroundColor(theme.text)
                     .textContentType(.password)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .padding()
-                    .background(
-                        ZStack {
-                            BorderedCapsule()
-                            FieldLabel(fieldLabel: "Confirm Password")
-                                .offset(x: -60, y: -26)
-                        })
+                    .background{
+                        HStack {
+                            Text("Confirm Password")
+                                .foregroundColor(theme.text.opacity(0.6))
+                                .offset(x: 0, y: -26)
+                            Spacer()
+                        }
+                    }
                     .opacity(mode == .signUp ? 1.0 : 0.0)
                     .animation(.easeInOut, value: mode)
                 buttons

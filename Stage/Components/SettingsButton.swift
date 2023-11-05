@@ -29,7 +29,7 @@ struct SettingsButton: View {
                 }) {
                     ZStack {
                         Capsule()
-                            .fill(modeController.isEditEnabled ? theme.button : theme.background)
+                            .fill(modeController.isEditEnabled ? theme.button : theme.backgroundAccent)
                         Image(systemName: modeController.isEditEnabled ? "checkmark" : "gearshape")
                             .foregroundStyle(theme.text)
                     }
