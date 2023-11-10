@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/supabase-community/postgrest-swift",
       "state" : {
-        "revision" : "e9dae74d410b13383bf804f84efc16700c5a61c1",
-        "version" : "1.0.2"
+        "revision" : "2afb40a2f91ba881db8f04131e1b5146001813a5",
+        "version" : "1.0.3"
       }
     },
     {

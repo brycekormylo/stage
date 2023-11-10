@@ -20,8 +20,7 @@ struct ContentView: View {
         ZStack {
             themeController.background.ignoresSafeArea()
             NavigationBar()
-            SettingsButton()
-            AccountButton()
+            MoreButton()
         }
         .environmentObject(imageSliderController)
         .environmentObject(themeController)
@@ -30,7 +29,6 @@ struct ContentView: View {
         .environmentObject(modeController)
         .environmentObject(auth)
         .environmentObject(stageController)
-        
     }
 }
 

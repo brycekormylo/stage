@@ -11,10 +11,12 @@ struct AuthView: View {
 
     @State var email: String = ""
     @State var password: String = ""
+    @State var confirmedPassword: String = ""
     @State var mode: Mode = .signUp
     @State var error: Error?
     @State var errorMessage: String?
     @State var loginInProgress: Bool = false
+    
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var auth: AuthController
     @EnvironmentObject var theme: ThemeController
@@ -32,7 +34,7 @@ struct AuthView: View {
                         Image(systemName: "xmark")
                             .foregroundColor(theme.text)
                             .padding()
-                            .background(BorderedCapsule(hasColoredBorder: true, hasThinBorder: true))
+                            .background(Capsule().fill(theme.backgroundAccent))
                             .shadow(color: theme.shadow, radius: 4, x: 2, y: 2)
                     }
                 }
@@ -41,6 +43,7 @@ struct AuthView: View {
                     .foregroundColor(theme.text)
                     .padding(.bottom)
                 TextField("", text: $email)
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(theme.text)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
@@ -48,48 +51,73 @@ struct AuthView: View {
                     .textInputAutocapitalization(.never)
                     .padding()
                     .background {
-                        HStack {
-                            Text("Email")
-                                .foregroundColor(theme.text.opacity(0.6))
-                                .offset(x: 0, y: -26)
-                            Spacer()
+                        ZStack {
+                            VStack(spacing: 2) {
+                                Spacer()
+                                theme.text.opacity(0.4)
+                                    .frame(height: 1)
+                                HStack {
+                                    Text("Email")
+                                        .foregroundColor(theme.text.opacity(0.6))
+                                    Spacer()
+                                }
+                            }
                         }
+                        .offset(y: 12)
                     }
 
                 SecureField("",text: $password)
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(theme.text)
                     .textContentType(.password)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .padding()
                     .background {
-                        HStack {
-                            Text("Password")
-                                .foregroundColor(theme.text.opacity(0.6))
-                                .offset(x: 0, y: -26)
-                            Spacer()
+                        ZStack {
+                            VStack(spacing: 2) {
+                                Spacer()
+                                theme.text.opacity(0.4)
+                                    .frame(height: 1)
+                                HStack {
+                                    Text("Password")
+                                        .foregroundColor(theme.text.opacity(0.6))
+                                    Spacer()
+                                }
+                            }
                         }
+                        .offset(y: 12)
                     }
-                    .offset(x: -88, y: -26)
-                SecureField("", text: $password)
+
+                SecureField("", text: $confirmedPassword)
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(theme.text)
                     .textContentType(.password)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .padding()
-                    .background{
-                        HStack {
-                            Text("Confirm Password")
-                                .foregroundColor(theme.text.opacity(0.6))
-                                .offset(x: 0, y: -26)
-                            Spacer()
+                    .background {
+                        ZStack {
+                            VStack(spacing: 2) {
+                                Spacer()
+                                theme.text.opacity(0.4)
+                                    .frame(height: 1)
+                                HStack {
+                                    Text("Confirm Password")
+                                        .foregroundColor(theme.text.opacity(0.6))
+                                    Spacer()
+                                }
+                            }
                         }
+                        .offset(y: 12)
                     }
                     .opacity(mode == .signUp ? 1.0 : 0.0)
                     .animation(.easeInOut, value: mode)
+                if let error = errorMessage {
+                    Text(error)
+                }
                 buttons
                 Spacer()
-                Text(errorMessage ?? "")
             }
             .padding()
             .background(theme.background)
@@ -101,14 +129,17 @@ struct AuthView: View {
             mainActionButton
             modeToggle
         }
-        .padding(.top)
+        .padding(.top, 32)
     }
     
     var mainActionButton: some View {
         HStack {
             Spacer()
             Button(action: {
-                if mode == .signUp {
+                if password != confirmedPassword {
+                    errorMessage = "Passwords do not match"
+                }
+                if mode == .signUp && password == confirmedPassword {
                     Task {
                         do {
                             try await auth.createNewUser(email: email, password: password)
@@ -140,10 +171,11 @@ struct AuthView: View {
             }
             Spacer()
         }
-        .background(
-            BorderedCapsule(hasColoredBorder: true)
-                .shadow(color: theme.shadow, radius: 4, x: 2, y: 2)
-        )
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(theme.button)
+                .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
+        }
     }
     
     var modeToggle: some View {
@@ -158,10 +190,11 @@ struct AuthView: View {
             }
             Spacer()
         }
-        .background(
-            Capsule()
+        .background {
+            RoundedRectangle(cornerRadius: 8)
                 .stroke(theme.accent, lineWidth: 1)
-                .shadow(color: theme.shadow, radius: 4, x: 2, y: 2))
+                .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
+        }
     }
 }
 

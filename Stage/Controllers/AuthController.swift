@@ -74,7 +74,7 @@ class AuthController: ObservableObject {
     
     func deleteAccount() {
         
-        if authChangeEvent == .signedOut { return }
+        guard authChangeEvent == .signedOut else { return }
         
         let userID = session!.user.id
         let query = supabase.database.from("users")
