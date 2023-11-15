@@ -136,7 +136,7 @@ struct AuthView: View {
         HStack {
             Spacer()
             Button(action: {
-                if password != confirmedPassword {
+                if mode == .signUp && password != confirmedPassword {
                     errorMessage = "Passwords do not match"
                 }
                 if mode == .signUp && password == confirmedPassword {

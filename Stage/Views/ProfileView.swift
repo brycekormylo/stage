@@ -11,15 +11,19 @@ struct ProfileView: View {
     
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
+    @EnvironmentObject var imageController: ImageController
     @State var arrowUp: Bool = false
     
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
+                StickyHeader {
+                    BannerImage()
+                }
                 VStack {
-                    ProfileHeader()
+                    ProfileImage(size: 256)
                     info
-                        .padding(.top, 196)
+                    Spacer(minLength: 400)
                     moreInfo
                         .padding(.vertical, 120)
                     GeometryReader { geo in
@@ -29,6 +33,7 @@ struct ProfileView: View {
                             }
                     }
                 }
+                .offset(y: -96)
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.paging)
@@ -41,7 +46,7 @@ struct ProfileView: View {
     }
     
     var arrowButton: some View {
-        ZStack() {
+        ZStack {
             Image(systemName: arrowUp ? "chevron.up" : "chevron.down")
                 .padding(.vertical, 8)
                 .foregroundStyle(theme.text)
@@ -70,7 +75,6 @@ struct ProfileView: View {
             }
             ContactButton()
                 .padding(.bottom, 40)
-            
         }
         .padding(.top, 48)
     }

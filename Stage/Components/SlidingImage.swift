@@ -44,6 +44,9 @@ struct SlidingImage: View {
                         .mask { RoundedRectangle(cornerRadius: 24) }
                         .contentShape(Rectangle())
                         .onTapGesture {
+                            if scrollDirection == .horizontal {
+                                return
+                            }
                             withAnimation {
                                 if isExpanded {
                                     imageSliderController.minimizeAll()

@@ -18,26 +18,18 @@ enum CreateUserError: Error {
 @MainActor
 class AuthController: ObservableObject {
     
-    static var shared = AuthController()
-    
     let supabase: SupabaseClient = SupabaseClient(supabaseURL: Secrets.supabaseURL, supabaseKey: Secrets.supabaseAnonKey)
     
     private var error: Error?
     @Published private(set) var session: Session?
     @Published private(set) var authChangeEvent: AuthChangeEvent?
     
-    init() {
-        startSession()
-    }
-    
-    private func startSession() {
-        Task {
-            do {
-                self.session = try await supabase.auth.session
-                self.authChangeEvent = (session != nil) ? .signedIn : .signedOut
-            } catch {
-                print(error)
-            }
+    func startSession() async {
+        do {
+            self.session = try await supabase.auth.session
+            self.authChangeEvent = (session != nil) ? .signedIn : .signedOut
+        } catch {
+            print(error)
         }
     }
     

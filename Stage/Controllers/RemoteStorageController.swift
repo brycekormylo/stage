@@ -12,7 +12,7 @@ class RemoteStorageController: NSObject, ObservableObject, URLSessionTaskDelegat
 
     func uploadToImgBB(_ image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+        guard let imageData = image.jpegData(compressionQuality: 0.05) else {
             print("Error converting image to JPEG")
             completion(.failure(NSError(domain: "Image Conversion Error", code: 1, userInfo: nil)))
             return
@@ -48,7 +48,7 @@ class RemoteStorageController: NSObject, ObservableObject, URLSessionTaskDelegat
                         //Save url and delete url for each image
                         if let dataDict = json["data"] as? [String: Any],
                            let url = dataDict["url"] as? String {
-                            print("Image uploaded successfully")
+                            print("Image uploaded successfully. URL: \(url)")
                             completion(.success(url))
                         } else {
                             print("Error parsing JSON: data or url not found")

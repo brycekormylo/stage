@@ -1,16 +1,13 @@
 //
-//  ProfileImage.swift
+//  BannerImageView.swift
 //  Fotofolio
 //
-//  Created by Bryce on 10/19/23.
+//  Created by Bryce on 10/23/23.
 //
 
 import SwiftUI
 
-struct ProfileImage: View {
-    
-    let size: CGFloat
-    let stroke: CGFloat
+struct BannerImage: View {
     
     @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
@@ -22,32 +19,26 @@ struct ProfileImage: View {
     @State private var selectedImage: UIImage?
     @State private var imageURL: URL?
     
-    init(size: CGFloat = 100, stroke: CGFloat = 16) {
-        self.size = size
-        self.stroke = stroke
-    }
     
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(theme.background)
-                .frame(width: size+stroke, height: size+stroke)
-            AsyncImage(url: imageURL ?? imageController.profileURL) { phase in
-                phase.image?
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: size, height: size)
+        VStack {
+            AsyncImage(url: imageURL) { result in
+                if let image = result.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .ignoresSafeArea()
+                }
             }
             .overlay {
                 ZStack {
-                    theme.backgroundAccent.ignoresSafeArea()
+                    theme.background.ignoresSafeArea()
                     ProgressView()
                         .foregroundStyle(theme.text)
                         .scaleEffect(2.0)
                 }
                 .opacity(isUploading ? 1.0 : 0.0)
             }
-            .clipShape(Circle())
         }
         .onTapGesture {
             self.isImagePickerPresented = true
@@ -64,11 +55,10 @@ struct ProfileImage: View {
                     case .success(let imageURL):
                         self.imageURL = URL(string: imageURL)!
                         if var stage = stageController.stage {
-                            stage.profileImage = URL(string: imageURL)!
+                            stage.header = URL(string: imageURL)!
                             Task {
                                 await stageController.updateStage(stage)
                             }
-
                         }
                         isUploading = false
                     case .failure(let error):
@@ -78,5 +68,14 @@ struct ProfileImage: View {
                 }
             }
         }
+        .onAppear {
+            if imageURL == nil {
+                imageURL = imageController.bannerURL
+            }
+        }
     }
+}
+
+#Preview {
+    BannerImage()
 }

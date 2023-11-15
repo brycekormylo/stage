@@ -11,7 +11,6 @@ import Combine
 struct HighlightsView: View {
     
     @EnvironmentObject var theme: ThemeController
-    @EnvironmentObject var modeController: ModeController
     @EnvironmentObject var stageController: StageController
     
     @State private var presentReorderSheet = false
@@ -25,15 +24,16 @@ struct HighlightsView: View {
     
     func updateContents() {
         print("update called")
-        if self.contents == [] {
-            self.contents = stageController.stage?.highlights ?? []
+        if let highlights = stageController.stage?.highlights {
+            self.contents = highlights
         }
-        stageController.stage?.setHighlights(contents)
+        
+        stageController.stage?.highlights = contents
     }
     
     var body: some View {
         ZStack {
-            if modeController.isEditEnabled {
+            if stageController.isEditEnabled {
                 reorderButton
                     .zIndex(2.0)
             }

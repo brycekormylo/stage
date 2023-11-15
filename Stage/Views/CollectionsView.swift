@@ -14,7 +14,7 @@ struct CollectionsView: View {
     let content: [URL]
     let imageHeight: CGFloat
     
-    init(_ content: [URL] = sampleImages, imageHeight: CGFloat = 300) {
+    init(_ content: [URL] = sampleImages, imageHeight: CGFloat = 320) {
         self.content = content
         self.imageHeight = imageHeight
     }
@@ -40,24 +40,23 @@ struct CollectionsView: View {
                 collection
                 collection
                 collection
-
             }
         }
         .foregroundStyle(theme.text)
     }
     
     var collection: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                Spacer(minLength: 40)
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack {
                 ForEach(content, id: \.self) { imageURL in
                     SlidingImage(imageURL, .horizontal, startingHeight: imageHeight)
                 }
                 Spacer(minLength: 80)
             }
+            .scrollTargetLayout()
         }
-
+        .scrollTargetBehavior(.viewAligned)
+        .safeAreaPadding(.horizontal, 35)
         .padding(.bottom)
-        
     }
 }

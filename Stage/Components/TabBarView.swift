@@ -58,12 +58,10 @@ struct TabBarView: View {
                     currentTab = .collections
                 }
         }
-        .padding(.horizontal, 8)
         .padding(6)
         .background { 
             Capsule()
                 .fill(theme.backgroundAccent)
-                .strokeBorder(theme.buttonBorder.opacity(0.2))
         }
         .overlay { SelectedTabCircleView(currentTab: $currentTab) }
         .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
@@ -95,11 +93,11 @@ struct SelectedTabCircleView: View {
     private var horizontalOffset: CGFloat {
         switch currentTab {
         case .profile:
-            return -72
+            return -64
         case .highlights:
             return 0
         case .collections:
-            return 72
+            return 64
         }
     }
     
@@ -109,7 +107,7 @@ struct SelectedTabCircleView: View {
                 .fill(theme.buttonBackground)
                 .frame(width: buttonDimen , height: buttonDimen)
             Circle()
-                .stroke(theme.buttonBorder, lineWidth: 1)
+                .stroke(theme.buttonBorder.opacity(0.4), lineWidth: 1)
                 .frame(width: buttonDimen , height: buttonDimen)
             TabBarButton(imageName: "\(currentTab.rawValue).fill")
                 .foregroundColor(theme.text)

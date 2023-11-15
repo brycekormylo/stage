@@ -15,6 +15,7 @@
 		024EBFF52AF6CBD800D432BC /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF42AF6CBD800D432BC /* CircleButton.swift */; };
 		024EBFF72AF7359500D432BC /* InteractiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF62AF7359500D432BC /* InteractiveListView.swift */; };
 		024EF0D92AFEB28900CB754B /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF0D82AFEB28900CB754B /* StyledButton.swift */; };
+		025980AF2B0296A20065F69E /* StickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025980AE2B0296A20065F69E /* StickyHeader.swift */; };
 		02630B5F2AFEEA500091DFD7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02630B5E2AFEEA500091DFD7 /* Extensions.swift */; };
 		027817852AFC6169002A9B31 /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027817842AFC6169002A9B31 /* MoreButton.swift */; };
 		02DAC99F2AF55FFE001585A6 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAC99E2AF55FFE001585A6 /* AccountView.swift */; };
@@ -37,12 +38,8 @@
 		02FC7A592AF448AF0043FA48 /* SlidingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A542AF448AF0043FA48 /* SlidingImage.swift */; };
 		02FC7A5A2AF448AF0043FA48 /* ContactButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A522AF448AF0043FA48 /* ContactButton.swift */; };
 		02FC7A5B2AF448AF0043FA48 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */; };
-		02FC7A5D2AF448AF0043FA48 /* BannerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A512AF448AF0043FA48 /* BannerImageView.swift */; };
+		02FC7A5D2AF448AF0043FA48 /* BannerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A512AF448AF0043FA48 /* BannerImage.swift */; };
 		02FC7A5E2AF448AF0043FA48 /* ImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4A2AF448AE0043FA48 /* ImageSlider.swift */; };
-		02FC7A5F2AF448AF0043FA48 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A4E2AF448AF0043FA48 /* ProfileHeader.swift */; };
-		02FC7A602AF448AF0043FA48 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A492AF448AE0043FA48 /* EditButton.swift */; };
-		02FC7A612AF448AF0043FA48 /* ModeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A502AF448AF0043FA48 /* ModeToggle.swift */; };
-		02FC7A692AF448B70043FA48 /* ModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A672AF448B70043FA48 /* ModeController.swift */; };
 		02FC7A6A2AF448B70043FA48 /* StageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A632AF448B70043FA48 /* StageController.swift */; };
 		02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A682AF448B70043FA48 /* AuthController.swift */; };
 		02FC7A6C2AF448B70043FA48 /* ImageSliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A662AF448B70043FA48 /* ImageSliderController.swift */; };
@@ -79,6 +76,7 @@
 		024EBFF42AF6CBD800D432BC /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		024EBFF62AF7359500D432BC /* InteractiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveListView.swift; sourceTree = "<group>"; };
 		024EF0D82AFEB28900CB754B /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
+		025980AE2B0296A20065F69E /* StickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeader.swift; sourceTree = "<group>"; };
 		02630B5E2AFEEA500091DFD7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		027817842AFC6169002A9B31 /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 		02DAC99E2AF55FFE001585A6 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -98,14 +96,11 @@
 		02FC7A422AF448A60043FA48 /* HighlightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsView.swift; sourceTree = "<group>"; };
 		02FC7A432AF448A60043FA48 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
 		02FC7A482AF448AE0043FA48 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		02FC7A492AF448AE0043FA48 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		02FC7A4A2AF448AE0043FA48 /* ImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlider.swift; sourceTree = "<group>"; };
 		02FC7A4B2AF448AE0043FA48 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		02FC7A4C2AF448AE0043FA48 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
-		02FC7A4E2AF448AF0043FA48 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		02FC7A502AF448AF0043FA48 /* ModeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeToggle.swift; sourceTree = "<group>"; };
-		02FC7A512AF448AF0043FA48 /* BannerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerImageView.swift; sourceTree = "<group>"; };
+		02FC7A512AF448AF0043FA48 /* BannerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerImage.swift; sourceTree = "<group>"; };
 		02FC7A522AF448AF0043FA48 /* ContactButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactButton.swift; sourceTree = "<group>"; };
 		02FC7A532AF448AF0043FA48 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		02FC7A542AF448AF0043FA48 /* SlidingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingImage.swift; sourceTree = "<group>"; };
@@ -114,7 +109,6 @@
 		02FC7A642AF448B70043FA48 /* ThemeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeController.swift; sourceTree = "<group>"; };
 		02FC7A652AF448B70043FA48 /* ImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		02FC7A662AF448B70043FA48 /* ImageSliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderController.swift; sourceTree = "<group>"; };
-		02FC7A672AF448B70043FA48 /* ModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeController.swift; sourceTree = "<group>"; };
 		02FC7A682AF448B70043FA48 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		02FC7A732AF449040043FA48 /* _Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,7 +205,6 @@
 				02FC7A682AF448B70043FA48 /* AuthController.swift */,
 				02FC7A652AF448B70043FA48 /* ImageController.swift */,
 				02FC7A662AF448B70043FA48 /* ImageSliderController.swift */,
-				02FC7A672AF448B70043FA48 /* ModeController.swift */,
 				02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */,
 				02FC7A632AF448B70043FA48 /* StageController.swift */,
 				02FC7A642AF448B70043FA48 /* ThemeController.swift */,
@@ -225,6 +218,7 @@
 		02FC7A762AF4495C0043FA48 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				02630B5E2AFEEA500091DFD7 /* Extensions.swift */,
 				02FC7A322AF428D40043FA48 /* Stage.swift */,
 			);
 			path = Model;
@@ -234,17 +228,14 @@
 			isa = PBXGroup;
 			children = (
 				02FC7A012AF428420043FA48 /* ContentView.swift */,
-				02FC7A432AF448A60043FA48 /* CollectionsView.swift */,
+				02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */,
+				02FC7A402AF448A60043FA48 /* ProfileView.swift */,
 				02FC7A422AF448A60043FA48 /* HighlightsView.swift */,
+				02FC7A432AF448A60043FA48 /* CollectionsView.swift */,
 				024EBFF62AF7359500D432BC /* InteractiveListView.swift */,
 				022118892AF86B030098887D /* CollectionDetailView.swift */,
-				027817842AFC6169002A9B31 /* MoreButton.swift */,
-				02630B5E2AFEEA500091DFD7 /* Extensions.swift */,
-				0221188B2AF86E000098887D /* SampleGridLayoutView.swift */,
-				0221188D2AF873DD0098887D /* ImageGridRow.swift */,
 				02FC7A412AF448A60043FA48 /* AuthView.swift */,
 				02DAC99E2AF55FFE001585A6 /* AccountView.swift */,
-				02FC7A402AF448A60043FA48 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,15 +243,15 @@
 		02FC7A782AF449970043FA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				025980AE2B0296A20065F69E /* StickyHeader.swift */,
+				027817842AFC6169002A9B31 /* MoreButton.swift */,
+				0221188B2AF86E000098887D /* SampleGridLayoutView.swift */,
+				0221188D2AF873DD0098887D /* ImageGridRow.swift */,
 				02FC7A4C2AF448AE0043FA48 /* ColorPickerView.swift */,
 				02FC7A522AF448AF0043FA48 /* ContactButton.swift */,
-				02FC7A492AF448AE0043FA48 /* EditButton.swift */,
 				02FC7A482AF448AE0043FA48 /* ImagePicker.swift */,
 				02FC7A4A2AF448AE0043FA48 /* ImageSlider.swift */,
-				02FC7A502AF448AF0043FA48 /* ModeToggle.swift */,
-				02FC7A4F2AF448AF0043FA48 /* NavigationBar.swift */,
-				02FC7A4E2AF448AF0043FA48 /* ProfileHeader.swift */,
-				02FC7A512AF448AF0043FA48 /* BannerImageView.swift */,
+				02FC7A512AF448AF0043FA48 /* BannerImage.swift */,
 				02FC7A4B2AF448AE0043FA48 /* ProfileImage.swift */,
 				02FC7A542AF448AF0043FA48 /* SlidingImage.swift */,
 				02FC7A532AF448AF0043FA48 /* TabBarView.swift */,
@@ -413,12 +404,10 @@
 				02FC7A6E2AF448B70043FA48 /* ImageController.swift in Sources */,
 				02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */,
 				027817852AFC6169002A9B31 /* MoreButton.swift in Sources */,
-				02FC7A602AF448AF0043FA48 /* EditButton.swift in Sources */,
 				02FC7A552AF448AF0043FA48 /* ProfileImage.swift in Sources */,
 				0221188A2AF86B030098887D /* CollectionDetailView.swift in Sources */,
 				02FC7A5A2AF448AF0043FA48 /* ContactButton.swift in Sources */,
 				02630B5F2AFEEA500091DFD7 /* Extensions.swift in Sources */,
-				02FC7A692AF448B70043FA48 /* ModeController.swift in Sources */,
 				02FC7A5B2AF448AF0043FA48 /* NavigationBar.swift in Sources */,
 				0221188E2AF873DD0098887D /* ImageGridRow.swift in Sources */,
 				02FC7A6D2AF448B70043FA48 /* RemoteStorageController.swift in Sources */,
@@ -427,14 +416,13 @@
 				02FC7A5E2AF448AF0043FA48 /* ImageSlider.swift in Sources */,
 				024EBFF52AF6CBD800D432BC /* CircleButton.swift in Sources */,
 				02FC7A022AF428420043FA48 /* ContentView.swift in Sources */,
-				02FC7A5F2AF448AF0043FA48 /* ProfileHeader.swift in Sources */,
 				02FC7A332AF428D40043FA48 /* Stage.swift in Sources */,
+				025980AF2B0296A20065F69E /* StickyHeader.swift in Sources */,
 				02FC7A442AF448A60043FA48 /* AuthView.swift in Sources */,
 				02FC7A592AF448AF0043FA48 /* SlidingImage.swift in Sources */,
 				02FC7A462AF448A60043FA48 /* HighlightsView.swift in Sources */,
-				02FC7A612AF448AF0043FA48 /* ModeToggle.swift in Sources */,
 				02FC7A472AF448A60043FA48 /* CollectionsView.swift in Sources */,
-				02FC7A5D2AF448AF0043FA48 /* BannerImageView.swift in Sources */,
+				02FC7A5D2AF448AF0043FA48 /* BannerImage.swift in Sources */,
 				0221188C2AF86E000098887D /* SampleGridLayoutView.swift in Sources */,
 				02FC7A6F2AF448B70043FA48 /* ThemeController.swift in Sources */,
 				02FC7A742AF449040043FA48 /* _Secrets.swift in Sources */,

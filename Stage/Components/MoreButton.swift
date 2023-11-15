@@ -10,7 +10,7 @@ import SwiftUI
 struct MoreButton: View {
     
     @EnvironmentObject var auth: AuthController
-    @EnvironmentObject var modeController: ModeController
+    @EnvironmentObject var stageController: StageController
     @EnvironmentObject var theme: ThemeController
     
     @State private var presentAccountView = false
@@ -23,30 +23,29 @@ struct MoreButton: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: {
-                    withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
-                        modeController.isEditEnabled ? modeController.isEditEnabled.toggle() : isExtended.toggle()
+                HStack(spacing: 18) {
+                    if isExtended && !stageController.isEditEnabled {
+                        options
                     }
-                }) {
-                    HStack(spacing: 18) {
-                        if isExtended && !modeController.isEditEnabled {
-                            options
-                        }
-                        if modeController.isEditEnabled {
-                            Text("Save")
-                                .foregroundStyle(theme.text)
-                        }
-                        Image(systemName: modeController.isEditEnabled ? "checkmark" : "ellipsis")
+                    if stageController.isEditEnabled {
+                        Text("Save")
                             .foregroundStyle(theme.text)
                     }
-                    .frame(height: height)
-//                    .if(modeController.isEditEnabled) { view in
-//                        view.frame(width: width)
-//                    }
-                    .padding(.horizontal)
-                    .background {
-                        Capsule()
-                            .fill(modeController.isEditEnabled ? theme.button : theme.backgroundAccent)
+                    Image(systemName: stageController.isEditEnabled ? "checkmark" : "ellipsis")
+                        .foregroundStyle(theme.text)
+                }
+                .frame(height: height)
+                .padding(.horizontal)
+                .background {
+                    Capsule()
+                        .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
+                }
+                .onTapGesture {
+                    withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
+                        if stageController.isEditEnabled {
+                            stageController.isEditEnabled.toggle()
+                        }
+                        isExtended.toggle()
                     }
                 }
             }
@@ -94,10 +93,13 @@ struct MoreButton: View {
     var editButton: some View {
         Button(action: {
             withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
-                modeController.isEditEnabled.toggle()
+                if auth.authChangeEvent == .signedIn {
+                    stageController.isEditEnabled.toggle()
+                }
             }
         }) {
             Image(systemName: "pencil")
+                .opacity(auth.authChangeEvent == .signedIn ? 1.0 : 0.4)
         }
     }
 
