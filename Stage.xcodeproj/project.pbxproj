@@ -14,6 +14,7 @@
 		0238317C2B07DAB50058C217 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238317B2B07DAB50058C217 /* EditableText.swift */; };
 		023DBD3A2AFD662400AD254D /* DataSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DBD392AFD662400AD254D /* DataSequence.swift */; };
 		023DBD3C2AFDBE5E00AD254D /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DBD3B2AFDBE5E00AD254D /* KeychainManager.swift */; };
+		023E8BCB2B17E777008E97EF /* TestInteractiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023E8BCA2B17E777008E97EF /* TestInteractiveList.swift */; };
 		024EBFF52AF6CBD800D432BC /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF42AF6CBD800D432BC /* CircleButton.swift */; };
 		024EBFF72AF7359500D432BC /* InteractiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF62AF7359500D432BC /* InteractiveListView.swift */; };
 		024EF0D92AFEB28900CB754B /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF0D82AFEB28900CB754B /* StyledButton.swift */; };
@@ -77,6 +78,7 @@
 		0238317B2B07DAB50058C217 /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		023DBD392AFD662400AD254D /* DataSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSequence.swift; sourceTree = "<group>"; };
 		023DBD3B2AFDBE5E00AD254D /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		023E8BCA2B17E777008E97EF /* TestInteractiveList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInteractiveList.swift; sourceTree = "<group>"; };
 		024EBFF42AF6CBD800D432BC /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		024EBFF62AF7359500D432BC /* InteractiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveListView.swift; sourceTree = "<group>"; };
 		024EF0D82AFEB28900CB754B /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		02FC7A782AF449970043FA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				023E8BCA2B17E777008E97EF /* TestInteractiveList.swift */,
 				025980AE2B0296A20065F69E /* StickyHeader.swift */,
 				027817842AFC6169002A9B31 /* MoreButton.swift */,
 				0221188B2AF86E000098887D /* SampleGridLayoutView.swift */,
@@ -408,6 +411,7 @@
 				02FC7A6A2AF448B70043FA48 /* StageController.swift in Sources */,
 				02FC7A572AF448AF0043FA48 /* TabBarView.swift in Sources */,
 				02FC7A6E2AF448B70043FA48 /* ImageController.swift in Sources */,
+				023E8BCB2B17E777008E97EF /* TestInteractiveList.swift in Sources */,
 				02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */,
 				027817852AFC6169002A9B31 /* MoreButton.swift in Sources */,
 				02FC7A552AF448AF0043FA48 /* ProfileImage.swift in Sources */,

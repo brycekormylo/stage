@@ -26,12 +26,8 @@ struct HighlightsView: View {
     }
     
     func updateContents() {
-        print("update called")
         if let highlights = stageController.stage?.highlights {
             self.contents = highlights
-        }
-        if !contents.isEmpty {
-            stageController.stage?.highlights = contents
         }
     }
     
@@ -61,7 +57,7 @@ struct HighlightsView: View {
                     VStack() {
                         Spacer()
                         NewImageButton(selectedImage: self.$selectedImage)
-                        ChangeOrderButton(contents: self.$contents)
+                        ChangeHighlightOrderButton()
                     }
                     .padding(.bottom, 120)
                 }
@@ -93,21 +89,25 @@ struct HighlightsView: View {
                 }
             }
         }
+        .onChange(of: stageController.isEditEnabled) {
+            updateContents()
+        }
     }
 }
 
-private struct ChangeOrderButton: View {
+private struct ChangeHighlightOrderButton: View {
     
-    @Binding var contents: [ID_URL]
+    @EnvironmentObject var stageController: StageController
+    
     @State private var presentReorderSheet = false
-    
+
     var body: some View {
         Button(action: { presentReorderSheet.toggle() }) {
             Image(systemName: "arrow.up.arrow.down")
         }
         .modifier(CircleButton())
         .fullScreenCover(isPresented: $presentReorderSheet) {
-            InteractiveListView(contents: $contents)
+            InteractiveListView()
         }
     }
     
