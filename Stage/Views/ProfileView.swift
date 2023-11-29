@@ -12,20 +12,53 @@ struct ProfileView: View {
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
     @EnvironmentObject var imageController: ImageController
+    
     @State var arrowUp: Bool = false
+    
+    @State var name: String = "--"
+    @State var profession: String = "--"
+    @State var intro: String = "--"
+    
+    @State var segments: [Segment] = []
+    
+    func syncProfileInfo() {
+        DispatchQueue.main.async {
+            if let stage = stageController.stage {
+                self.name = stage.name ?? ""
+                self.profession = stage.profession ?? ""
+                self.intro = stage.intro ?? ""
+                self.segments = stage.segments ?? []
+            }
+        }
+    }
+    
+    func updateProfileInfo() {
+        DispatchQueue.main.async {
+            if var stage = stageController.stage {
+                stage.name = name
+                stage.profession = profession
+                stage.intro = intro
+                stage.segments = segments
+                Task {
+                    await stageController.updateStage(stage)
+                    syncProfileInfo()
+                }
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
-                StickyHeader {
-                    BannerImage()
-                }
+                BannerImage()
                 VStack {
                     ProfileImage(size: 256)
                     info
-                    Spacer(minLength: 400)
-                    moreInfo
-                        .padding(.vertical, 120)
+                    ProfilePageFrame {
+                        ForEach(stageController.sampleSegments) { segment in
+                            SegmentView(segment)
+                        }
+                    }
                     GeometryReader { geo in
                         Color.clear
                             .onChange(of: geo.frame(in: .global).minY) {
@@ -43,62 +76,118 @@ struct ProfileView: View {
                 .padding(arrowUp ? .top : .bottom, arrowUp ? 64 : 108)
         }
         .ignoresSafeArea()
+        .onAppear {
+            syncProfileInfo()
+        }
+        .onChange(of: stageController.stage) {
+            syncProfileInfo()
+        }
+        .onChange(of: stageController.isEditEnabled) {
+            if !stageController.isEditEnabled {
+                updateProfileInfo()
+            }
+        }
     }
     
     var arrowButton: some View {
-        ZStack {
-            Image(systemName: arrowUp ? "chevron.up" : "chevron.down")
-                .padding(.vertical, 8)
-                .foregroundStyle(theme.text)
-        }
+        Image(systemName: arrowUp ? "chevron.up" : "chevron.down")
+            .padding(.vertical, 8)
+            .foregroundStyle(theme.text)
     }
     
     var info: some View {
-        StyledStack {
-            Text(stageController.stage?.name ?? "Name")
-                .font(.title)
-            Text(stageController.stage?.profession ?? "Profession")
-                .opacity(0.6)
-            Text(stageController.stage?.intro ?? "About me")
-                .padding(.vertical, 8)
-        }
-        .frame(height: 200)
-    }
-    
-    var moreInfo: some View {
         VStack {
-            if let segments = stageController.stage?.segments {
-                ForEach(segments) { segment in
-                    SegmentView(segment)
-                    SegmentView(segment)
-                }
+            EditableText(content: $name)
+                .font(.title)
+            EditableText(content: $profession)
+                .opacity(0.6)
+            CaptionView {
+                EditableText(content: $intro)
+                    .padding(.vertical, 8)
             }
-            ContactButton()
-                .padding(.bottom, 40)
         }
-        .padding(.top, 48)
+        .foregroundStyle(theme.text)
+    }
+}
+
+struct ProfilePageFrame<Content: View>: View {
+    
+    @EnvironmentObject var theme: ThemeController
+    @ViewBuilder var content: Content
+    
+    var body: some View {
+        VStack {
+            content
+        }
+        .frame(minHeight: UIScreen.main.bounds.height - 240)
+        .background {
+            theme.backgroundAccent.opacity(0.2)
+        }
+        .padding(.top, 240)
+
+    }
+}
+
+struct CaptionView<Content: View>: View {
+
+    @EnvironmentObject var theme: ThemeController
+    @ViewBuilder var content: Content
+    
+    var body: some View {
+        HStack {
+            content
+        }
+        .frame(height: 80)
+        .padding()
+        .background {
+            theme.backgroundAccent.opacity(0.2)
+        }
+        .cornerRadius(8)
     }
 }
 
 struct SegmentView: View {
-    let segment: Segment
     
-    init(_ segment: Segment) {
-        self.segment = segment
+    @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
+    @State private var segment: Segment
+    
+    @State private var segmentTitle: String
+    @State private var segmentContent: String
+    
+    init(_ seg: Segment) {
+        _segment = State(initialValue: seg)
+        if let title = seg.title {
+            _segmentTitle = State(initialValue: title)
+        } else {
+            _segmentTitle = State(initialValue: "No title")
+        }
+        if let content = seg.content {
+            _segmentContent = State(initialValue: content)
+        } else {
+            _segmentContent = State(initialValue: "No content")
+
+        }
     }
     
     var body: some View {
         StyledStack {
             HStack {
                 Spacer()
-                Text(segment.title ?? "Title")
-                    .font(.title)
+                EditableText(content: $segmentTitle)
+                    .font(.title2)
             }
             .padding(.horizontal)
-            Text(segment.content ?? "Content")
-                .padding(.vertical, 8)
+            Group {
+                Spacer()
+                EditableText(content: $segmentContent)
+                Spacer()
+            }
         }
-        .frame(height: 300)
+        .padding()
+        .background(Color.black)
+        .padding(.vertical, 4)
+        .frame(minHeight: (UIScreen.main.bounds.height - 240)/3)
     }
 }
 
@@ -112,11 +201,6 @@ struct StyledStack<Content: View>: View {
             content
         }
         .foregroundStyle(theme.text)
-        .padding(.horizontal)
     }
     
-}
-
-#Preview {
-    ProfileView()
 }

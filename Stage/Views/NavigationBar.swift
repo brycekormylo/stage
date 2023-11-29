@@ -28,7 +28,3 @@ struct NavigationBar: View {
         .ignoresSafeArea()
     }
 }
-
-#Preview {
-    NavigationBar()
-}

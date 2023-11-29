@@ -11,6 +11,7 @@ struct StickyHeader<Content: View>: View {
     
     var minHeight: CGFloat
     var content: Content
+//    @State var isEditing: Bool = false
     
     init(minHeight: CGFloat = 320, @ViewBuilder content: () -> Content) {
         self.minHeight = minHeight

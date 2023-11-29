@@ -21,27 +21,13 @@ struct BannerImage: View {
     
     
     var body: some View {
-        VStack {
-            AsyncImage(url: imageURL) { result in
-                if let image = result.image {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .ignoresSafeArea()
-                }
-            }
-            .overlay {
-                ZStack {
-                    theme.background.ignoresSafeArea()
-                    ProgressView()
-                        .foregroundStyle(theme.text)
-                        .scaleEffect(2.0)
-                }
-                .opacity(isUploading ? 1.0 : 0.0)
-            }
+        StickyHeader {
+            CachedAsyncImage(url: imageURL)
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
         }
         .onTapGesture {
-            self.isImagePickerPresented = true
+            isImagePickerPresented.toggle()
         }
         .disabled(!stageController.isEditEnabled)
         .sheet(isPresented: $isImagePickerPresented) {

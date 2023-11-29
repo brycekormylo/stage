@@ -18,6 +18,8 @@ enum CreateUserError: Error {
 @MainActor
 class AuthController: ObservableObject {
     
+    static let shared = AuthController()
+    
     let supabase: SupabaseClient = SupabaseClient(supabaseURL: Secrets.supabaseURL, supabaseKey: Secrets.supabaseAnonKey)
     
     private var error: Error?
@@ -26,8 +28,17 @@ class AuthController: ObservableObject {
     
     func startSession() async {
         do {
-            self.session = try await supabase.auth.session
-            self.authChangeEvent = (session != nil) ? .signedIn : .signedOut
+            if let storedSessionInfo = UserDefaults.standard.data(forKey: "userSession"),
+               let decodedSession = try? JSONDecoder().decode(Session.self, from: storedSessionInfo) {
+                self.session = decodedSession
+                self.authChangeEvent = .signedIn
+            } else {
+                self.session = try await supabase.auth.session
+                self.authChangeEvent = (session != nil) ? .signedIn : .signedOut
+                if let encodedSession = try? JSONEncoder().encode(session) {
+                    UserDefaults.standard.set(encodedSession, forKey: "userSession")
+                }
+            }
         } catch {
             print(error)
         }
@@ -50,6 +61,7 @@ class AuthController: ObservableObject {
                 try await supabase.auth.signOut()
                 self.authChangeEvent = .signedOut
                 self.session = nil
+                clearStoredSession()
             } catch {
                 print(error)
             }
@@ -81,5 +93,9 @@ class AuthController: ObservableObject {
                 print(error)
             }
         }
+    }
+    
+    func clearStoredSession() {
+        UserDefaults.standard.removeObject(forKey: "userSession")
     }
 }

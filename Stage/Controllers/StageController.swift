@@ -18,24 +18,32 @@ enum AppMode {
 class StageController: ObservableObject {
     
     let supabase: SupabaseClient = SupabaseClient(supabaseURL: Secrets.supabaseURL, supabaseKey: Secrets.supabaseAnonKey)
-    let auth: AuthController = AuthController()
+    let auth = AuthController.shared
     let remoteStorageController = RemoteStorageController()
+    
+    let sampleSegments = [Segment(id: UUID(), title: "About the dogs", content: "Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection."), Segment(id: UUID(), title: "What they do", content: "She just loves charlie so damn much it is the cutest funniest thing on earth"), Segment(id: UUID(), title: "Why it's cute", content: "She just loves charlie so damn much it is the cutest funniest thing on earth")]
 
-    var originalStage: Stage?
+    private (set) var originalStage: Stage?
+    
     @Published var stage: Stage?
+
     @Published var isEditEnabled: Bool = false {
         didSet {
-            if self.isEditEnabled {
-                activateBackup()
-            } else {
-                restore()
+            if oldValue != isEditEnabled {
+                if isEditEnabled {
+                    activateBackup()
+                } else {
+                    clearBackup()
+                }
             }
         }
     }
 
     init() {
         Task {
-            await self.auth.startSession()
+            if auth.authChangeEvent != .signedIn {
+                await self.auth.startSession()
+            }
             await self.loadStageFromUser()
             if stage == nil {
                 await createNewStage()
@@ -61,6 +69,7 @@ class StageController: ObservableObject {
             if let stage = stage {
                 await updateStage(stage)
                 await loadStageFromUser()
+                self.isEditEnabled = false
             }
         }
     }
@@ -91,9 +100,9 @@ class StageController: ObservableObject {
                 let query = supabase.database
                     .from("stages")
                     .update(values: ["content": compressedStage.content])
-                    .eq(column: "id", value: userID)
+                    .eq(column: "user_id", value: userID)
                 do {
-                    try await query.execute().value
+                    try await query.execute()
                     await loadStageFromUser()
                 } catch {
                     print(error)
@@ -114,7 +123,7 @@ class StageController: ObservableObject {
                     .from("stages")
                     .insert(values: ["content": compressedStage.content])
                 do {
-                    try await query.execute().value
+                    try await query.execute()
                 } catch {
                     print(error)
                 }
@@ -128,7 +137,7 @@ class StageController: ObservableObject {
         let query = supabase.database
             .from("stages")
             .delete()
-            .eq(column: "stage_id", value: compressedStage.id)
+            .eq(column: "id", value: compressedStage.id)
         Task {
             do {
                 try await query.execute()

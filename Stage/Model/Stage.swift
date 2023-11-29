@@ -89,7 +89,10 @@ struct StageContent: Codable {
     }
 }
 
-struct Stage: Codable, Identifiable {
+struct Stage: Codable, Identifiable, Equatable {
+    static func == (lhs: Stage, rhs: Stage) -> Bool {
+        lhs.id == rhs.id
+    }
     
     var id: UUID = UUID()
     var userID: UUID
@@ -120,9 +123,11 @@ struct Stage: Codable, Identifiable {
 
 
 struct ID_URL: Codable, Identifiable, Hashable {
+    
     let id: UUID
     let url: URL
     var order: Int
+    
 }
 
 struct ImageCollection: Codable, Identifiable {

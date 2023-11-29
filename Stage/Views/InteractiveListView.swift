@@ -12,6 +12,7 @@ struct InteractiveListView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @EnvironmentObject var stageController: StageController
     @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
     

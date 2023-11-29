@@ -43,7 +43,7 @@ struct MoreButton: View {
                 .onTapGesture {
                     withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
                         if stageController.isEditEnabled {
-                            stageController.isEditEnabled.toggle()
+                            stageController.submitChanges()
                         }
                         isExtended.toggle()
                     }
