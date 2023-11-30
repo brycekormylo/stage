@@ -20,6 +20,10 @@ class InteractiveListViewModel: ObservableObject {
     func move(from source: IndexSet, to destination: Int) {
         orderedHighlights.move(fromOffsets: source, toOffset: destination)
     }
+    
+    func delete(at offsets: IndexSet) {
+        orderedHighlights.remove(atOffsets: offsets)
+    }
 }
 
 
@@ -54,6 +58,7 @@ struct InteractiveListView: View {
                         .listRowBackground(theme.background)
                     }
                     .onMove(perform: viewModel.move)
+                    .onDelete(perform: viewModel.delete)
                 }
                 .padding(.top, 80)
                 .listStyle(.plain)

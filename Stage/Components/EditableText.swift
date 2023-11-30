@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct EditableText: View {
-    
+struct EditableField: View {
     @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
@@ -20,6 +19,28 @@ struct EditableText: View {
             if stageController.isEditEnabled {
                 TextField("\(content)", text: $content)
                     .background(Color.clear)
+                    .multilineTextAlignment(.center)
+            } else {
+                Text(content)
+            }
+        }
+        .foregroundStyle(theme.text)
+    }
+}
+
+struct EditableText: View {
+    
+    @EnvironmentObject var imageController: ImageController
+    @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
+    
+    @Binding var content: String
+    
+    var body: some View {
+        Group {
+            if stageController.isEditEnabled {
+                TextEditor(text: $content)
+                    .scrollContentBackground(.hidden)
                     .multilineTextAlignment(.center)
             } else {
                 Text(content)

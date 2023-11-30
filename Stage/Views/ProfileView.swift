@@ -97,9 +97,9 @@ struct ProfileView: View {
     
     var info: some View {
         VStack {
-            EditableText(content: $name)
+            EditableField(content: $name)
                 .font(.title)
-            EditableText(content: $profession)
+            EditableField(content: $profession)
                 .opacity(0.6)
             CaptionView {
                 EditableText(content: $intro)
@@ -174,7 +174,7 @@ struct SegmentView: View {
         StyledStack {
             HStack {
                 Spacer()
-                EditableText(content: $segmentTitle)
+                EditableField(content: $segmentTitle)
                     .font(.title2)
             }
             .padding(.horizontal)

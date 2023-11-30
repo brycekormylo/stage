@@ -41,7 +41,7 @@ struct MoreButton: View {
                         .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
                 }
                 .onTapGesture {
-                    withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
+                    withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
                         if stageController.isEditEnabled {
                             stageController.submitChanges()
                         }
@@ -92,9 +92,9 @@ struct MoreButton: View {
     
     var editButton: some View {
         Button(action: {
-            withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
-                if auth.authChangeEvent == .signedIn {
-                    stageController.isEditEnabled.toggle()
+            if auth.authChangeEvent == .signedIn {
+                withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
+                        stageController.isEditEnabled.toggle()
                 }
             }
         }) {

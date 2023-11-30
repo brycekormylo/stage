@@ -50,7 +50,10 @@ struct HighlightsView: View {
                     }
                     Spacer(minLength: 240)
                 }
+                .scrollTargetLayout()
             }
+            .scrollTargetBehavior(.viewAligned)
+            .zIndex(0)
             if stageController.isEditEnabled {
                 HStack {
                     Spacer()
@@ -61,9 +64,14 @@ struct HighlightsView: View {
                     }
                     .padding(.bottom, 120)
                 }
+                .zIndex(1)
+                .transition(.move(edge: .trailing))
                 .padding()
             }
         }
+        .animation(
+            //This is the dismiss animation
+            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: stageController.isEditEnabled)
         .foregroundStyle(theme.text)
         .onAppear {
             updateContents()
