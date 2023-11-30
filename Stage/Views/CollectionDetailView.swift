@@ -10,6 +10,7 @@ import SwiftUI
 struct CollectionDetailView: View {
     
     @EnvironmentObject private var theme: ThemeController
+    
     @Environment(\.dismiss) private var dismiss
     
     var images: [ID_URL] = sampleImages.enumerated().map { index, url in
@@ -19,17 +20,20 @@ struct CollectionDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-            ForEach(images, id: \.self) { image in
-                HStack(spacing: 0) {
-                    CollectionImage(image, style: .medium)
-                    VStack(spacing: 0) {
-                        CollectionImage(image, style: .small)
-                        CollectionImage(image, style: .small)
+                Button(action: { dismiss() }) {
+                    Image(systemName: "xmark")
+                }
+                ForEach(images, id: \.self) { image in
+                    HStack(spacing: 0) {
+                        CollectionImage(image, style: .medium)
+                        VStack(spacing: 0) {
+                            CollectionImage(image, style: .small)
+                            CollectionImage(image, style: .small)
+                        }
+                    }
+                    CollectionImage(image, style: .large)
                     }
                 }
-                CollectionImage(image, style: .large)
-                }
-            }
         }
     }
 }

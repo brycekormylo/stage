@@ -135,7 +135,7 @@ struct ImageCollection: Codable, Identifiable {
     var id: UUID
     var hexColor: String?
     var title: String?
-    var content: [URL]?
+    var content: [ID_URL]?
     
 }
 
