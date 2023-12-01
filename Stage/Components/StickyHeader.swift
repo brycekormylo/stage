@@ -11,8 +11,7 @@ struct StickyHeader<Content: View>: View {
     
     var minHeight: CGFloat
     var content: Content
-//    @State var isEditing: Bool = false
-    
+
     init(minHeight: CGFloat = 320, @ViewBuilder content: () -> Content) {
         self.minHeight = minHeight
         self.content = content()
@@ -22,12 +21,15 @@ struct StickyHeader<Content: View>: View {
         GeometryReader { geo in
             if(geo.frame(in: .global).minY <= 0) {
                 content
+                    .offset(y: -geo.frame(in: .global).minY)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             } else {
                 content
                     .offset(y: -geo.frame(in: .global).minY)
                     .frame(width: geo.size.width, height: geo.size.height + geo.frame(in: .global).minY)
             }
-        }.frame(minHeight: minHeight)
+        }
+        .frame(minHeight: minHeight)
     }
 }
+

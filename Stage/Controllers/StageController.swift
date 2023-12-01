@@ -97,7 +97,7 @@ class StageController: ObservableObject {
         }
     }
     
-    func updateStage(_ newStage: Stage) async {
+    private func updateStage(_ newStage: Stage) async {
         Task {
             if let userID = auth.session?.user.id {
                 let compressedStage: CompressedStage = newStage.compressed()

@@ -160,9 +160,7 @@ struct CollectionCreatorView: View {
             } else {
                 stage.collections = [newCollection]
             }
-            Task {
-                await stageController.updateStage(stage)
-            }
+            stageController.stage = stage
         }
     }
 }
@@ -251,7 +249,8 @@ struct CollectionPreviewRow: View {
             Image(systemName: "pencil")
         }
         .foregroundStyle(theme.text.opacity(0.8))
-//        .modifier(CircleButton())
+        .modifier(CircleButton())
+        .scaleEffect(0.75)
         .fullScreenCover(isPresented: $presentEditView) {
             CollectionEditView(collectionData: $collectionData)
         }

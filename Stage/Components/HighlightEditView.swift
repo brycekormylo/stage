@@ -84,11 +84,9 @@ struct HighlightEditView: View {
                     .font(.title2)
                 Spacer()
                 Button(action: {
-                    Task {
-                        if var stage = stageController.stage {
-                            stage.highlights = viewModel.orderedImages
-                            await stageController.updateStage(stage)
-                        }
+                    if var stage = stageController.stage {
+                        stage.highlights = viewModel.orderedImages
+                        stageController.stage = stage
                     }
                     dismiss()
                 }) {

@@ -14,6 +14,7 @@ struct ProfileView: View {
     @EnvironmentObject var imageController: ImageController
     
     @State var arrowUp: Bool = false
+    @State var bannerHeight: CGFloat = 320
     
     @State var name: String = "--"
     @State var profession: String = "--"
@@ -39,10 +40,8 @@ struct ProfileView: View {
                 stage.profession = profession
                 stage.intro = intro
                 stage.segments = segments
-                Task {
-                    await stageController.updateStage(stage)
-                    syncProfileInfo()
-                }
+                stageController.stage = stage
+                syncProfileInfo()
             }
         }
     }
@@ -203,4 +202,12 @@ struct StyledStack<Content: View>: View {
         .foregroundStyle(theme.text)
     }
     
+}
+
+private struct BannerHeightPreferenceKey: PreferenceKey, Hashable {
+    static var defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
 }
