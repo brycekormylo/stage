@@ -139,7 +139,7 @@ struct ImageCollection: Codable, Identifiable, Equatable {
     
 }
 
-struct Segment: Codable, Identifiable {
+struct Segment: Codable, Identifiable, Hashable {
 
     var id: UUID
     var title: String?

@@ -20,6 +20,7 @@
 		024EF0D92AFEB28900CB754B /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF0D82AFEB28900CB754B /* StyledButton.swift */; };
 		025980AF2B0296A20065F69E /* StickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025980AE2B0296A20065F69E /* StickyHeader.swift */; };
 		02630B5F2AFEEA500091DFD7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02630B5E2AFEEA500091DFD7 /* Extensions.swift */; };
+		026AC4C42B1A8F50001B7D2E /* SegmentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */; };
 		027817852AFC6169002A9B31 /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027817842AFC6169002A9B31 /* MoreButton.swift */; };
 		02A995792B19546200DEAAC5 /* CollectionEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A995782B19546200DEAAC5 /* CollectionEditView.swift */; };
 		02DAC99F2AF55FFE001585A6 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAC99E2AF55FFE001585A6 /* AccountView.swift */; };
@@ -85,6 +86,7 @@
 		024EF0D82AFEB28900CB754B /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		025980AE2B0296A20065F69E /* StickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeader.swift; sourceTree = "<group>"; };
 		02630B5E2AFEEA500091DFD7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentEditView.swift; sourceTree = "<group>"; };
 		027817842AFC6169002A9B31 /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 		02A995782B19546200DEAAC5 /* CollectionEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionEditView.swift; sourceTree = "<group>"; };
 		02DAC99E2AF55FFE001585A6 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				024EBFF62AF7359500D432BC /* HighlightEditView.swift */,
 				02A995782B19546200DEAAC5 /* CollectionEditView.swift */,
+				026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */,
 				023E8BCA2B17E777008E97EF /* TestInteractiveList.swift */,
 				025980AE2B0296A20065F69E /* StickyHeader.swift */,
 				027817842AFC6169002A9B31 /* MoreButton.swift */,
@@ -436,6 +439,7 @@
 				02FC7A592AF448AF0043FA48 /* SlidingImage.swift in Sources */,
 				0238317C2B07DAB50058C217 /* EditableText.swift in Sources */,
 				02FC7A462AF448A60043FA48 /* HighlightsView.swift in Sources */,
+				026AC4C42B1A8F50001B7D2E /* SegmentEditView.swift in Sources */,
 				02FC7A472AF448A60043FA48 /* CollectionsView.swift in Sources */,
 				02FC7A5D2AF448AF0043FA48 /* BannerImage.swift in Sources */,
 				0221188C2AF86E000098887D /* SampleGridLayoutView.swift in Sources */,

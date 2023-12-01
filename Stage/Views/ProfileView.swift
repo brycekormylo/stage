@@ -15,6 +15,7 @@ struct ProfileView: View {
     
     @State var arrowUp: Bool = false
     @State var bannerHeight: CGFloat = 320
+    @State var profileImageSize: CGFloat = 164
     
     @State var name: String = "--"
     @State var profession: String = "--"
@@ -48,15 +49,33 @@ struct ProfileView: View {
     
     var body: some View {
         ZStack {
+            if stageController.isEditEnabled && arrowUp {
+                ZStack() {
+                    SegmentOrderChangerButton()
+                        .padding(.bottom, 180)
+                    NewSegmentButton()
+                        .padding(.bottom, 120)
+                }
+                .zIndex(1)
+                .transition(.move(edge: .trailing))
+                .padding()
+            }
             ScrollView(showsIndicators: false) {
                 BannerImage()
                 VStack {
-                    ProfileImage(size: 256)
+                    HStack {
+                        ProfileImage(size: profileImageSize)
+                            .padding(.leading, 36)
+                        Spacer()
+                    }
                     info
                     ProfilePageFrame {
-                        ForEach(stageController.sampleSegments) { segment in
-                            SegmentView(segment)
+                        if let segments = stageController.stage?.segments {
+                            ForEach(segments) { segment in
+                                SegmentView(segment)
+                            }
                         }
+                        Spacer()
                     }
                     GeometryReader { geo in
                         Color.clear
@@ -65,7 +84,20 @@ struct ProfileView: View {
                             }
                     }
                 }
-                .offset(y: -96)
+                .offset(y: -profileImageSize*0.61)
+                .background {
+                    ZStack {
+                        theme.background
+                        VStack {
+                            Rectangle()
+                                .fill(theme.background)
+                                .frame(height: 48)
+                                .cornerRadius(32, corners: [.topLeft, .topRight])
+                                .offset(y: -48)
+                            Spacer()
+                        }
+                    }
+                }
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.paging)
@@ -86,6 +118,8 @@ struct ProfileView: View {
                 updateProfileInfo()
             }
         }
+        .animation(
+            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: stageController.isEditEnabled)
     }
     
     var arrowButton: some View {
@@ -96,15 +130,28 @@ struct ProfileView: View {
     
     var info: some View {
         VStack {
-            EditableField(content: $name)
-                .font(.title)
-            EditableField(content: $profession)
-                .opacity(0.6)
+            Spacer()
+            HStack {
+                Spacer()
+                EditableField(content: $name)
+                    .font(.title)
+            }
+            .padding(.trailing, 24)
+            HStack {
+                Spacer()
+                EditableField(content: $profession)
+                    .opacity(0.6)
+            }
+            .padding(.trailing, 24)
+            Spacer()
             CaptionView {
                 EditableText(content: $intro)
                     .padding(.vertical, 8)
             }
+            Spacer()
+            
         }
+        .frame(height: UIScreen.main.bounds.height*(0.314))
         .foregroundStyle(theme.text)
     }
 }
@@ -186,7 +233,133 @@ struct SegmentView: View {
         .padding()
         .background(Color.black)
         .padding(.vertical, 4)
-        .frame(minHeight: (UIScreen.main.bounds.height - 240)/3)
+        .frame(height: (UIScreen.main.bounds.height - 240)/3)
+    }
+}
+
+struct NewSegmentButton: View {
+    @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
+    
+    @State var presentNewSegmentCreator: Bool = false
+    
+    var body: some View {
+        ZStack {
+            if stageController.isEditEnabled {
+                if presentNewSegmentCreator {
+                    VStack {
+                        SegmentCreatorView(isPresented: $presentNewSegmentCreator)
+                        Spacer()
+                    }
+                    .padding(.top, 120)
+                    .transition(.move(edge: .trailing))
+                } else {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                presentNewSegmentCreator.toggle()
+                            }) {
+                                Image(systemName: "plus")
+                                    .foregroundStyle(theme.text)
+                            }
+                            .modifier(CircleButton())
+                            .transition(.move(edge: .trailing))
+                        }
+                        .padding(.bottom, 120)
+                    }
+                }
+            }
+        }
+        .zIndex(1)
+        .animation(
+            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: presentNewSegmentCreator)
+    }
+
+    
+}
+
+struct SegmentCreatorView: View {
+    
+    @Binding var isPresented: Bool
+    
+    @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
+    
+    @State var title: String = ""
+    @State var content: String = ""
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text("New Segment")
+                    .opacity(0.6)
+                Spacer()
+            }
+            .padding(.horizontal)
+            TextField("", text: $title)
+                .placeholder(when: title.isEmpty) {
+                    Text("Title").foregroundColor(theme.text.opacity(0.6))
+                }
+                .padding()
+                .background(theme.button.opacity(0.1))
+                .cornerRadius(8)
+            TextEditor(text: $content)
+                .placeholder(when: content.isEmpty) {
+                    VStack {
+                        Text("Content").foregroundColor(theme.text.opacity(0.6))
+                        Spacer()
+                    }
+                    .padding()
+                }
+                .scrollContentBackground(.hidden)
+                .background {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(theme.button.opacity(0.1))
+                }
+                .multilineTextAlignment(.leading)
+                .frame(maxHeight: 120)
+            HStack {
+                Spacer()
+                Button(action: { isPresented = false }) {
+                    Image(systemName: "xmark")
+                }
+                .modifier(CircleButton())
+                Button(action: {
+                    submitNewSegment()
+                    isPresented = false
+                }) {
+                    Image(systemName: "checkmark")
+                }
+                .disabled(title.isEmpty)
+                .modifier(CircleButton())
+            }
+        }
+        .padding()
+        .background {
+            theme.backgroundAccent
+                .cornerRadius(12)
+        }
+        .padding()
+        .foregroundStyle(theme.text)
+    }
+    
+    func submitNewSegment() {
+        
+        let newSegment = Segment(id: UUID(), title: self.title, content: self.content)
+        
+        if var stage = stageController.stage {
+            print("Found stage")
+            if var segments = stage.segments {
+                segments.append(newSegment)
+                print(segments)
+                stage.segments = segments
+            } else {
+                stage.segments = [newSegment]
+            }
+            stageController.stage = stage
+        }
     }
 }
 
@@ -202,12 +375,4 @@ struct StyledStack<Content: View>: View {
         .foregroundStyle(theme.text)
     }
     
-}
-
-private struct BannerHeightPreferenceKey: PreferenceKey, Hashable {
-    static var defaultValue: CGFloat = 0
-    
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
 }

@@ -23,6 +23,16 @@ struct MoreButton: View {
         VStack {
             HStack {
                 Spacer()
+                if stageController.isEditEnabled {
+                    Button(action: {
+                        stageController.discardChanges()
+                    }) {
+                        Image(systemName: "xmark")
+                    }
+                    .modifier(CircleButton())
+                    .padding(.horizontal, 8)
+                    .transition(.move(edge: .leading))
+                }
                 HStack(spacing: 18) {
                     if isExtended && !stageController.isEditEnabled {
                         options

@@ -18,8 +18,12 @@ struct EditableField: View {
         Group {
             if stageController.isEditEnabled {
                 TextField("\(content)", text: $content)
-                    .background(Color.clear)
-                    .multilineTextAlignment(.center)
+                    .padding(8)
+                    .background {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(theme.button.opacity(0.1))
+                    }
+                    .multilineTextAlignment(.trailing)
             } else {
                 Text(content)
             }
@@ -41,7 +45,11 @@ struct EditableText: View {
             if stageController.isEditEnabled {
                 TextEditor(text: $content)
                     .scrollContentBackground(.hidden)
-                    .multilineTextAlignment(.center)
+                    .background {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(theme.button.opacity(0.1))
+                    }
+                    .multilineTextAlignment(.leading)
             } else {
                 Text(content)
             }

@@ -22,7 +22,7 @@ struct ProfileImage: View {
     @State private var selectedImage: UIImage?
     @State private var imageURL: URL?
     
-    init(size: CGFloat = 100, stroke: CGFloat = 16) {
+    init(size: CGFloat = 100, stroke: CGFloat = 12) {
         self.size = size
         self.stroke = stroke
     }
