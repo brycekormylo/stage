@@ -130,7 +130,7 @@ struct ID_URL: Codable, Identifiable, Hashable {
     
 }
 
-struct ImageCollection: Codable, Identifiable {
+struct ImageCollection: Codable, Identifiable, Equatable {
     
     var id: UUID
     var hexColor: String?

@@ -66,7 +66,6 @@ private struct NewCollectionButton: View {
         ZStack {
             if stageController.isEditEnabled {
                 if presentCollectionCreator {
-
                     VStack {
                         CollectionCreatorView(isPresented: $presentCollectionCreator)
                         Spacer()
@@ -174,19 +173,27 @@ struct CollectionPreviewRow: View {
     let imageHeight: CGFloat
     
     @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
     
     @State var presentDetailView: Bool = false
+    @State var presentEditView: Bool = false
+    
+    @State private var collectionData: ImageCollection = ImageCollection(id: UUID(), title: "Empty Collection")
     
     init(_ collection: ImageCollection, imageHeight: CGFloat = 320) {
         self.collection = collection
         self.imageHeight = imageHeight
+        self.collectionData = collection
     }
     
     var body: some View {
         VStack {
             if let title = collection.title {
-                HStack {
+                HStack(alignment: .center) {
                     Spacer()
+                    if stageController.isEditEnabled {
+                        editButton
+                    }
                     Text(title)
                         .font(.title3)
                         .foregroundStyle(theme.text)
@@ -195,7 +202,7 @@ struct CollectionPreviewRow: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    if let content = collection.content {
+                    if let content = collectionData.content {
                         ForEach(content, id: \.self) { imageURL in
                             SlidingImage(imageURL.url, .horizontal, startingHeight: imageHeight)
                         }
@@ -214,6 +221,39 @@ struct CollectionPreviewRow: View {
         }
         .fullScreenCover(isPresented: $presentDetailView) {
             CollectionDetailView()
+        }
+        .onChange(of: collectionData.content) {
+            if var stage = stageController.stage, var collections = stage.collections {
+                collections = collections.map { collection in
+                    if collection.id != collectionData.id {
+                        return collection
+                    } else {
+                        var modifiedCollection = collection
+                        modifiedCollection.content = collectionData.content
+                        return modifiedCollection
+                    }
+                }
+                
+                stage.collections = collections
+                stageController.stage = stage
+
+            }
+        }
+        .onAppear {
+            collectionData = collection
+        }
+    }
+    
+    var editButton: some View {
+        Button(action: {
+            presentEditView.toggle()
+        }) {
+            Image(systemName: "pencil")
+        }
+        .foregroundStyle(theme.text.opacity(0.8))
+//        .modifier(CircleButton())
+        .fullScreenCover(isPresented: $presentEditView) {
+            CollectionEditView(collectionData: $collectionData)
         }
     }
 }

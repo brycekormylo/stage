@@ -10,24 +10,24 @@ import Combine
 
 class InteractiveListViewModel: ObservableObject {
     
-    @Published var orderedHighlights: [ID_URL] = []
+    @Published var orderedImages: [ID_URL] = []
     @Published var editMode: EditMode = .inactive
     
-    func setOrderedHighlights(to urls: [ID_URL]) {
-        self.orderedHighlights = urls
+    func setOrderedImages(to urls: [ID_URL]) {
+        self.orderedImages = urls
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        orderedHighlights.move(fromOffsets: source, toOffset: destination)
+        orderedImages.move(fromOffsets: source, toOffset: destination)
     }
     
     func delete(at offsets: IndexSet) {
-        orderedHighlights.remove(atOffsets: offsets)
+        orderedImages.remove(atOffsets: offsets)
     }
 }
 
 
-struct InteractiveListView: View {
+struct HighlightEditView: View {
     
     @Environment(\.dismiss) private var dismiss
     
@@ -42,7 +42,7 @@ struct InteractiveListView: View {
                 theme.background.ignoresSafeArea()
                 dismissButton
                 List {
-                    ForEach(viewModel.orderedHighlights, id: \.self) { highlight in
+                    ForEach(viewModel.orderedImages, id: \.self) { highlight in
                         HStack {
                             AsyncImage(url: highlight.url) { phase in
                                 phase.image?
@@ -69,7 +69,7 @@ struct InteractiveListView: View {
         .onAppear {
             viewModel.editMode = .active
             if let highlights = stageController.stage?.highlights {
-                viewModel.setOrderedHighlights(to: highlights)
+                viewModel.setOrderedImages(to: highlights)
             }
         }
         .onDisappear {
@@ -86,7 +86,7 @@ struct InteractiveListView: View {
                 Button(action: {
                     Task {
                         if var stage = stageController.stage {
-                            stage.highlights = viewModel.orderedHighlights
+                            stage.highlights = viewModel.orderedImages
                             await stageController.updateStage(stage)
                         }
                     }

@@ -115,13 +115,13 @@ private struct ChangeHighlightOrderButton: View {
         }
         .modifier(CircleButton())
         .fullScreenCover(isPresented: $presentReorderSheet) {
-            InteractiveListView()
+            HighlightEditView()
         }
     }
     
 }
 
-private struct NewImageButton: View {
+struct NewImageButton: View {
     
     @Binding var selectedImage: UIImage?
     @State private var presentImagePicker = false

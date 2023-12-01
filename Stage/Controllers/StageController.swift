@@ -74,6 +74,10 @@ class StageController: ObservableObject {
         }
     }
     
+    func discardChanges() {
+        restore()
+    }
+    
     func loadStageFromUser(_ id: UUID? = nil) async {
         if let userID = id ?? auth.session?.user.id {
             let query = supabase.database
@@ -104,6 +108,7 @@ class StageController: ObservableObject {
                 do {
                     try await query.execute()
                     await loadStageFromUser()
+                    print("Stage updated sucessfully")
                 } catch {
                     print(error)
                 }
