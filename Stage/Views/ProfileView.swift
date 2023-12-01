@@ -52,9 +52,9 @@ struct ProfileView: View {
             if stageController.isEditEnabled && arrowUp {
                 ZStack() {
                     SegmentOrderChangerButton()
-                        .padding(.bottom, 180)
+                        .padding(.bottom, 196)
                     NewSegmentButton()
-                        .padding(.bottom, 120)
+                        .padding(.bottom, 124)
                 }
                 .zIndex(1)
                 .transition(.move(edge: .trailing))
@@ -215,7 +215,7 @@ struct SegmentView: View {
 
         }
     }
-    
+
     var body: some View {
         StyledStack {
             HStack {
@@ -234,6 +234,38 @@ struct SegmentView: View {
         .background(Color.black)
         .padding(.vertical, 4)
         .frame(height: (UIScreen.main.bounds.height - 240)/3)
+        .onChange(of: segmentTitle) {
+            if var stage = stageController.stage, var segments = stage.segments {
+                segments = segments.map { segment in
+                    if segment.id != self.segment.id {
+                        return segment
+                    } else {
+                        var modifiedSegment = segment
+                        modifiedSegment.title = self.segmentTitle
+                        modifiedSegment.content = self.segmentContent
+                        return modifiedSegment
+                    }
+                }
+                stage.segments = segments
+                stageController.stage = stage
+            }
+        }
+        .onChange(of: segmentContent) {
+            if var stage = stageController.stage, var segments = stage.segments {
+                segments = segments.map { segment in
+                    if segment.id != self.segment.id {
+                        return segment
+                    } else {
+                        var modifiedSegment = segment
+                        modifiedSegment.title = self.segmentTitle
+                        modifiedSegment.content = self.segmentContent
+                        return modifiedSegment
+                    }
+                }
+                stage.segments = segments
+                stageController.stage = stage
+            }
+        }
     }
 }
 
