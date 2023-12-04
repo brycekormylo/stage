@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		020833BB2B059FE700AE71E4 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020833BA2B059FE700AE71E4 /* ImageCache.swift */; };
+		021B5A312B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 021B5A302B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf */; };
+		021B5A322B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 021B5A302B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf */; };
+		021B5A332B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 021B5A302B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf */; };
 		0221188A2AF86B030098887D /* CollectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022118892AF86B030098887D /* CollectionDetailView.swift */; };
 		0221188C2AF86E000098887D /* SampleGridLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221188B2AF86E000098887D /* SampleGridLayoutView.swift */; };
 		0221188E2AF873DD0098887D /* ImageGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221188D2AF873DD0098887D /* ImageGridRow.swift */; };
@@ -23,6 +26,21 @@
 		026AC4C42B1A8F50001B7D2E /* SegmentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */; };
 		027817852AFC6169002A9B31 /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027817842AFC6169002A9B31 /* MoreButton.swift */; };
 		02A995792B19546200DEAAC5 /* CollectionEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A995782B19546200DEAAC5 /* CollectionEditView.swift */; };
+		02D32E122B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */; };
+		02D32E132B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */; };
+		02D32E142B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */; };
+		02D32E152B1D4F5000DEEDA6 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0E2B1D4F5000DEEDA6 /* Quicksand-Light.ttf */; };
+		02D32E162B1D4F5000DEEDA6 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0E2B1D4F5000DEEDA6 /* Quicksand-Light.ttf */; };
+		02D32E172B1D4F5000DEEDA6 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0E2B1D4F5000DEEDA6 /* Quicksand-Light.ttf */; };
+		02D32E182B1D4F5000DEEDA6 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0F2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf */; };
+		02D32E192B1D4F5000DEEDA6 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0F2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf */; };
+		02D32E1A2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0F2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf */; };
+		02D32E1B2B1D4F5000DEEDA6 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E102B1D4F5000DEEDA6 /* Quicksand-Regular.ttf */; };
+		02D32E1C2B1D4F5000DEEDA6 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E102B1D4F5000DEEDA6 /* Quicksand-Regular.ttf */; };
+		02D32E1D2B1D4F5000DEEDA6 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E102B1D4F5000DEEDA6 /* Quicksand-Regular.ttf */; };
+		02D32E1E2B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */; };
+		02D32E1F2B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */; };
+		02D32E202B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */; };
 		02DAC99F2AF55FFE001585A6 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAC99E2AF55FFE001585A6 /* AccountView.swift */; };
 		02FC7A002AF428420043FA48 /* StageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC79FF2AF428420043FA48 /* StageApp.swift */; };
 		02FC7A022AF428420043FA48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A012AF428420043FA48 /* ContentView.swift */; };
@@ -74,6 +92,8 @@
 
 /* Begin PBXFileReference section */
 		020833BA2B059FE700AE71E4 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		021B5A302B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		021B5A342B1C49D500B9E856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		022118892AF86B030098887D /* CollectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailView.swift; sourceTree = "<group>"; };
 		0221188B2AF86E000098887D /* SampleGridLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleGridLayoutView.swift; sourceTree = "<group>"; };
 		0221188D2AF873DD0098887D /* ImageGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridRow.swift; sourceTree = "<group>"; };
@@ -89,6 +109,11 @@
 		026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentEditView.swift; sourceTree = "<group>"; };
 		027817842AFC6169002A9B31 /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 		02A995782B19546200DEAAC5 /* CollectionEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionEditView.swift; sourceTree = "<group>"; };
+		02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
+		02D32E0E2B1D4F5000DEEDA6 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
+		02D32E0F2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
+		02D32E102B1D4F5000DEEDA6 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		02DAC99E2AF55FFE001585A6 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		02FC79FC2AF428420043FA48 /* Stage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FC79FF2AF428420043FA48 /* StageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageApp.swift; sourceTree = "<group>"; };
@@ -149,6 +174,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021B5A2F2B1C391600B9E856 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */,
+				02D32E0E2B1D4F5000DEEDA6 /* Quicksand-Light.ttf */,
+				02D32E0F2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf */,
+				02D32E102B1D4F5000DEEDA6 /* Quicksand-Regular.ttf */,
+				02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */,
+				021B5A302B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		02FC79F32AF428420043FA48 = {
 			isa = PBXGroup;
 			children = (
@@ -172,11 +210,13 @@
 		02FC79FE2AF428420043FA48 /* Stage */ = {
 			isa = PBXGroup;
 			children = (
+				021B5A342B1C49D500B9E856 /* Info.plist */,
 				02FC79FF2AF428420043FA48 /* StageApp.swift */,
 				02FC7A772AF449620043FA48 /* Views */,
 				02FC7A782AF449970043FA48 /* Components */,
 				02FC7A752AF449550043FA48 /* Controllers */,
 				02FC7A762AF4495C0043FA48 /* Model */,
+				021B5A2F2B1C391600B9E856 /* Font */,
 				02FC7A032AF428430043FA48 /* Assets.xcassets */,
 				02FC7A732AF449040043FA48 /* _Secrets.swift */,
 				02FC7A052AF428430043FA48 /* Preview Content */,
@@ -386,7 +426,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				02FC7A072AF428430043FA48 /* Preview Assets.xcassets in Resources */,
+				02D32E122B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */,
+				02D32E1B2B1D4F5000DEEDA6 /* Quicksand-Regular.ttf in Resources */,
+				021B5A312B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				02FC7A042AF428430043FA48 /* Assets.xcassets in Resources */,
+				02D32E152B1D4F5000DEEDA6 /* Quicksand-Light.ttf in Resources */,
+				02D32E182B1D4F5000DEEDA6 /* Quicksand-Medium.ttf in Resources */,
+				02D32E1E2B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +440,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D32E162B1D4F5000DEEDA6 /* Quicksand-Light.ttf in Resources */,
+				02D32E1F2B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */,
+				02D32E192B1D4F5000DEEDA6 /* Quicksand-Medium.ttf in Resources */,
+				021B5A322B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */,
+				02D32E132B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */,
+				02D32E1C2B1D4F5000DEEDA6 /* Quicksand-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +453,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D32E172B1D4F5000DEEDA6 /* Quicksand-Light.ttf in Resources */,
+				02D32E202B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */,
+				02D32E1A2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf in Resources */,
+				021B5A332B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */,
+				02D32E142B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */,
+				02D32E1D2B1D4F5000DEEDA6 /* Quicksand-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +675,7 @@
 				DEVELOPMENT_TEAM = 8K35U4GA26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Stage/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -646,6 +705,7 @@
 				DEVELOPMENT_TEAM = 8K35U4GA26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Stage/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

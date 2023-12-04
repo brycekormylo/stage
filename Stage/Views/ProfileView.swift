@@ -66,6 +66,7 @@ struct ProfileView: View {
                     HStack {
                         ProfileImage(size: profileImageSize)
                             .padding(.leading, 36)
+                            .shadow(color: theme.background.opacity(0.6), radius: 8, x: 0, y: 0)
                         Spacer()
                     }
                     info
@@ -75,6 +76,7 @@ struct ProfileView: View {
                                 SegmentView(segment)
                             }
                         }
+                        ContactButton()
                         Spacer()
                     }
                     GeometryReader { geo in
@@ -94,6 +96,7 @@ struct ProfileView: View {
                                 .frame(height: 48)
                                 .cornerRadius(32, corners: [.topLeft, .topRight])
                                 .offset(y: -48)
+                                .shadow(color: theme.background.opacity(0.6), radius: 8, x: 0, y: 0)
                             Spacer()
                         }
                     }
@@ -128,31 +131,46 @@ struct ProfileView: View {
             .foregroundStyle(theme.text)
     }
     
+    @State var infoOpacity: CGFloat = 0.0
+    
     var info: some View {
         VStack {
             Spacer()
             HStack {
                 Spacer()
                 EditableField(content: $name)
-                    .font(.title)
+                    .font(.custom("Quicksand-Medium", size: 36))
             }
             .padding(.trailing, 24)
             HStack {
                 Spacer()
                 EditableField(content: $profession)
+                    .font(.custom("Quicksand-Light", size: 18))
                     .opacity(0.6)
             }
             .padding(.trailing, 24)
             Spacer()
             CaptionView {
                 EditableText(content: $intro)
+                    .font(.custom("Quicksand-Medium", size: 18))
                     .padding(.vertical, 8)
             }
+            .transition(.move(edge: .leading))
+            .opacity(infoOpacity)
             Spacer()
             
         }
+        .onAppear {
+            withAnimation(.easeInOut) {
+                infoOpacity = 0.0
+                infoOpacity += 1.0
+            }
+        }
+        .animation(
+            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: infoOpacity)
         .frame(height: UIScreen.main.bounds.height*(0.314))
         .foregroundStyle(theme.text)
+
     }
 }
 
@@ -166,9 +184,9 @@ struct ProfilePageFrame<Content: View>: View {
             content
         }
         .frame(minHeight: UIScreen.main.bounds.height - 240)
-        .background {
-            theme.backgroundAccent.opacity(0.2)
-        }
+//        .background {
+//            theme.backgroundAccent.opacity(0.2)
+//        }
         .padding(.top, 240)
 
     }
@@ -186,9 +204,10 @@ struct CaptionView<Content: View>: View {
         .frame(height: 80)
         .padding()
         .background {
-            theme.backgroundAccent.opacity(0.2)
+            theme.backgroundAccent.opacity(0.4)
         }
-        .cornerRadius(8)
+        .cornerRadius(18)
+        .padding(.horizontal, 8)
     }
 }
 
@@ -221,18 +240,24 @@ struct SegmentView: View {
             HStack {
                 Spacer()
                 EditableField(content: $segmentTitle)
-                    .font(.title2)
+                    .font(.custom("Quicksand-Medium", size: 24))
             }
             .padding(.horizontal)
             Group {
                 Spacer()
                 EditableText(content: $segmentContent)
+                    .font(.custom("Quicksand-Medium", size: 18))
                 Spacer()
             }
         }
         .padding()
-        .background(Color.black)
-        .padding(.vertical, 4)
+        .background {
+            theme.backgroundAccent
+                .opacity(0.4)
+                .cornerRadius(18)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
         .frame(height: (UIScreen.main.bounds.height - 240)/3)
         .onChange(of: segmentTitle) {
             if var stage = stageController.stage, var segments = stage.segments {
@@ -308,8 +333,6 @@ struct NewSegmentButton: View {
         .animation(
             .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: presentNewSegmentCreator)
     }
-
-    
 }
 
 struct SegmentCreatorView: View {
@@ -326,13 +349,16 @@ struct SegmentCreatorView: View {
         VStack {
             HStack {
                 Text("New Segment")
+                    .font(.custom("Quicksand-Medium", size: 24))
                     .opacity(0.6)
                 Spacer()
             }
             .padding(.horizontal)
             TextField("", text: $title)
                 .placeholder(when: title.isEmpty) {
-                    Text("Title").foregroundColor(theme.text.opacity(0.6))
+                    Text("Title")
+                        .foregroundColor(theme.text.opacity(0.6))
+                        .font(.custom("Quicksand-Medium", size: 18))
                 }
                 .padding()
                 .background(theme.button.opacity(0.1))
@@ -340,7 +366,9 @@ struct SegmentCreatorView: View {
             TextEditor(text: $content)
                 .placeholder(when: content.isEmpty) {
                     VStack {
-                        Text("Content").foregroundColor(theme.text.opacity(0.6))
+                        Text("Content")
+                            .foregroundColor(theme.text.opacity(0.6))
+                            .font(.custom("Quicksand-Medium", size: 18))
                         Spacer()
                     }
                     .padding()
@@ -378,11 +406,8 @@ struct SegmentCreatorView: View {
     }
     
     func submitNewSegment() {
-        
         let newSegment = Segment(id: UUID(), title: self.title, content: self.content)
-        
         if var stage = stageController.stage {
-            print("Found stage")
             if var segments = stage.segments {
                 segments.append(newSegment)
                 print(segments)

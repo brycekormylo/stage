@@ -39,7 +39,7 @@ struct HighlightsView: View {
                     HStack {
                         Spacer()
                         Text("Highlights")
-                            .font(.title)
+                            .font(.custom("Quicksand-Medium", size: 32))
                     }
                     .padding()
                     .padding(.bottom)

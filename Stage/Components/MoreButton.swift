@@ -26,6 +26,7 @@ struct MoreButton: View {
                 if stageController.isEditEnabled {
                     Button(action: {
                         stageController.discardChanges()
+                        stageController.isEditEnabled.toggle()
                     }) {
                         Image(systemName: "xmark")
                     }
@@ -61,6 +62,7 @@ struct MoreButton: View {
             }
             Spacer()
         }
+        .shadow(color: theme.background.opacity(0.4), radius: 8, x: 0, y: 0)
         .ignoresSafeArea()
         .padding(.vertical, 4)
         .padding(.horizontal, 36)

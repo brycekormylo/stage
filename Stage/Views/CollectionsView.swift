@@ -48,7 +48,7 @@ struct CollectionsView: View {
         HStack {
             Spacer()
             Text("Collections")
-                .font(.title)
+                .font(.custom("Quicksand-Medium", size: 32))
                 .foregroundStyle(theme.text)
                 .padding()
         }
@@ -112,12 +112,15 @@ struct CollectionCreatorView: View {
         VStack {
             HStack {
                 Text("New Collection")
+                    .font(.custom("Quicksand-Medium", size: 24))
                 Spacer()
             }
             .padding(.horizontal)
             TextField("", text: $title)
                 .placeholder(when: title.isEmpty) {
-                    Text("Title").foregroundColor(theme.text.opacity(0.6))
+                    Text("Title")
+                        .foregroundColor(theme.text.opacity(0.6))
+                        .font(.custom("Quicksand-Medium", size: 18))
                 }
                 .padding()
                 .background(theme.background)
@@ -193,7 +196,7 @@ struct CollectionPreviewRow: View {
                         editButton
                     }
                     Text(title)
-                        .font(.title3)
+                        .font(.custom("Quicksand-Medium", size: 18))
                         .foregroundStyle(theme.text)
                         .padding(.horizontal)
                 }
@@ -231,10 +234,8 @@ struct CollectionPreviewRow: View {
                         return modifiedCollection
                     }
                 }
-                
                 stage.collections = collections
                 stageController.stage = stage
-
             }
         }
         .onAppear {
