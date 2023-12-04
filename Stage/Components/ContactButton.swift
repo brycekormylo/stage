@@ -47,6 +47,7 @@ struct ContactSheet: View {
             theme.background.ignoresSafeArea()
             Text("Contact info")
                 .font(.custom("Quicksand-Medium", size: 24))
+                .foregroundStyle(theme.text)
         }
         
     }

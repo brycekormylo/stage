@@ -51,6 +51,12 @@ let chestnut: Color = Color(hex: 0xA53F2B)
 let hooker: Color = Color(hex: 0x467259)
 let grass: Color = Color(hex: 0x8CA694)
 
+//STAGE
+
+let ocean: Color = Color(hex: 0x20A39E)
+let creamsicle: Color = Color(hex: 0xFFBA49)
+let cindre: Color = Color(hex: 0x121110)
+
 
 let rainbowColors: [Color] = [
     Color(hex: 0xFF0000),    // Red
@@ -176,10 +182,10 @@ struct LightTheme: ColorTheme {
 struct DarkTheme: ColorTheme {
     var backgroundAccent: Color = .black
     var border: Color = cinereous
-    var background: Color = eerie
-    var accent: Color = ash
+    var background: Color = cindre
+    var accent: Color = ocean
     var text: Color = snow
-    var button: Color = grass
+    var button: Color = ocean
     var buttonBorder: Color = grass
     var buttonBackground: Color = eerie
     var shadow: Color = .black

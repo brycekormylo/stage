@@ -38,7 +38,7 @@ struct SlidingImage: View {
                                 .frame(width: scrollDirection == .vertical ? 0 : initialHeight * 2.5,
                                        height: scrollDirection == .vertical ? initialHeight * 2.5 : 0)
                                 .offset(scrollDirection == .vertical ?
-                                        CGSize(width: 0, height: -(geo.frame(in: .global).midY/2 - initialHeight * (2/3))) :
+                                        CGSize(width: 0, height: -(geo.frame(in: .global).midY/2 - initialHeight*0.8)) :
                                             CGSize(width: -(geo.frame(in: .global).midX/2 - initialHeight / 3), height: 0))
                         )
                         .mask { RoundedRectangle(cornerRadius: 24) }
@@ -59,7 +59,7 @@ struct SlidingImage: View {
             }
         }
         .frame(minWidth: initialHeight)
-        .modifier(AnimatingCellHeight(height: isExpanded ? initialHeight * 5/3 : initialHeight))
+        .modifier(AnimatingCellHeight(height: isExpanded ? initialHeight * 1.614 : initialHeight))
         .onReceive(imageSliderController.$expandedImage) { expandedImage in
             withAnimation {
                 if let expandedURL = imageSliderController.expandedImage, expandedURL == url {

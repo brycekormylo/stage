@@ -184,9 +184,6 @@ struct ProfilePageFrame<Content: View>: View {
             content
         }
         .frame(minHeight: UIScreen.main.bounds.height - 240)
-//        .background {
-//            theme.backgroundAccent.opacity(0.2)
-//        }
         .padding(.top, 240)
 
     }
@@ -203,9 +200,6 @@ struct CaptionView<Content: View>: View {
         }
         .frame(height: 80)
         .padding()
-        .background {
-            theme.backgroundAccent.opacity(0.4)
-        }
         .cornerRadius(18)
         .padding(.horizontal, 8)
     }

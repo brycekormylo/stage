@@ -21,7 +21,7 @@ struct HighlightsView: View {
     
     let imageHeight: CGFloat
     
-    init(imageHeight: CGFloat = 300) {
+    init(imageHeight: CGFloat = UIScreen.main.bounds.width) {
         self.imageHeight = imageHeight
     }
     
@@ -50,9 +50,7 @@ struct HighlightsView: View {
                     }
                     Spacer(minLength: 240)
                 }
-                .scrollTargetLayout()
             }
-            .scrollTargetBehavior(.viewAligned)
             .zIndex(0)
             if stageController.isEditEnabled {
                 HStack {
@@ -70,7 +68,6 @@ struct HighlightsView: View {
             }
         }
         .animation(
-            //This is the dismiss animation
             .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: stageController.isEditEnabled)
         .foregroundStyle(theme.text)
         .onAppear {
