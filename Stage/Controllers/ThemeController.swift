@@ -183,7 +183,7 @@ struct DarkTheme: ColorTheme {
     var backgroundAccent: Color = .black
     var border: Color = cinereous
     var background: Color = cindre
-    var accent: Color = ocean
+    var accent: Color = creamsicle
     var text: Color = snow
     var button: Color = ocean
     var buttonBorder: Color = grass

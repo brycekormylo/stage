@@ -15,6 +15,8 @@ struct CollectionDetailView: View {
     @State var isScrolling = false
     @State private var timer: Timer?
     
+    @State var collection: ImageCollection?
+    
     var images: [ID_URL] = sampleImages.enumerated().map { index, url in
         ID_URL(id: UUID(), url: url, order: index)
     }
@@ -36,7 +38,7 @@ struct CollectionDetailView: View {
                     }
                     CollectionImage(image, style: .large)
                 }
-                    .background(theme.background)
+                .background(theme.background)
             }
         }
             .overlay {
@@ -45,16 +47,28 @@ struct CollectionDetailView: View {
                         HStack {
                             Spacer()
                             Button(action: { dismiss() }) {
-                                Image(systemName: "xmark")
+                                HStack {
+                                    Spacer()
+                                    ZStack {
+                                        Rectangle()
+                                            .fill(theme.background)
+                                            .cornerRadius(12, corners: [.topLeft, .bottomLeft])
+                                            .ignoresSafeArea()
+                                            .frame(width: 110)
+                                            .offset(x: 55)
+                                        Image(systemName: "xmark")
+                                            .foregroundStyle(theme.text)
+                                            .offset(x: 22)
+                                    }
+                                }
+                                .frame(height: 55)
                             }
-                            .modifier(CircleButton())
                             .zIndex(2.0)
                         }
                         Spacer()
                     }
                     .padding(.top, 64)
-                    .padding(.horizontal, 16)
-                    .transition(.move(edge: .top))
+                    .transition(.move(edge: .trailing))
                 }
             }
             .ignoresSafeArea()
@@ -120,45 +134,45 @@ struct CollectionImage: View {
     }
 }
 
-//struct ScrollOffsetPreferenceKey: PreferenceKey {
-//    static var defaultValue: CGPoint = .zero
-//    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-//        value = nextValue()
-//    }
-//}
-//
-//struct ScrollView<Content: View>: View {
-//    let axes: Axis.Set
-//    let showsIndicators: Bool
-//    let offsetChanged: (CGPoint) -> Void
-//    let content: Content
-//    init(
-//        axes: Axis.Set = .vertical,
-//        showsIndicators: Bool = true,
-//        offsetChanged: @escaping (CGPoint) -> Void = { _ in },
-//        @ViewBuilder content: () -> Content
-//    ) {
-//        self.axes = axes
-//        self.showsIndicators = showsIndicators
-//        self.offsetChanged = offsetChanged
-//        self.content = content()
-//    }
-//    
-//    var body: some View {
-//        SwiftUI.ScrollView(axes, showsIndicators: showsIndicators) {
-//            GeometryReader { geometry in
-//                Color.clear.preference(
-//                    key: ScrollOffsetPreferenceKey.self,
-//                    value: geometry.frame(in: .named("scrollView")).origin
-//                )
-//            }.frame(width: 0, height: 0)
-//            content
-//        }
-//        .coordinateSpace(name: "scrollView")
-//        .onPreferenceChange(ScrollOffsetPreferenceKey.self, perform: offsetChanged)
-//    }
-//}
-//
+struct CollectionImageRow: View {
+    
+    let images: [ID_URL]
+    
+    var body: some View {
+        switch (images.count) {
+        case 0:
+            Text("No images found")
+            
+        case 1:
+            CollectionImage(images[0], style: .large)
+            
+        case 3:
+            HStack(spacing: 0) {
+                CollectionImage(images[0], style: .medium)
+                VStack(spacing: 0) {
+                    CollectionImage(images[1], style: .small)
+                    CollectionImage(images[2], style: .small)
+                }
+            }
+        case 6:
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    CollectionImage(images[0], style: .small)
+                    CollectionImage(images[1], style: .small)
+                    CollectionImage(images[2], style: .small)
+                }
+                HStack(spacing: 0) {
+                    CollectionImage(images[3], style: .small)
+                    CollectionImage(images[4], style: .small)
+                    CollectionImage(images[5], style: .small)
+                }
+            }
+            
+        default:
+            Text("Unacceptable image count")
+        }
+    }
+}
 
 #Preview {
     CollectionDetailView()

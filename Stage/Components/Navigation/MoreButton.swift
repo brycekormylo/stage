@@ -15,9 +15,10 @@ struct MoreButton: View {
     
     @State private var presentAccountView = false
     @State private var isExtended = false
+    @State private var showConfirmation = false
     
-    private var height: CGFloat = 48
-    @State private var width: CGFloat = 48
+    private var height: CGFloat = 55
+    @State private var width: CGFloat = 55
     
     var body: some View {
         VStack {
@@ -25,14 +26,29 @@ struct MoreButton: View {
                 Spacer()
                 if stageController.isEditEnabled {
                     Button(action: {
-                        stageController.discardChanges()
-                        stageController.isEditEnabled.toggle()
+                        showConfirmation = true
                     }) {
-                        Image(systemName: "xmark")
+                        ZStack {
+                            Rectangle()
+                                .fill(theme.backgroundAccent)
+                                .cornerRadius(16)
+                                .frame(width: height, height: height)
+                                .shadow(color: theme.background.opacity(0.6), radius: 4)
+                            Image(systemName: "xmark")
+                                .foregroundStyle(theme.text)
+                        }
                     }
-                    .modifier(CircleButton())
-                    .padding(.horizontal, 8)
-                    .transition(.move(edge: .leading))
+                    .confirmationDialog("Discard changes?", isPresented: $showConfirmation) {
+                        Button("Discard changes?", role: .destructive) {
+                            stageController.discardChanges()
+                            stageController.isEditEnabled.toggle()
+                            withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
+                                self.isExtended = false
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 4)
+
                 }
                 HStack(spacing: 18) {
                     if isExtended && !stageController.isEditEnabled {
@@ -48,8 +64,9 @@ struct MoreButton: View {
                 .frame(height: height)
                 .padding(.horizontal)
                 .background {
-                    Capsule()
+                    Rectangle()
                         .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
+                        .cornerRadius(12, corners: [.topLeft, .bottomLeft])
                 }
                 .onTapGesture {
                     withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
@@ -65,7 +82,6 @@ struct MoreButton: View {
         .shadow(color: theme.background.opacity(0.4), radius: 8, x: 0, y: 0)
         .ignoresSafeArea()
         .padding(.vertical, 4)
-        .padding(.horizontal, 36)
     }
     
     var options: some View {

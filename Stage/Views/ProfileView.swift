@@ -52,13 +52,12 @@ struct ProfileView: View {
             if stageController.isEditEnabled && arrowUp {
                 ZStack() {
                     SegmentOrderChangerButton()
-                        .padding(.bottom, 196)
+                        .padding(.bottom, 204)
                     NewSegmentButton()
-                        .padding(.bottom, 124)
+                        .padding(.bottom, 148)
                 }
                 .zIndex(1)
                 .transition(.move(edge: .trailing))
-                .padding()
             }
             ScrollView(showsIndicators: false) {
                 BannerImage()
@@ -141,19 +140,19 @@ struct ProfileView: View {
                 EditableField(content: $name)
                     .font(.custom("Quicksand-Medium", size: 36))
             }
-            .padding(.trailing, 24)
+            .padding(.horizontal, 24)
             HStack {
                 Spacer()
                 EditableField(content: $profession)
                     .font(.custom("Quicksand-Light", size: 18))
                     .opacity(0.6)
             }
-            .padding(.trailing, 24)
+            .padding(.horizontal, 24)
             Spacer()
             CaptionView {
                 EditableText(content: $intro)
                     .font(.custom("Quicksand-Medium", size: 18))
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 4)
             }
             .transition(.move(edge: .leading))
             .opacity(infoOpacity)
@@ -236,7 +235,6 @@ struct SegmentView: View {
                 EditableField(content: $segmentTitle)
                     .font(.custom("Quicksand-Medium", size: 24))
             }
-            .padding(.horizontal)
             Group {
                 Spacer()
                 EditableText(content: $segmentContent)
@@ -247,7 +245,7 @@ struct SegmentView: View {
         .padding()
         .background {
             theme.backgroundAccent
-                .opacity(0.4)
+                .opacity(0.1)
                 .cornerRadius(18)
         }
         .padding(.horizontal, 12)
@@ -315,8 +313,7 @@ struct NewSegmentButton: View {
                                 Image(systemName: "plus")
                                     .foregroundStyle(theme.text)
                             }
-                            .modifier(CircleButton())
-                            .transition(.move(edge: .trailing))
+                            .modifier(SideMountedButton(backgroundColor: theme.button))
                         }
                         .padding(.bottom, 120)
                     }

@@ -37,7 +37,6 @@ struct CollectionsView: View {
                 .padding(.bottom, 120)
                 .zIndex(1)
                 .transition(.move(edge: .trailing))
-                .padding()
             }
         }
         .animation(
@@ -71,7 +70,6 @@ private struct NewCollectionButton: View {
                         Spacer()
                     }
                     .padding(.top, 120)
-                    
                     .transition(.move(edge: .trailing))
                 } else {
                     VStack {
@@ -84,8 +82,7 @@ private struct NewCollectionButton: View {
                                 Image(systemName: "plus")
                                     .foregroundStyle(theme.text)
                             }
-                            .modifier(CircleButton())
-                            .transition(.move(edge: .trailing))
+                            .modifier(SideMountedButton(backgroundColor: theme.button))
                         }
                         .padding(.bottom, 120)
                     }

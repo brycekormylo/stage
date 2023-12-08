@@ -38,6 +38,7 @@ struct CollectionEditView: View {
     @StateObject private var viewModel = InteractiveListViewModel()
     @State private var selectedImage: UIImage?
     @State private var isUploading = false
+    @State private var showConfirmation = false
     
     @Binding var collectionData: ImageCollection
     
@@ -46,6 +47,7 @@ struct CollectionEditView: View {
             ZStack {
                 theme.background.ignoresSafeArea()
                 buttons
+                    .zIndex(10)
                 List {
                     ForEach(viewModel.orderedImages, id: \.self) { image in
                         HStack {
@@ -119,7 +121,8 @@ struct CollectionEditView: View {
                     .font(.title2)
                     .foregroundStyle(theme.text)
                 Spacer()
-                NewImageButton(selectedImage: $selectedImage)
+                deleteCollectionButton
+                NewCollectionImageButton(selectedImage: $selectedImage)
                 Button(action: { dismiss() }) {
                     Image(systemName: "checkmark")
                 }
@@ -132,4 +135,48 @@ struct CollectionEditView: View {
         .padding(.horizontal, 24)
         .ignoresSafeArea()
     }
+    
+    var deleteCollectionButton: some View {
+        Button(action: { showConfirmation.toggle() }) {
+            Image(systemName: "trash")
+                .foregroundStyle(.red)
+        }
+        .confirmationDialog("Delete the entire collection?", isPresented: $showConfirmation) {
+            Button("Delete entire collection?", role: .destructive) {
+                if let collections = stageController.stage?.collections {
+                    if var stage = stageController.stage {
+                        stage.collections = collections.filter { $0.id != collectionData.id }
+                        stageController.stage = stage
+                    }
+                }
+            }
+        } message: {
+            Text("This cannot be undone")
+        }
+
+        .modifier(CircleButton())
+    }
 }
+
+struct NewCollectionImageButton: View {
+    
+    @EnvironmentObject var theme: ThemeController
+    
+    @Binding var selectedImage: UIImage?
+    @State private var presentImagePicker = false
+    
+    var body: some View {
+        Button(action: { presentImagePicker.toggle() }) {
+                Image(systemName: "plus")
+                    .foregroundStyle(theme.text)
+        }
+        .modifier(CircleButton())
+        .transition(.move(edge: .trailing))
+
+        .sheet(isPresented: $presentImagePicker) {
+            ImagePicker(image: $selectedImage)
+        }
+    }
+    
+}
+

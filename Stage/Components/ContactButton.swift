@@ -49,9 +49,7 @@ struct ContactSheet: View {
                 .font(.custom("Quicksand-Medium", size: 24))
                 .foregroundStyle(theme.text)
         }
-        
     }
-    
 }
 
 #Preview {

@@ -45,8 +45,7 @@ struct SegmentOrderChangerButton: View {
                             Image(systemName: "arrow.up.arrow.down")
                                 .foregroundStyle(theme.text)
                         }
-                        .modifier(CircleButton())
-                        .transition(.move(edge: .trailing))
+                        .modifier(SideMountedButton(backgroundColor: theme.accent))
                     }
                 }
                 .sheet(isPresented: $presentReorderSheet) {
@@ -56,7 +55,7 @@ struct SegmentOrderChangerButton: View {
         }
         .zIndex(1)
         .animation(
-            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: presentReorderSheet)
+            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.69), value: presentReorderSheet)
     }
     
 }
@@ -82,6 +81,8 @@ struct SegmentEditView: View {
                                 Text(segment.title ?? "No title")
                                 Text(segment.content ?? "No content")
                             }
+                            .foregroundStyle(theme.text)
+                            .font(.custom("Quicksand-Medium", size: 18))
                             Spacer()
                         }
                         .onDrag {
@@ -93,7 +94,7 @@ struct SegmentEditView: View {
                     .onMove(perform: viewModel.move)
                     .onDelete(perform: viewModel.delete)
                 }
-                .padding(.top, 80)
+                .padding(.top, 140)
                 .listStyle(.plain)
                 .environment(\.editMode, $viewModel.editMode)
                 .foregroundStyle(theme.text)
@@ -114,7 +115,8 @@ struct SegmentEditView: View {
         VStack {
             HStack {
                 Text("Adjust order")
-                    .font(.title2)
+                    .foregroundStyle(theme.text)
+                    .font(.custom("Quicksand-Medium", size: 28))
                 Spacer()
                 Button(action: {
                     if var stage = stageController.stage {

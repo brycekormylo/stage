@@ -13,7 +13,7 @@ enum Tab: String, Hashable, CaseIterable {
     case collections = "square.grid.3x3"
 }
 
-private let buttonDimen: CGFloat = 55
+private let buttonDimen: CGFloat = 56
 
 struct BackgroundHelper: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
@@ -60,11 +60,11 @@ struct TabBarView: View {
         }
         .padding(6)
         .background { 
-            Capsule()
+            Rectangle()
                 .fill(theme.backgroundAccent)
+                .cornerRadius(22)
         }
         .overlay { SelectedTabCircleView(currentTab: $currentTab) }
-        .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
         .animation(
             .interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69),
             value: currentTab)
@@ -79,7 +79,6 @@ private struct TabBarButton: View {
             .renderingMode(.template)
             .foregroundColor(theme.text)
             .fontWeight(.bold)
-            .scaleEffect(1)
             .padding()
             .contentShape(Rectangle())
     }
@@ -103,13 +102,19 @@ struct SelectedTabCircleView: View {
     
     var body: some View {
         ZStack {
-            Circle()
-                .fill(theme.buttonBackground)
+            Rectangle()
+                .fill(theme.backgroundAccent)
+                .cornerRadius(16)
                 .frame(width: buttonDimen , height: buttonDimen)
-            Circle()
-                .stroke(theme.buttonBorder.opacity(0.4), lineWidth: 1)
+//            Circle()
+//                .fill(theme.button.opacity(0.2))
+//                .frame(width: buttonDimen , height: buttonDimen)
+            RoundedRectangle(cornerRadius: 16.0)
+                .strokeBorder(theme.button, lineWidth: 2.0)
+//                .cornerRadius(16)
                 .frame(width: buttonDimen , height: buttonDimen)
             TabBarButton(imageName: "\(currentTab.rawValue).fill")
+                .scaleEffect(1.1)
                 .foregroundColor(theme.text)
         }
         .offset(x: horizontalOffset)

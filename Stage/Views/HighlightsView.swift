@@ -33,6 +33,16 @@ struct HighlightsView: View {
     
     var body: some View {
         ZStack {
+            if stageController.isEditEnabled {
+                ZStack {
+                    NewImageButton(selectedImage: self.$selectedImage)
+                        .padding(.bottom, 234)
+                    ChangeHighlightOrderButton()
+                        .padding(.bottom, 170)
+                }
+                .zIndex(1)
+                .transition(.move(edge: .trailing))
+            }
             ScrollView {
                 LazyVStack {
                     Spacer(minLength: 64)
@@ -52,20 +62,6 @@ struct HighlightsView: View {
                 }
             }
             .zIndex(0)
-            if stageController.isEditEnabled {
-                HStack {
-                    Spacer()
-                    VStack() {
-                        Spacer()
-                        NewImageButton(selectedImage: self.$selectedImage)
-                        ChangeHighlightOrderButton()
-                    }
-                    .padding(.bottom, 120)
-                }
-                .zIndex(1)
-                .transition(.move(edge: .trailing))
-                .padding()
-            }
         }
         .animation(
             .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: stageController.isEditEnabled)
@@ -101,14 +97,35 @@ struct HighlightsView: View {
 private struct ChangeHighlightOrderButton: View {
     
     @EnvironmentObject var stageController: StageController
+    @EnvironmentObject var theme: ThemeController
     
     @State private var presentReorderSheet = false
 
     var body: some View {
-        Button(action: { presentReorderSheet.toggle() }) {
-            Image(systemName: "arrow.up.arrow.down")
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: { presentReorderSheet.toggle() }) {
+                    HStack {
+                        Spacer()
+                        ZStack {
+                            Rectangle()
+                                .fill(theme.accent)
+                                .cornerRadius(12, corners: [.topLeft, .bottomLeft])
+                                .ignoresSafeArea()
+                                .frame(width: 110)
+                                .offset(x: 55)
+                            Image(systemName: "arrow.up.arrow.down")
+                                .foregroundStyle(theme.text)
+                                .offset(x: 22)
+                        }
+                    }
+                    .frame(height: 55)
+                }
+                .transition(.move(edge: .trailing))
+            }
         }
-        .modifier(CircleButton())
         .fullScreenCover(isPresented: $presentReorderSheet) {
             HighlightEditView()
         }
@@ -118,14 +135,25 @@ private struct ChangeHighlightOrderButton: View {
 
 struct NewImageButton: View {
     
+    @EnvironmentObject var theme: ThemeController
+    
     @Binding var selectedImage: UIImage?
     @State private var presentImagePicker = false
     
     var body: some View {
-        Button(action: { presentImagePicker.toggle() }) {
-            Image(systemName: "plus")
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: { presentImagePicker.toggle() }) {
+                    Image(systemName: "plus")
+                        .foregroundStyle(theme.text)
+                    }
+                .modifier(SideMountedButton(backgroundColor: theme.button))
+//                .transition(.move(edge: .trailing))
+            }
+
         }
-        .modifier(CircleButton())
         .sheet(isPresented: $presentImagePicker) {
             ImagePicker(image: $selectedImage)
         }
