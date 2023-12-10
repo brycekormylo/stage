@@ -141,7 +141,7 @@ struct CollectionEditView: View {
                 if let collections = stageController.stage?.collections {
                     if var stage = stageController.stage {
                         stage.collections = collections.filter { $0.id != collectionData.id }
-                        stageController.stage = stage
+                        stageController.replaceStage(stage)
                     }
                 }
             }

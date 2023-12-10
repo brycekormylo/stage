@@ -42,7 +42,7 @@ struct BannerImage: View {
                         self.imageURL = URL(string: imageURL)!
                         if var stage = stageController.stage {
                             stage.header = URL(string: imageURL)!
-                            stageController.stage = stage
+                            stageController.replaceStage(stage)
                         }
                         isUploading = false
                     case .failure(let error):

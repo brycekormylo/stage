@@ -86,23 +86,22 @@ struct HighlightEditView: View {
             HStack {
                 Text("Adjust order")
                     .font(.title2)
+                    .padding(.horizontal, 24)
                 Spacer()
                 Button(action: {
                     if var stage = stageController.stage {
                         stage.highlights = viewModel.orderedImages
-                        stageController.stage = stage
+                        stageController.replaceStage(stage)
                     }
                     dismiss()
                 }) {
                     Image(systemName: "checkmark")
                 }
-                .modifier(CircleButton())
-                    .zIndex(2.0)
+                .modifier(SideMountedButton(backgroundColor: theme.button))
+                .zIndex(2.0)
             }
             Spacer()
         }
-        .padding(.top, 56)
-        .padding(.horizontal, 24)
-        .ignoresSafeArea()
+        .padding(.top, 16)
     }
 }

@@ -97,6 +97,10 @@ class StageController: ObservableObject {
         }
     }
     
+    func replaceStage(_ newStage: Stage) {
+        self.stage = newStage
+    }
+    
     private func updateStage(_ newStage: Stage) async {
         Task {
             if let userID = auth.session?.user.id {

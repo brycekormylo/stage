@@ -12,7 +12,7 @@ struct AuthView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var confirmedPassword: String = ""
-    @State var mode: Mode = .signUp
+    @State var mode: Mode = .signIn
     @State var error: Error?
     @State var errorMessage: String?
     @State var loginInProgress: Bool = false
@@ -27,100 +27,101 @@ struct AuthView: View {
     
     var body: some View {
         ZStack {
-            VStack (spacing: 16){
-                HStack {
-                    Spacer()
+            VStack {
+                if auth.authChangeEvent == .signedIn {
                     Button(action: {dismiss()} ) {
                         Image(systemName: "xmark")
                             .foregroundColor(theme.text)
-                            .padding()
-                            .background(Capsule().fill(theme.backgroundAccent))
-                            .shadow(color: theme.shadow, radius: 4, x: 2, y: 2)
                     }
+                    .modifier(SideMountedButton(backgroundColor: theme.backgroundAccent))
                 }
-                Text("Welcome to Stage")
-                    .font(.title2)
-                    .foregroundColor(theme.text)
-                    .padding(.bottom)
-                TextField("", text: $email)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(theme.text)
-                    .keyboardType(.emailAddress)
-                    .textContentType(.emailAddress)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .padding()
-                    .background {
-                        ZStack {
-                            VStack(spacing: 2) {
-                                Spacer()
-                                theme.text.opacity(0.4)
-                                    .frame(height: 1)
-                                HStack {
-                                    Text("Email")
-                                        .foregroundColor(theme.text.opacity(0.6))
+                VStack (spacing: 16) {
+                    Text("Welcome to Stage")
+                        .font(.custom("Quicksand-Medium", size: 28))
+                        .foregroundColor(theme.text)
+                        .padding(.bottom)
+                    TextField("", text: $email)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(theme.text)
+                        .keyboardType(.emailAddress)
+                        .textContentType(.emailAddress)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .padding()
+                        .background {
+                            ZStack {
+                                VStack(spacing: 2) {
                                     Spacer()
+                                    theme.text.opacity(0.4)
+                                        .frame(height: 1)
+                                    HStack {
+                                        Text("Email")
+                                            .foregroundColor(theme.text.opacity(0.6))
+                                        Spacer()
+                                    }
                                 }
                             }
+                            .offset(y: 12)
                         }
-                        .offset(y: 12)
-                    }
-
-                SecureField("",text: $password)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(theme.text)
-                    .textContentType(.password)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .padding()
-                    .background {
-                        ZStack {
-                            VStack(spacing: 2) {
-                                Spacer()
-                                theme.text.opacity(0.4)
-                                    .frame(height: 1)
-                                HStack {
-                                    Text("Password")
-                                        .foregroundColor(theme.text.opacity(0.6))
+                    
+                    SecureField("",text: $password)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(theme.text)
+                        .textContentType(.password)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .padding()
+                        .background {
+                            ZStack {
+                                VStack(spacing: 2) {
                                     Spacer()
+                                    theme.text.opacity(0.4)
+                                        .frame(height: 1)
+                                    HStack {
+                                        Text("Password")
+                                            .foregroundColor(theme.text.opacity(0.6))
+                                        Spacer()
+                                    }
                                 }
                             }
+                            .offset(y: 12)
                         }
-                        .offset(y: 12)
-                    }
-
-                SecureField("", text: $confirmedPassword)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(theme.text)
-                    .textContentType(.password)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .padding()
-                    .background {
-                        ZStack {
-                            VStack(spacing: 2) {
-                                Spacer()
-                                theme.text.opacity(0.4)
-                                    .frame(height: 1)
-                                HStack {
-                                    Text("Confirm Password")
-                                        .foregroundColor(theme.text.opacity(0.6))
+                    
+                    SecureField("", text: $confirmedPassword)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(theme.text)
+                        .textContentType(.password)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .padding()
+                        .background {
+                            ZStack {
+                                VStack(spacing: 2) {
                                     Spacer()
+                                    theme.text.opacity(0.4)
+                                        .frame(height: 1)
+                                    HStack {
+                                        Text("Confirm Password")
+                                            .foregroundColor(theme.text.opacity(0.6))
+                                        Spacer()
+                                    }
                                 }
                             }
+                            .offset(y: 12)
                         }
-                        .offset(y: 12)
+                        .opacity(mode == .signUp ? 1.0 : 0.0)
+                        .animation(.easeInOut, value: mode)
+                    if let error = errorMessage {
+                        Text(error)
                     }
-                    .opacity(mode == .signUp ? 1.0 : 0.0)
-                    .animation(.easeInOut, value: mode)
-                if let error = errorMessage {
-                    Text(error)
+                    buttons
+                    Spacer()
                 }
-                buttons
-                Spacer()
+                .padding()
+                .padding(.top, 64)
             }
-            .padding()
             .background(theme.background)
+            .font(.custom("Quicksand-Medium", size: 18))
         }
     }
 

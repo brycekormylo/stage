@@ -52,6 +52,7 @@ struct AccountView: View {
             }
             .padding()
         }
+        .font(.custom("Quicksand-Medium", size: 18))
     }
     
     func buildField(_ fieldLabel: String, content: String? = "", editable: Bool = false) -> some View {
@@ -86,6 +87,7 @@ struct AccountView: View {
             Spacer()
             Button(action: {
                 auth.logout()
+                dismiss()
             }) {
                 Text("Log out")
                     .padding(16)

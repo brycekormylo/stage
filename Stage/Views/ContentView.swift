@@ -16,11 +16,19 @@ struct ContentView: View {
     @StateObject var imageController: ImageController = ImageController()
     @StateObject var imgBB: RemoteStorageController = RemoteStorageController()
     
+    @State private var showIntro: Bool = false
+    
     var body: some View {
         ZStack {
             themeController.background.ignoresSafeArea()
             NavigationBar()
             MoreButton()
+        }
+        .overlay {
+            if showIntro {
+                AuthView()
+                    .transition(.move(edge: .bottom))
+            }
         }
         .environmentObject(imageSliderController)
         .environmentObject(themeController)
@@ -31,8 +39,20 @@ struct ContentView: View {
         .onAppear {
             Task {
                 await auth.startSession()
+                if auth.authChangeEvent != .signedIn {
+                    showIntro = true
+                }
             }
         }
+        .onChange(of: auth.authChangeEvent) {
+            if auth.authChangeEvent == .signedIn {
+                showIntro = false
+            } else {
+                showIntro = true
+            }
+        }
+        .animation(
+            .easeInOut, value: auth.authChangeEvent)
     }
 }
 

@@ -160,7 +160,7 @@ struct CollectionCreatorView: View {
             } else {
                 stage.collections = [newCollection]
             }
-            stageController.stage = stage
+            stageController.replaceStage(stage)
         }
     }
 }
@@ -231,24 +231,9 @@ struct CollectionPreviewRow: View {
                     }
                 }
                 stage.collections = collections
-                stageController.stage = stage
+                stageController.replaceStage(stage)
             }
         }
-//        .onChange(of: collectionData.title) {
-//            if var stage = stageController.stage, var collections = stage.collections {
-//                collections = collections.map { collection in
-//                    if collection.id != collectionData.id {
-//                        return collection
-//                    } else {
-//                        var modifiedCollection = collection
-//                        modifiedCollection.content = collectionData.content
-//                        return modifiedCollection
-//                    }
-//                }
-//                stage.title = title
-//                stageController.stage = stage
-//            }
-//        }
         .onAppear {
             collectionData = collection
         }

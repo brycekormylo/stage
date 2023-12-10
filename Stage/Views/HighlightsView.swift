@@ -78,7 +78,7 @@ struct HighlightsView: View {
                         self.contents.append(ID_URL(id: UUID(), url: URL(string: imageURL)!, order: contents.count+1))
                         if var stage = stageController.stage {
                             stage.highlights = self.contents
-                            stageController.stage = stage
+                            stageController.replaceStage(stage)
                         }
                         isUploading = false
                     case .failure(let error):

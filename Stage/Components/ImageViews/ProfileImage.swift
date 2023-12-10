@@ -65,7 +65,7 @@ struct ProfileImage: View {
                         self.imageURL = URL(string: imageURL)!
                         if var stage = stageController.stage {
                             stage.profileImage = URL(string: imageURL)!
-                            stageController.stage = stage
+                            stageController.replaceStage(stage)
                         }
                         isUploading = false
                     case .failure(let error):

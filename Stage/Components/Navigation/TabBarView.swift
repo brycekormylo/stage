@@ -111,7 +111,7 @@ struct SelectedTabCircleView: View {
 //                .fill(theme.button.opacity(0.2))
 //                .frame(width: buttonDimen , height: buttonDimen)
             RoundedRectangle(cornerRadius: 16.0)
-                .strokeBorder(theme.button, lineWidth: 2.0)
+                .strokeBorder(theme.button, lineWidth: 1.4)
 //                .cornerRadius(16)
                 .frame(width: buttonDimen , height: buttonDimen)
             TabBarButton(imageName: "\(currentTab.rawValue).fill")

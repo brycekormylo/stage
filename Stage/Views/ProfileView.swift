@@ -41,7 +41,7 @@ struct ProfileView: View {
                 stage.profession = profession
                 stage.intro = intro
                 stage.segments = segments
-                stageController.stage = stage
+                stageController.replaceStage(stage)
                 syncProfileInfo()
             }
         }
@@ -267,7 +267,7 @@ struct SegmentView: View {
                     }
                 }
                 stage.segments = segments
-                stageController.stage = stage
+                stageController.replaceStage(stage)
             }
         }
         .onChange(of: segmentContent) {
@@ -283,7 +283,7 @@ struct SegmentView: View {
                     }
                 }
                 stage.segments = segments
-                stageController.stage = stage
+                stageController.replaceStage(stage)
             }
         }
     }
@@ -411,7 +411,7 @@ struct SegmentCreatorView: View {
             } else {
                 stage.segments = [newSegment]
             }
-            stageController.stage = stage
+            stageController.replaceStage(stage)
         }
     }
 }

@@ -104,9 +104,7 @@ struct ContactSheet: View {
                     newSegments.append(Segment(id: UUID(), email: "Email not set"))
                     if var stage = stageController.stage {
                         stage.segments = newSegments
-                        stageController.stage = stage
-                        stageController.submitChanges()
-                        
+                        stageController.replaceStage(stage)
                     }
                 }
             }

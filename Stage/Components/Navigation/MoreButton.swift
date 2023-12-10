@@ -21,68 +21,80 @@ struct MoreButton: View {
     @State private var width: CGFloat = 55
     
     var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                if stageController.isEditEnabled {
-                    Button(action: {
-                        showConfirmation = true
-                    }) {
-                        ZStack {
-                            Rectangle()
-                                .fill(theme.backgroundAccent)
-                                .cornerRadius(16)
-                                .frame(width: height, height: height)
-                                .shadow(color: theme.background.opacity(0.6), radius: 4)
-                            Image(systemName: "xmark")
-                                .foregroundStyle(theme.text)
+        ZStack {
+            if isExtended && !stageController.isEditEnabled {
+                Rectangle()
+                    .fill(theme.background.opacity(0.4))
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            isExtended = false
                         }
                     }
-                    .confirmationDialog("Discard changes?", isPresented: $showConfirmation) {
-                        Button("Discard changes?", role: .destructive) {
-                            stageController.discardChanges()
-                            stageController.isEditEnabled.toggle()
-                            withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
-                                self.isExtended = false
+            }
+            VStack {
+                HStack {
+                    Spacer()
+                    if stageController.isEditEnabled {
+                        Button(action: {
+                            showConfirmation = true
+                        }) {
+                            ZStack {
+                                Rectangle()
+                                    .fill(theme.backgroundAccent)
+                                    .cornerRadius(16)
+                                    .frame(width: height, height: height)
+                                    .shadow(color: theme.background.opacity(0.6), radius: 4)
+                                Image(systemName: "xmark")
+                                    .foregroundStyle(theme.text)
                             }
                         }
+                        .confirmationDialog("Discard changes?", isPresented: $showConfirmation) {
+                            Button("Discard changes?", role: .destructive) {
+                                stageController.discardChanges()
+                                stageController.isEditEnabled.toggle()
+                                withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
+                                    self.isExtended = false
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 4)
+                        
                     }
-                    .padding(.horizontal, 4)
-
-                }
-                HStack(spacing: 18) {
-                    if isExtended && !stageController.isEditEnabled {
-                        options
-                    }
-                    if stageController.isEditEnabled {
-                        Text("Save")
+                    HStack(spacing: 18) {
+                        if isExtended && !stageController.isEditEnabled {
+                            options
+                        }
+                        if stageController.isEditEnabled {
+                            Text("Save")
+                                .foregroundStyle(theme.text)
+                        }
+                        Image(systemName: stageController.isEditEnabled ? "checkmark" : "ellipsis")
                             .foregroundStyle(theme.text)
                     }
-                    Image(systemName: stageController.isEditEnabled ? "checkmark" : "ellipsis")
-                        .foregroundStyle(theme.text)
-                }
-                .frame(height: height)
-                .padding(.horizontal)
-                .background {
-                    Rectangle()
-                        .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
-                        .cornerRadius(12, corners: [.topLeft, .bottomLeft])
-                }
-                .shadow(color: theme.background.opacity(0.6), radius: 4)
-                .onTapGesture {
-                    withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
-                        if stageController.isEditEnabled {
-                            stageController.submitChanges()
+                    .frame(height: height)
+                    .padding(.horizontal)
+                    .background {
+                        Rectangle()
+                            .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
+                            .cornerRadius(12, corners: [.topLeft, .bottomLeft])
+                    }
+                    .shadow(color: theme.background.opacity(0.6), radius: 4)
+                    .onTapGesture {
+                        withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
+                            if stageController.isEditEnabled {
+                                stageController.submitChanges()
+                            }
+                            isExtended.toggle()
                         }
-                        isExtended.toggle()
                     }
                 }
+                Spacer()
             }
-            Spacer()
+            .shadow(color: theme.background.opacity(0.4), radius: 8, x: 0, y: 0)
+            .ignoresSafeArea()
+            .padding(.vertical, 4)
         }
-        .shadow(color: theme.background.opacity(0.4), radius: 8, x: 0, y: 0)
-        .ignoresSafeArea()
-        .padding(.vertical, 4)
     }
     
     var options: some View {
@@ -110,7 +122,13 @@ struct MoreButton: View {
         }) {
             Image(systemName: "person")
         }
-        .sheet(isPresented: $presentAccountView) {
+        .sheet(
+            isPresented: $presentAccountView,
+            onDismiss: {
+                withAnimation(.interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69)) {
+                    isExtended = false
+                }
+        }) {
             if auth.authChangeEvent == .signedIn {
                 AccountView()
             } else {

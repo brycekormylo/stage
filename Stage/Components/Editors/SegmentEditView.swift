@@ -125,7 +125,7 @@ struct SegmentEditView: View {
                 Button(action: {
                     if var stage = stageController.stage {
                         stage.segments = viewModel.orderedSegments
-                        stageController.stage = stage
+                        stageController.replaceStage(stage)
                     }
                     dismiss()
                 }) {
