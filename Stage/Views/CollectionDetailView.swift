@@ -16,11 +16,7 @@ struct CollectionDetailView: View {
     @State private var timer: Timer?
     
     @State var collection: ImageCollection?
-    
-    var images: [ID_URL] = sampleImages.enumerated().map { index, url in
-        ID_URL(id: UUID(), url: url, order: index)
-    }
-    
+        
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView(
@@ -28,19 +24,12 @@ struct CollectionDetailView: View {
                 showsIndicators: false
             ) {
                 VStack(spacing: 0) {
-                    ForEach(images, id: \.self) { image in
-                    HStack(spacing: 0) {
-                        CollectionImage(image, style: .medium)
-                        VStack(spacing: 0) {
-                            CollectionImage(image, style: .small)
-                            CollectionImage(image, style: .small)
-                        }
+                    if let images = collection?.content {
+                        CollectionImageRow(images: images)
                     }
-                    CollectionImage(image, style: .large)
                 }
-                .background(theme.background)
+
             }
-        }
             .overlay {
                 if isScrolling {
                     VStack {
@@ -76,6 +65,7 @@ struct CollectionDetailView: View {
                 handleScroll(scrollView: scrollView)
             })
         }
+        .background(theme.background)
         .onAppear {
             isScrolling = true
         }
@@ -136,41 +126,55 @@ struct CollectionImage: View {
 
 struct CollectionImageRow: View {
     
-    let images: [ID_URL]
+    @State var images: [ID_URL]
     
     var body: some View {
-        switch (images.count) {
-        case 0:
-            Text("No images found")
-            
-        case 1:
-            CollectionImage(images[0], style: .large)
-            
-        case 3:
-            HStack(spacing: 0) {
-                CollectionImage(images[0], style: .medium)
-                VStack(spacing: 0) {
-                    CollectionImage(images[1], style: .small)
-                    CollectionImage(images[2], style: .small)
+        VStack(spacing: 0) {
+            ForEach(images.chunked(into: 3), id: \.self) { chunk in
+                HStack(spacing: 0) {
+                    ForEach(chunk, id: \.self) { image in
+                        CollectionImage(image, style: .small)
+                    }
                 }
             }
-        case 6:
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    CollectionImage(images[0], style: .small)
-                    CollectionImage(images[1], style: .small)
-                    CollectionImage(images[2], style: .small)
-                }
-                HStack(spacing: 0) {
-                    CollectionImage(images[3], style: .small)
-                    CollectionImage(images[4], style: .small)
-                    CollectionImage(images[5], style: .small)
-                }
-            }
-            
-        default:
-            Text("Unacceptable image count")
         }
+//        switch (images.count) {
+//        case 0:
+//            Text("No images found")
+//            
+//        case 1:
+//            CollectionImage(images[0], style: .large)
+//            
+//        case 3:
+//            HStack(spacing: 0) {
+//                CollectionImage(images[0], style: .medium)
+//                VStack(spacing: 0) {
+//                    CollectionImage(images[1], style: .small)
+//                    CollectionImage(images[2], style: .small)
+//                }
+//            }
+//        case 6:
+//            VStack(spacing: 0) {
+//                HStack(spacing: 0) {
+//                    CollectionImage(images[0], style: .small)
+//                    CollectionImage(images[1], style: .small)
+//                    CollectionImage(images[2], style: .small)
+//                }
+//                HStack(spacing: 0) {
+//                    CollectionImage(images[3], style: .small)
+//                    CollectionImage(images[4], style: .small)
+//                    CollectionImage(images[5], style: .small)
+//                }
+//            }
+//            
+//        default:
+//            LazyHStack {
+//                
+//                ForEach(images) { image in
+//                    CollectionImage(image, style: .small)
+//                }
+//            }
+//        }
     }
 }
 

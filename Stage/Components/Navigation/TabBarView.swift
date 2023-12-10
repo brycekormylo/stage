@@ -64,6 +64,7 @@ struct TabBarView: View {
                 .fill(theme.backgroundAccent)
                 .cornerRadius(22)
         }
+        .shadow(color: theme.background.opacity(0.6), radius: 4)
         .overlay { SelectedTabCircleView(currentTab: $currentTab) }
         .animation(
             .interactiveSpring(response: 0.34, dampingFraction: 0.69, blendDuration: 0.69),

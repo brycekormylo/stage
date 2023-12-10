@@ -25,29 +25,32 @@ struct AccountView: View {
     
     var body: some View {
         createBody()
-            .padding()
             .background(theme.background)
     }
     
     func createBody() -> some View {
-        VStack(spacing: 20) {
+        VStack {
             HStack {
-                Text("Manage account")
+                Text("Account")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(theme.text)
+                    .padding()
                 Spacer()
                 Button(action: { dismiss() }) {
                     Image(systemName: "xmark")
                         .foregroundStyle(theme.text)
                 }
-                .modifier(CircleButton())
+                .modifier(SideMountedButton(backgroundColor: theme.button))
+            }
+            .padding(.top)
+            VStack(spacing: 20) {
+                buildField("Email", content: auth.session?.user.email)
+                buildField("Creation Date", content: auth.session?.user.createdAt.formatted())
+                buildButtons()
+                Spacer()
             }
             .padding()
-            buildField("Email", content: auth.session?.user.email)
-            buildField("Creation Date", content: auth.session?.user.createdAt.formatted())
-            buildButtons()
-            Spacer()
         }
     }
     

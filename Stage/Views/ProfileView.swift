@@ -69,14 +69,17 @@ struct ProfileView: View {
                         Spacer()
                     }
                     info
-                    ProfilePageFrame {
-                        if let segments = stageController.stage?.segments {
-                            ForEach(segments) { segment in
-                                SegmentView(segment)
+                    if let segments = stageController.stage?.segments {
+                        ForEach(segments.chunked(into: 3), id: \.self) { segmentChunk in
+                            ProfilePageFrame {
+                                ForEach(segmentChunk) { segment in
+                                    SegmentView(segment)
+                                }
+                                if segmentChunk.count < 3 {
+                                    ContactButton()
+                                }
                             }
                         }
-                        ContactButton()
-                        Spacer()
                     }
                     GeometryReader { geo in
                         Color.clear
@@ -335,8 +338,10 @@ struct SegmentCreatorView: View {
     
     @State var title: String = ""
     @State var content: String = ""
+    @State var isContactSegment: Bool = false
     
     var body: some View {
+        
         VStack {
             HStack {
                 Text("New Segment")

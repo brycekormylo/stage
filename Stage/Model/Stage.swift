@@ -127,6 +127,7 @@ struct ID_URL: Codable, Identifiable, Hashable {
     let id: UUID
     let url: URL
     var order: Int
+    var size: Int?
     
 }
 
@@ -134,7 +135,7 @@ struct ImageCollection: Codable, Identifiable, Equatable {
     
     var id: UUID
     var hexColor: String?
-    var title: String?
+    var title: String
     var content: [ID_URL]?
     
 }
@@ -144,5 +145,6 @@ struct Segment: Codable, Identifiable, Hashable {
     var id: UUID
     var title: String?
     var content: String?
+    var email: String?
     
 }

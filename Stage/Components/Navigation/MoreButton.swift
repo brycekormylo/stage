@@ -68,6 +68,7 @@ struct MoreButton: View {
                         .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
                         .cornerRadius(12, corners: [.topLeft, .bottomLeft])
                 }
+                .shadow(color: theme.background.opacity(0.6), radius: 4)
                 .onTapGesture {
                     withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
                         if stageController.isEditEnabled {

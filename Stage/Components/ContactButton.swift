@@ -41,16 +41,80 @@ struct ContactSheet: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
+    
+    @State private var email: String = "Email"
+//    @State private var twitter: String = "Twitter"
+//    @State private var instagram: String = "Instagram"
     
     var body: some View {
         ZStack {
             theme.background.ignoresSafeArea()
-            Text("Contact info")
-                .font(.custom("Quicksand-Medium", size: 24))
+            VStack(alignment: .leading, spacing: 24) {
+                HStack {
+                    Text("Contact info")
+                        .font(.custom("Quicksand-Medium", size: 24))
+                        .foregroundStyle(theme.text)
+                        .padding()
+                    Spacer()
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "xmark")
+                    }
+                    .modifier(SideMountedButton(backgroundColor: theme.backgroundAccent))
+                }
+                .padding(.vertical)
+                Group {
+                    ZStack {
+                        HStack {
+                            Text("Email")
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            EditableText(content: $email)
+                                .frame(width: UIScreen.main.bounds.width*3/4, height: 48)
+                                .multilineTextAlignment(.trailing)
+                        }
+                        
+                    }
+//                    HStack {
+//                        Text("Twitter")
+//                        Spacer()
+//                        EditableText(content: $twitter)
+//                        
+//                    }
+//                    HStack {
+//                        Text("Instagram")
+//                        Spacer()
+//                        EditableText(content: $instagram)
+//                    }
+                }
                 .foregroundStyle(theme.text)
+                .font(.custom("Quicksand-Medium", size: 18))
+                .padding(.horizontal)
+                Spacer()
+            }
+        }
+        .onAppear {
+            if let segments = stageController.stage?.segments {
+                if let email = segments.filter({ $0.email != nil }).first?.email {
+                    self.email = email
+                } else {
+                    var newSegments = segments
+                    newSegments.append(Segment(id: UUID(), email: "Email not set"))
+                    if var stage = stageController.stage {
+                        stage.segments = newSegments
+                        stageController.stage = stage
+                        stageController.submitChanges()
+                        
+                    }
+                }
+            }
+
         }
     }
 }
+
 
 #Preview {
     ContactButton()

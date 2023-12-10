@@ -186,18 +186,17 @@ struct CollectionPreviewRow: View {
     
     var body: some View {
         VStack {
-            if let title = collection.title {
-                HStack(alignment: .center) {
-                    Spacer()
-                    if stageController.isEditEnabled {
-                        editButton
-                    }
-                    Text(title)
-                        .font(.custom("Quicksand-Medium", size: 18))
-                        .foregroundStyle(theme.text)
-                        .padding(.horizontal)
+            HStack(alignment: .center) {
+                Spacer()
+                if stageController.isEditEnabled {
+                    editButton
                 }
+                Text(collection.title)
+                    .font(.custom("Quicksand-Medium", size: 18))
+                    .foregroundStyle(theme.text)
+                    .padding(.horizontal)
             }
+            .frame(height: 36)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     if let content = collectionData.content {
@@ -218,7 +217,7 @@ struct CollectionPreviewRow: View {
             presentDetailView.toggle()
         }
         .fullScreenCover(isPresented: $presentDetailView) {
-            CollectionDetailView()
+            CollectionDetailView(collection: collectionData)
         }
         .onChange(of: collectionData.content) {
             if var stage = stageController.stage, var collections = stage.collections {
@@ -235,6 +234,21 @@ struct CollectionPreviewRow: View {
                 stageController.stage = stage
             }
         }
+//        .onChange(of: collectionData.title) {
+//            if var stage = stageController.stage, var collections = stage.collections {
+//                collections = collections.map { collection in
+//                    if collection.id != collectionData.id {
+//                        return collection
+//                    } else {
+//                        var modifiedCollection = collection
+//                        modifiedCollection.content = collectionData.content
+//                        return modifiedCollection
+//                    }
+//                }
+//                stage.title = title
+//                stageController.stage = stage
+//            }
+//        }
         .onAppear {
             collectionData = collection
         }

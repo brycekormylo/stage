@@ -8,25 +8,6 @@
 import SwiftUI
 import Combine
 
-//class InteractiveListViewModel: ObservableObject {
-//    
-//    @Published var orderedImages: [ID_URL] = []
-//    @Published var editMode: EditMode = .inactive
-//    
-//    func setOrderedImages(to urls: [ID_URL]) {
-//        self.orderedImages = urls
-//    }
-//    
-//    func move(from source: IndexSet, to destination: Int) {
-//        orderedImages.move(fromOffsets: source, toOffset: destination)
-//    }
-//    
-//    func delete(at offsets: IndexSet) {
-//        orderedImages.remove(atOffsets: offsets)
-//    }
-//}
-
-
 struct CollectionEditView: View {
     
     @Environment(\.dismiss) private var dismiss
@@ -39,6 +20,7 @@ struct CollectionEditView: View {
     @State private var selectedImage: UIImage?
     @State private var isUploading = false
     @State private var showConfirmation = false
+    @State private var title: String = ""
     
     @Binding var collectionData: ImageCollection
     
@@ -54,9 +36,16 @@ struct CollectionEditView: View {
                             AsyncImage(url: image.url) { phase in
                                 phase.image?
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 120, height: 120)
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 12)
+                                    )
                             }
                             Spacer()
+//                            Picker("Image size", selection: $image.size) {
+//                                
+//                            }
                         }
                         .onDrag {
                             return NSItemProvider()
@@ -75,11 +64,13 @@ struct CollectionEditView: View {
         }
         .onAppear {
             viewModel.editMode = .active
+            title = collectionData.title
             if let images = collectionData.content {
                 viewModel.setOrderedImages(to: images)
             }
         }
         .onDisappear {
+            collectionData.title = self.title
             viewModel.editMode = .inactive
         }
         .onChange(of: viewModel.orderedImages) {
@@ -87,6 +78,10 @@ struct CollectionEditView: View {
             data.content = viewModel.orderedImages
             collectionData = data
             
+        }
+        .onChange(of: title) {
+            print(title)
+            collectionData.title = self.title
         }
         .onChange(of: $selectedImage.wrappedValue) {
             if let image = selectedImage {
@@ -117,7 +112,7 @@ struct CollectionEditView: View {
     var buttons: some View {
         VStack {
             HStack {
-                Text("Edit Collection")
+                TextField("", text: $title)
                     .font(.title2)
                     .foregroundStyle(theme.text)
                 Spacer()

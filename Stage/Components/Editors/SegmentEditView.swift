@@ -78,11 +78,15 @@ struct SegmentEditView: View {
                     ForEach(viewModel.orderedSegments, id: \.self) { segment in
                         HStack {
                             VStack {
-                                Text(segment.title ?? "No title")
+                                HStack {
+                                    Spacer()
+                                    Text(segment.title ?? "No title")
+                                        .font(.custom("Quicksand-Medium", size: 24))
+                                }
                                 Text(segment.content ?? "No content")
+                                    .font(.custom("Quicksand-Medium", size: 18))
                             }
                             .foregroundStyle(theme.text)
-                            .font(.custom("Quicksand-Medium", size: 18))
                             Spacer()
                         }
                         .onDrag {

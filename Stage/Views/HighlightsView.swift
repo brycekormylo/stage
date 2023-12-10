@@ -107,22 +107,10 @@ private struct ChangeHighlightOrderButton: View {
             HStack {
                 Spacer()
                 Button(action: { presentReorderSheet.toggle() }) {
-                    HStack {
-                        Spacer()
-                        ZStack {
-                            Rectangle()
-                                .fill(theme.accent)
-                                .cornerRadius(12, corners: [.topLeft, .bottomLeft])
-                                .ignoresSafeArea()
-                                .frame(width: 110)
-                                .offset(x: 55)
-                            Image(systemName: "arrow.up.arrow.down")
-                                .foregroundStyle(theme.text)
-                                .offset(x: 22)
-                        }
-                    }
-                    .frame(height: 55)
+                    Image(systemName: "arrow.up.arrow.down")
+                        .foregroundStyle(theme.text)
                 }
+                .modifier(SideMountedButton(backgroundColor: theme.accent))
                 .transition(.move(edge: .trailing))
             }
         }
@@ -150,7 +138,6 @@ struct NewImageButton: View {
                         .foregroundStyle(theme.text)
                     }
                 .modifier(SideMountedButton(backgroundColor: theme.button))
-//                .transition(.move(edge: .trailing))
             }
 
         }

@@ -47,7 +47,11 @@ struct HighlightEditView: View {
                             AsyncImage(url: highlight.url) { phase in
                                 phase.image?
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 120, height: 120)
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 12)
+                                    )
                             }
                             Spacer()
                         }
