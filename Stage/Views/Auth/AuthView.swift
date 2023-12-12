@@ -173,7 +173,7 @@ struct AuthView: View {
             Spacer()
         }
         .background {
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(theme.button)
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
         }
@@ -192,8 +192,8 @@ struct AuthView: View {
             Spacer()
         }
         .background {
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(theme.accent, lineWidth: 1)
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(theme.accent, lineWidth: 1.4)
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
         }
     }

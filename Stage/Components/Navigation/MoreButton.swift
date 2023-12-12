@@ -24,7 +24,7 @@ struct MoreButton: View {
         ZStack {
             if isExtended && !stageController.isEditEnabled {
                 Rectangle()
-                    .fill(theme.background.opacity(0.4))
+                    .fill(.regularMaterial.opacity(0.6))
                     .ignoresSafeArea()
                     .onTapGesture {
                         withAnimation {

@@ -12,7 +12,6 @@ struct ProfileImage: View {
     let size: CGFloat
     let stroke: CGFloat
     
-    @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var remoteStorage: RemoteStorageController
     @EnvironmentObject var stageController: StageController
@@ -32,22 +31,19 @@ struct ProfileImage: View {
             Circle()
                 .fill(theme.background)
                 .frame(width: size+stroke, height: size+stroke)
-            AsyncImage(url: imageURL ?? imageController.profileURL) { phase in
-                phase.image?
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: size, height: size)
-            }
-            .overlay {
-                ZStack {
-                    theme.backgroundAccent.ignoresSafeArea()
-                    ProgressView()
-                        .foregroundStyle(theme.text)
-                        .scaleEffect(2.0)
+            CachedAsyncImage(url: imageURL)
+                .scaledToFill()
+                .frame(width: size, height: size)
+                .overlay {
+                    ZStack {
+                        theme.backgroundAccent.ignoresSafeArea()
+                        ProgressView()
+                            .foregroundStyle(theme.text)
+                            .scaleEffect(2.0)
+                    }
+                    .opacity(isUploading ? 1.0 : 0.0)
                 }
-                .opacity(isUploading ? 1.0 : 0.0)
-            }
-            .clipShape(Circle())
+                .clipShape(Circle())
         }
         .onTapGesture {
             self.isImagePickerPresented = true
@@ -73,6 +69,11 @@ struct ProfileImage: View {
                         isUploading = false
                     }
                 }
+            }
+        }
+        .onChange(of: $stageController.stage.wrappedValue?.profileImage) {
+            if let profileImage = stageController.stage?.profileImage {
+                imageURL = profileImage
             }
         }
     }

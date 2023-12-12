@@ -142,7 +142,7 @@ struct NewImageButton: View {
 
         }
         .sheet(isPresented: $presentImagePicker) {
-            ImagePicker(image: $selectedImage)
+            ImagePicker(image: self.$selectedImage)
         }
     }
     

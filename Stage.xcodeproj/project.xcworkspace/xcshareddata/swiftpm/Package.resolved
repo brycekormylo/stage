@@ -46,6 +46,15 @@
       }
     },
     {
+      "identity" : "photoselectandcrop",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Rillieux/PhotoSelectAndCrop",
+      "state" : {
+        "revision" : "26eec466026a99ebde07e653ea325d7492f949d9",
+        "version" : "2.0.4"
+      }
+    },
+    {
       "identity" : "postgrest-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/supabase-community/postgrest-swift",
@@ -79,6 +88,15 @@
       "state" : {
         "revision" : "7088b85247c8e56317f0b22b9d60655e8f762fec",
         "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "tocropviewcontroller",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TimOliver/TOCropViewController",
+      "state" : {
+        "revision" : "d0470491f56e734731bbf77991944c0dfdee3e0e",
+        "version" : "2.6.1"
       }
     },
     {

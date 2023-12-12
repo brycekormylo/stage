@@ -43,7 +43,7 @@ struct AccountView: View {
                 }
                 .modifier(SideMountedButton(backgroundColor: theme.button))
             }
-            .padding(.top)
+            .padding(.top, 36)
             VStack(spacing: 20) {
                 buildField("Email", content: auth.session?.user.email)
                 buildField("Creation Date", content: auth.session?.user.createdAt.formatted())
@@ -96,7 +96,7 @@ struct AccountView: View {
             Spacer()
         }
         .background {
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(theme.button)
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
         }
@@ -121,7 +121,7 @@ struct AccountView: View {
             Spacer()
         }
         .background {
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(theme.backgroundAccent)
                 .strokeBorder(theme.button)
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)

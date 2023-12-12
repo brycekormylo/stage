@@ -14,7 +14,7 @@ struct CollectionsView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack {
                     Spacer(minLength: 64)
                     title
@@ -172,13 +172,17 @@ struct CollectionPreviewRow: View {
     
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
+    @EnvironmentObject var remoteStorage: RemoteStorageController
+    
+    @State private var selectedImage: UIImage?
+    @State private var isUploading: Bool = false
     
     @State var presentDetailView: Bool = false
     @State var presentEditView: Bool = false
     
     @State private var collectionData: ImageCollection = ImageCollection(id: UUID(), title: "Empty Collection")
     
-    init(_ collection: ImageCollection, imageHeight: CGFloat = 320) {
+    init(_ collection: ImageCollection, imageHeight: CGFloat = UIScreen.main.bounds.width * 0.88) {
         self.collection = collection
         self.imageHeight = imageHeight
         self.collectionData = collection
@@ -189,6 +193,7 @@ struct CollectionPreviewRow: View {
             HStack(alignment: .center) {
                 Spacer()
                 if stageController.isEditEnabled {
+                    newCollectionImageButton
                     editButton
                 }
                 Text(collection.title)
@@ -209,8 +214,8 @@ struct CollectionPreviewRow: View {
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.viewAligned)
-            .safeAreaPadding(.horizontal, 35)
-            .frame(height: imageHeight + 16)
+            .safeAreaPadding(.horizontal, UIScreen.main.bounds.width * 0.06)
+            .frame(height: imageHeight)
         }
         .padding(.bottom)
         .onTapGesture {
@@ -234,6 +239,28 @@ struct CollectionPreviewRow: View {
                 stageController.replaceStage(stage)
             }
         }
+        .onChange(of: self.selectedImage) {
+            if let image = selectedImage {
+                isUploading = true
+                remoteStorage.uploadToImgBB(image) { result in
+                    switch result {
+                    case .success(let imageURL):
+                        if collectionData.content == nil {
+                            collectionData.content = []
+                        }
+                        if var content = collectionData.content {
+                            let newImage = ID_URL(id: UUID(), url: URL(string: imageURL)!, order: content.count+1)
+                            content.append(newImage)
+                            collectionData.content = content
+                        }
+                        isUploading = false
+                    case .failure(let error):
+                        print("Image upload failed with error: \(error)")
+                        isUploading = false
+                    }
+                }
+            }
+        }
         .onAppear {
             collectionData = collection
         }
@@ -243,13 +270,38 @@ struct CollectionPreviewRow: View {
         Button(action: {
             presentEditView.toggle()
         }) {
-            Image(systemName: "pencil")
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(theme.button.opacity(0.4))
+                    .frame(width: 48, height: 48)
+                Image(systemName: "pencil")
+            }
         }
         .foregroundStyle(theme.text.opacity(0.8))
-        .modifier(CircleButton())
         .scaleEffect(0.75)
         .fullScreenCover(isPresented: $presentEditView) {
             CollectionEditView(collectionData: $collectionData)
+        }
+    }
+    
+    @State private var presentImagePicker = false
+    
+    var newCollectionImageButton: some View {
+        Button(action: {
+            presentImagePicker.toggle()
+        }) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(theme.accent.opacity(0.4))
+                    .frame(width: 48, height: 48)
+                Image(systemName: "plus")
+                    .foregroundStyle(theme.text)
+            }
+        }
+        .transition(.move(edge: .trailing))
+        .scaleEffect(0.75)
+        .sheet(isPresented: $presentImagePicker) {
+            ImagePicker(image: self.$selectedImage)
         }
     }
 }

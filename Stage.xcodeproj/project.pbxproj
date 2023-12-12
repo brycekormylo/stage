@@ -37,6 +37,9 @@
 		02D32E1F2B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */; };
 		02D32E202B1D4F5000DEEDA6 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E112B1D4F5000DEEDA6 /* Quicksand-Bold.ttf */; };
 		02DAC99F2AF55FFE001585A6 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAC99E2AF55FFE001585A6 /* AccountView.swift */; };
+		02F1E93C2B27DDA90055AC05 /* PhotoSelectAndCrop in Frameworks */ = {isa = PBXBuildFile; productRef = 02F1E93B2B27DDA90055AC05 /* PhotoSelectAndCrop */; };
+		02F1E9412B27E8350055AC05 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 02F1E9402B27E8350055AC05 /* CropViewController */; };
+		02F1E9432B27E8350055AC05 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 02F1E9422B27E8350055AC05 /* TOCropViewController */; };
 		02FC7A002AF428420043FA48 /* StageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC79FF2AF428420043FA48 /* StageApp.swift */; };
 		02FC7A022AF428420043FA48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A012AF428420043FA48 /* ContentView.swift */; };
 		02FC7A042AF428430043FA48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02FC7A032AF428430043FA48 /* Assets.xcassets */; };
@@ -62,7 +65,6 @@
 		02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A682AF448B70043FA48 /* AuthController.swift */; };
 		02FC7A6C2AF448B70043FA48 /* ImageSliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A662AF448B70043FA48 /* ImageSliderController.swift */; };
 		02FC7A6D2AF448B70043FA48 /* RemoteStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */; };
-		02FC7A6E2AF448B70043FA48 /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A652AF448B70043FA48 /* ImageController.swift */; };
 		02FC7A6F2AF448B70043FA48 /* ThemeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A642AF448B70043FA48 /* ThemeController.swift */; };
 		02FC7A722AF448EB0043FA48 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 02FC7A712AF448EB0043FA48 /* Supabase */; };
 		02FC7A742AF449040043FA48 /* _Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC7A732AF449040043FA48 /* _Secrets.swift */; };
@@ -132,7 +134,6 @@
 		02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStorageController.swift; sourceTree = "<group>"; };
 		02FC7A632AF448B70043FA48 /* StageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageController.swift; sourceTree = "<group>"; };
 		02FC7A642AF448B70043FA48 /* ThemeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeController.swift; sourceTree = "<group>"; };
-		02FC7A652AF448B70043FA48 /* ImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		02FC7A662AF448B70043FA48 /* ImageSliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderController.swift; sourceTree = "<group>"; };
 		02FC7A682AF448B70043FA48 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		02FC7A732AF449040043FA48 /* _Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Secrets.swift; sourceTree = "<group>"; };
@@ -144,6 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				02FC7A722AF448EB0043FA48 /* Supabase in Frameworks */,
+				02F1E93C2B27DDA90055AC05 /* PhotoSelectAndCrop in Frameworks */,
+				02F1E9432B27E8350055AC05 /* TOCropViewController in Frameworks */,
+				02F1E9412B27E8350055AC05 /* CropViewController in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				02FC7A682AF448B70043FA48 /* AuthController.swift */,
-				02FC7A652AF448B70043FA48 /* ImageController.swift */,
 				02FC7A662AF448B70043FA48 /* ImageSliderController.swift */,
 				02FC7A622AF448B70043FA48 /* RemoteStorageController.swift */,
 				02FC7A632AF448B70043FA48 /* StageController.swift */,
@@ -358,6 +361,9 @@
 			name = Stage;
 			packageProductDependencies = (
 				02FC7A712AF448EB0043FA48 /* Supabase */,
+				02F1E93B2B27DDA90055AC05 /* PhotoSelectAndCrop */,
+				02F1E9402B27E8350055AC05 /* CropViewController */,
+				02F1E9422B27E8350055AC05 /* TOCropViewController */,
 			);
 			productName = Stage;
 			productReference = 02FC79FC2AF428420043FA48 /* Stage.app */;
@@ -433,6 +439,8 @@
 			mainGroup = 02FC79F32AF428420043FA48;
 			packageReferences = (
 				02FC7A702AF448EB0043FA48 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				02F1E93A2B27DDA90055AC05 /* XCRemoteSwiftPackageReference "PhotoSelectAndCrop" */,
+				02F1E93F2B27E7E10055AC05 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = 02FC79FD2AF428420043FA48 /* Products */;
 			projectDirPath = "";
@@ -498,7 +506,6 @@
 				02FC7A562AF448AF0043FA48 /* ImagePicker.swift in Sources */,
 				02FC7A6A2AF448B70043FA48 /* StageController.swift in Sources */,
 				02FC7A572AF448AF0043FA48 /* TabBarView.swift in Sources */,
-				02FC7A6E2AF448B70043FA48 /* ImageController.swift in Sources */,
 				02FC7A6B2AF448B70043FA48 /* AuthController.swift in Sources */,
 				027817852AFC6169002A9B31 /* MoreButton.swift in Sources */,
 				02FC7A552AF448AF0043FA48 /* ProfileImage.swift in Sources */,
@@ -862,6 +869,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		02F1E93A2B27DDA90055AC05 /* XCRemoteSwiftPackageReference "PhotoSelectAndCrop" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Rillieux/PhotoSelectAndCrop";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.4;
+			};
+		};
+		02F1E93F2B27E7E10055AC05 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.1;
+			};
+		};
 		02FC7A702AF448EB0043FA48 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase/supabase-swift.git";
@@ -873,6 +896,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		02F1E93B2B27DDA90055AC05 /* PhotoSelectAndCrop */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F1E93A2B27DDA90055AC05 /* XCRemoteSwiftPackageReference "PhotoSelectAndCrop" */;
+			productName = PhotoSelectAndCrop;
+		};
+		02F1E9402B27E8350055AC05 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F1E93F2B27E7E10055AC05 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		02F1E9422B27E8350055AC05 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F1E93F2B27E7E10055AC05 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
+		};
 		02FC7A712AF448EB0043FA48 /* Supabase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 02FC7A702AF448EB0043FA48 /* XCRemoteSwiftPackageReference "supabase-swift" */;

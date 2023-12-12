@@ -121,6 +121,7 @@ struct SegmentEditView: View {
                 Text("Adjust order")
                     .foregroundStyle(theme.text)
                     .font(.custom("Quicksand-Medium", size: 28))
+                    .padding(.leading, 24)
                 Spacer()
                 Button(action: {
                     if var stage = stageController.stage {
@@ -131,13 +132,13 @@ struct SegmentEditView: View {
                 }) {
                     Image(systemName: "checkmark")
                 }
-                .modifier(CircleButton())
+                .modifier(SideMountedButton(backgroundColor: theme.button))
                 .zIndex(2.0)
             }
             Spacer()
         }
         .padding(.top, 56)
-        .padding(.horizontal, 24)
+
         .ignoresSafeArea()
     }
 }

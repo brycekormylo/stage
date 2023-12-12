@@ -13,7 +13,6 @@ struct ContentView: View {
     @StateObject var auth: AuthController = AuthController.shared
     @StateObject var stageController: StageController = StageController()
     @StateObject var imageSliderController: ImageSliderController = ImageSliderController()
-    @StateObject var imageController: ImageController = ImageController()
     @StateObject var imgBB: RemoteStorageController = RemoteStorageController()
     
     @State private var showIntro: Bool = false
@@ -32,7 +31,6 @@ struct ContentView: View {
         }
         .environmentObject(imageSliderController)
         .environmentObject(themeController)
-        .environmentObject(imageController)
         .environmentObject(imgBB)
         .environmentObject(auth)
         .environmentObject(stageController)

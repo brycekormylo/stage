@@ -11,7 +11,6 @@ struct ProfileView: View {
     
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
-    @EnvironmentObject var imageController: ImageController
     
     @State var arrowUp: Bool = false
     @State var bannerHeight: CGFloat = 320
@@ -61,6 +60,7 @@ struct ProfileView: View {
             }
             ScrollView(showsIndicators: false) {
                 BannerImage()
+                    .frame(minHeight: UIScreen.main.bounds.height*0.391 + 48)
                 VStack {
                     HStack {
                         ProfileImage(size: profileImageSize)
@@ -70,7 +70,8 @@ struct ProfileView: View {
                     }
                     info
                     if let segments = stageController.stage?.segments {
-                        ForEach(segments.chunked(into: 3), id: \.self) { segmentChunk in
+                        let formattedSegments = segments.filter({ $0.email == nil }).chunked(into: 3)
+                        ForEach(formattedSegments, id: \.self) { segmentChunk in
                             ProfilePageFrame {
                                 ForEach(segmentChunk) { segment in
                                     SegmentView(segment)
@@ -185,8 +186,8 @@ struct ProfilePageFrame<Content: View>: View {
         VStack {
             content
         }
-        .frame(minHeight: UIScreen.main.bounds.height - 240)
-        .padding(.top, 240)
+        .frame(height: UIScreen.main.bounds.height - 240)
+        .padding(.top, 260)
 
     }
 }

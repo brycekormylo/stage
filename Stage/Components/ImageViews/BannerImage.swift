@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BannerImage: View {
     
-    @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var remoteStorage: RemoteStorageController
     @EnvironmentObject var stageController: StageController
@@ -22,9 +21,13 @@ struct BannerImage: View {
     
     var body: some View {
         StickyHeader {
-            CachedAsyncImage(url: imageURL)
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
+            if imageURL != nil {
+                CachedAsyncImage(url: imageURL)
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea()
+            } else {
+                Rectangle()
+            }
         }
         .onTapGesture {
             isImagePickerPresented.toggle()
@@ -52,9 +55,9 @@ struct BannerImage: View {
                 }
             }
         }
-        .onAppear {
-            if imageURL == nil {
-                imageURL = imageController.bannerURL
+        .onChange(of: $stageController.stage.wrappedValue?.header) {
+            if let bannerImage = stageController.stage?.header {
+                imageURL = bannerImage
             }
         }
     }

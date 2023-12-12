@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct EditableField: View {
-    @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
     
@@ -34,7 +33,6 @@ struct EditableField: View {
 
 struct EditableText: View {
     
-    @EnvironmentObject var imageController: ImageController
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
     

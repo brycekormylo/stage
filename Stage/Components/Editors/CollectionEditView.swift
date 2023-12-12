@@ -43,9 +43,6 @@ struct CollectionEditView: View {
                                     )
                             }
                             Spacer()
-//                            Picker("Image size", selection: $image.size) {
-//                                
-//                            }
                         }
                         .onDrag {
                             return NSItemProvider()
@@ -83,7 +80,7 @@ struct CollectionEditView: View {
             print(title)
             collectionData.title = self.title
         }
-        .onChange(of: $selectedImage.wrappedValue) {
+        .onChange(of: self.$selectedImage.wrappedValue) {
             if let image = selectedImage {
                 isUploading = true
                 remoteStorage.uploadToImgBB(image) { result in
@@ -110,31 +107,44 @@ struct CollectionEditView: View {
     
     
     var buttons: some View {
-        VStack {
-            HStack {
-                TextField("", text: $title)
-                    .font(.title2)
-                    .foregroundStyle(theme.text)
-                Spacer()
-                deleteCollectionButton
-                NewCollectionImageButton(selectedImage: $selectedImage)
-                Button(action: { dismiss() }) {
-                    Image(systemName: "checkmark")
+        ZStack {
+            VStack {
+                ZStack {
+                    HStack {
+                        TextField("", text: $title)
+                            .font(.title2)
+                            .foregroundStyle(theme.text)
+                        Spacer()
+                        deleteCollectionButton
+                    }
+                    .padding(.leading)
+                    .padding(.trailing, 72)
+                    HStack {
+                        Spacer()
+                        Button(action: { dismiss() }) {
+                            Image(systemName: "checkmark")
+                        }
+                        .modifier(SideMountedButton(backgroundColor: theme.button))
+                        .zIndex(2.0)
+                    }
                 }
-                .modifier(CircleButton())
-                .zIndex(2.0)
+                Spacer()
+                
             }
-            Spacer()
         }
-        .padding(.top, 56)
-        .padding(.horizontal, 24)
-        .ignoresSafeArea()
+        .padding(.top)
     }
     
     var deleteCollectionButton: some View {
         Button(action: { showConfirmation.toggle() }) {
-            Image(systemName: "trash")
-                .foregroundStyle(.red)
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(theme.backgroundAccent)
+                    .frame(width: 55, height: 55)
+                
+                Image(systemName: "trash")
+                    .foregroundStyle(.red)
+            }
         }
         .confirmationDialog("Delete the entire collection?", isPresented: $showConfirmation) {
             Button("Delete entire collection?", role: .destructive) {
@@ -148,30 +158,6 @@ struct CollectionEditView: View {
         } message: {
             Text("This cannot be undone")
         }
-
-        .modifier(CircleButton())
     }
-}
-
-struct NewCollectionImageButton: View {
-    
-    @EnvironmentObject var theme: ThemeController
-    
-    @Binding var selectedImage: UIImage?
-    @State private var presentImagePicker = false
-    
-    var body: some View {
-        Button(action: { presentImagePicker.toggle() }) {
-                Image(systemName: "plus")
-                    .foregroundStyle(theme.text)
-        }
-        .modifier(CircleButton())
-        .transition(.move(edge: .trailing))
-
-        .sheet(isPresented: $presentImagePicker) {
-            ImagePicker(image: $selectedImage)
-        }
-    }
-    
 }
 
