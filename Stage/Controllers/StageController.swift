@@ -98,7 +98,11 @@ class StageController: ObservableObject {
     }
     
     func replaceStage(_ newStage: Stage) {
-        self.stage = newStage
+        Task {
+            await MainActor.run {
+                self.stage = newStage
+            }
+        }
     }
     
     private func updateStage(_ newStage: Stage) async {
@@ -124,7 +128,6 @@ class StageController: ObservableObject {
     
     func createNewStage() async {
         Task {
-            print("creating stage")
             if let userID = auth.session?.user.id {
                 let newStage = Stage(id: UUID(), userID: userID, name: "New Stage", profession: "Profession", intro: "Intro")
                 let compressedStage = newStage.compressed()
@@ -156,32 +159,3 @@ class StageController: ObservableObject {
         }
     }    
 }
-
-//struct Editable: ViewModifier {
-//
-//    @EnvironmentObject private var modeController: ModeController
-//    @State private var opacity: CGFloat = 0.0
-//    @Binding var selectedImage: UIImage?
-//    var offsetX: CGFloat
-//    var offsetY: CGFloat
-//
-//    func body(content: Content) -> some View {
-//        ZStack {
-//            content
-//            EditButton()
-//                .offset(CGSize(width: offsetX, height: offsetY))
-//                .opacity(opacity)
-//                .onChange(of: modeController.isEditEnabled) {
-//                    withAnimation(.easeInOut(duration: 0.2)) {
-//                        opacity = modeController.isEditEnabled ? 1.0 : 0.0
-//                    }
-//                }
-//        }
-//    }
-//}
-
-
-
-//    let sampleStage = Stage(id: UUID(), userID: UUID(), name: "Millie Worms", profession: "Ball Photographer", intro: "Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection.", segments: [Segment(id: UUID(), title: "Just the best", content: "She just loves charlie so damn much it is the cutest funniest thing on earth")], header: URL(string: "https://source.unsplash.com/random/600x480/?landscape")!, profileImage: URL(string: "https://source.unsplash.com/random/300x300/?person,profile")!, highlights: sampleImages.enumerated().map { index, url in
-//        ID_URL(id: UUID(), url: url, order: index)
-//    }, collections: nil)

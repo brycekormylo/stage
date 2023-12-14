@@ -44,7 +44,7 @@ struct MoreButton: View {
                                     .fill(theme.backgroundAccent)
                                     .cornerRadius(16)
                                     .frame(width: height, height: height)
-                                    .shadow(color: theme.background.opacity(0.6), radius: 4)
+                                    .shadow(color: theme.shadow, radius: 4)
                                 Image(systemName: "xmark")
                                     .foregroundStyle(theme.text)
                             }
@@ -79,7 +79,7 @@ struct MoreButton: View {
                             .fill(stageController.isEditEnabled ? theme.button : theme.backgroundAccent)
                             .cornerRadius(12, corners: [.topLeft, .bottomLeft])
                     }
-                    .shadow(color: theme.background.opacity(0.6), radius: 4)
+                    .shadow(color: theme.shadow, radius: 4)
                     .onTapGesture {
                         withAnimation(.interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74)) {
                             if stageController.isEditEnabled {
@@ -91,7 +91,7 @@ struct MoreButton: View {
                 }
                 Spacer()
             }
-            .shadow(color: theme.background.opacity(0.4), radius: 8, x: 0, y: 0)
+            .shadow(color: theme.shadow, radius: 8, x: 0, y: 0)
             .ignoresSafeArea()
             .padding(.vertical, 4)
         }

@@ -171,12 +171,12 @@ struct LightTheme: ColorTheme {
     var backgroundAccent: Color = .white
     var border: Color = .black
     var background: Color = snow
-    var accent: Color = eerie
+    var accent: Color = creamsicle
     var text: Color = licorice
-    var button: Color = eerie
+    var button: Color = ocean
     var buttonBorder: Color = eerie
     var buttonBackground: Color = ash
-    var shadow: Color = .gray.opacity(0.4)
+    var shadow: Color = .gray.opacity(0.0)
 }
 
 struct DarkTheme: ColorTheme {
@@ -188,7 +188,7 @@ struct DarkTheme: ColorTheme {
     var button: Color = ocean
     var buttonBorder: Color = grass
     var buttonBackground: Color = eerie
-    var shadow: Color = .black
+    var shadow: Color = cindre
 }
 
 struct ClearBackgroundView: UIViewRepresentable {

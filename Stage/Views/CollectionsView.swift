@@ -152,10 +152,8 @@ struct CollectionCreatorView: View {
         let newCollection = ImageCollection(id: UUID(), title: title)
         
         if var stage = stageController.stage {
-            print("Found stage")
             if var collections = stage.collections {
                 collections.append(newCollection)
-                print(collections)
                 stage.collections = collections
             } else {
                 stage.collections = [newCollection]

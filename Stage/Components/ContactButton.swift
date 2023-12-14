@@ -98,14 +98,12 @@ struct ContactSheet: View {
         .onAppear {
             if let segments = stageController.stage?.segments {
                 if let email = segments.filter({ $0.email != nil }).first?.email {
-                    print(email)
                     self.email = email
                 } else {
                     var newSegments = segments
                     newSegments.append(Segment(id: UUID(), email: "Email not set"))
                     if var stage = stageController.stage {
                         stage.segments = newSegments
-                        print(stage.segments)
                         stageController.replaceStage(stage)
                     }
                 }

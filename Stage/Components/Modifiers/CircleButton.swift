@@ -39,7 +39,7 @@ struct SideMountedButton: ViewModifier {
                     .ignoresSafeArea()
                     .frame(width: 110)
                     .offset(x: 55)
-                    .shadow(color: theme.background.opacity(0.6), radius: 4)
+                    .shadow(color: theme.shadow, radius: 4)
                 content
                     .foregroundStyle(theme.text)
                     .offset(x: 22)

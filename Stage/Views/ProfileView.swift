@@ -11,6 +11,7 @@ struct ProfileView: View {
     
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
+    @EnvironmentObject var auth: AuthController
     
     @State var arrowUp: Bool = false
     @State var bannerHeight: CGFloat = 320
@@ -22,7 +23,7 @@ struct ProfileView: View {
     
     @State var segments: [Segment] = []
     
-    func syncProfileInfo() {
+    func getProfileInfo() {
         DispatchQueue.main.async {
             if let stage = stageController.stage {
                 self.name = stage.name ?? ""
@@ -41,7 +42,7 @@ struct ProfileView: View {
                 stage.intro = intro
                 stage.segments = segments
                 stageController.replaceStage(stage)
-                syncProfileInfo()
+                getProfileInfo()
             }
         }
     }
@@ -49,64 +50,9 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             if stageController.isEditEnabled && arrowUp {
-                ZStack() {
-                    SegmentOrderChangerButton()
-                        .padding(.bottom, 204)
-                    NewSegmentButton()
-                        .padding(.bottom, 148)
-                }
-                .zIndex(1)
-                .transition(.move(edge: .trailing))
+                editButtons
             }
-            ScrollView(showsIndicators: false) {
-                BannerImage()
-                    .frame(minHeight: UIScreen.main.bounds.height*0.391 + 48)
-                VStack {
-                    HStack {
-                        ProfileImage(size: profileImageSize)
-                            .padding(.leading, 36)
-                            .shadow(color: theme.background.opacity(0.6), radius: 8, x: 0, y: 0)
-                        Spacer()
-                    }
-                    info
-                    if let segments = stageController.stage?.segments {
-                        let formattedSegments = segments.filter({ $0.email == nil }).chunked(into: 3)
-                        ForEach(formattedSegments, id: \.self) { segmentChunk in
-                            ProfilePageFrame {
-                                ForEach(segmentChunk) { segment in
-                                    SegmentView(segment)
-                                }
-                                if segmentChunk.count < 3 {
-                                    ContactButton()
-                                }
-                            }
-                        }
-                    }
-                    GeometryReader { geo in
-                        Color.clear
-                            .onChange(of: geo.frame(in: .global).minY) {
-                                self.arrowUp = geo.frame(in: .global).minY < 1000
-                            }
-                    }
-                }
-                .offset(y: -profileImageSize*0.61)
-                .background {
-                    ZStack {
-                        theme.background
-                        VStack {
-                            Rectangle()
-                                .fill(theme.background)
-                                .frame(height: 48)
-                                .cornerRadius(32, corners: [.topLeft, .topRight])
-                                .offset(y: -48)
-                                .shadow(color: theme.background.opacity(0.6), radius: 8, x: 0, y: 0)
-                            Spacer()
-                        }
-                    }
-                }
-                .scrollTargetLayout()
-            }
-            .scrollTargetBehavior(.paging)
+            scrollView
         }
         .overlay(alignment: arrowUp ? .top : .bottom) {
             arrowButton
@@ -114,18 +60,90 @@ struct ProfileView: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            syncProfileInfo()
-        }
-        .onChange(of: stageController.stage) {
-            syncProfileInfo()
+            getProfileInfo()
         }
         .onChange(of: stageController.isEditEnabled) {
             if !stageController.isEditEnabled {
                 updateProfileInfo()
             }
         }
+        .onChange(of: $stageController.stage.wrappedValue?.name) {
+            if let name = stageController.stage?.name {
+                self.name = name
+            }
+            if let profession = stageController.stage?.profession {
+                self.profession = profession
+            }
+            if let intro = stageController.stage?.intro {
+                self.intro = intro
+            }
+
+        }
         .animation(
             .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: stageController.isEditEnabled)
+    }
+    
+    var scrollView: some View {
+        ScrollView(showsIndicators: false) {
+            BannerImage()
+                .frame(minHeight: UIScreen.main.bounds.height*0.391 + 48)
+            VStack {
+                HStack {
+                    ProfileImage(size: profileImageSize)
+                        .padding(.leading, 36)
+                        .shadow(color: theme.shadow, radius: 8, x: 0, y: 0)
+                    Spacer()
+                }
+                info
+                if let segments = stageController.stage?.segments {
+                    let formattedSegments = segments.filter({ $0.email == nil }).chunked(into: 3)
+                    ForEach(formattedSegments, id: \.self) { segmentChunk in
+                        ProfilePageFrame {
+                            ForEach(segmentChunk) { segment in
+                                SegmentView(segment)
+                            }
+                            if segmentChunk.count < 3 {
+                                ContactButton()
+                            }
+                        }
+                    }
+                }
+                GeometryReader { geo in
+                    Color.clear
+                        .onChange(of: geo.frame(in: .global).minY) {
+                            self.arrowUp = geo.frame(in: .global).minY < 1000
+                        }
+                }
+            }
+            .offset(y: -profileImageSize*0.61)
+            .background {
+                ZStack {
+                    theme.background
+                    VStack {
+                        Rectangle()
+                            .fill(theme.background)
+                            .frame(height: 48)
+                            .cornerRadius(32, corners: [.topLeft, .topRight])
+                            .offset(y: -48)
+                            .shadow(color: theme.shadow, radius: 8, x: 0, y: 0)
+                        Spacer()
+                    }
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.paging)
+    }
+    
+    var editButtons: some View {
+        ZStack() {
+            SegmentOrderChangerButton()
+                .padding(.bottom, 204)
+            NewSegmentButton()
+                .padding(.bottom, 148)
+        }
+        .zIndex(1)
+        .transition(.move(edge: .trailing))
     }
     
     var arrowButton: some View {
@@ -133,9 +151,7 @@ struct ProfileView: View {
             .padding(.vertical, 8)
             .foregroundStyle(theme.text)
     }
-    
-    @State var infoOpacity: CGFloat = 0.0
-    
+
     var info: some View {
         VStack {
             Spacer()
@@ -159,20 +175,29 @@ struct ProfileView: View {
                     .padding(.vertical, 4)
             }
             .transition(.move(edge: .leading))
-            .opacity(infoOpacity)
             Spacer()
             
         }
-        .onAppear {
-            withAnimation(.easeInOut) {
-                infoOpacity = 0.0
-                infoOpacity += 1.0
-            }
-        }
-        .animation(
-            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: infoOpacity)
         .frame(height: UIScreen.main.bounds.height*(0.314))
         .foregroundStyle(theme.text)
+        .onChange(of: $name.wrappedValue) {
+            if var stage = stageController.stage {
+                stage.name = self.name
+                stageController.replaceStage(stage)
+            }
+        }
+        .onChange(of: $profession.wrappedValue) {
+            if var stage = stageController.stage {
+                stage.profession = self.profession
+                stageController.replaceStage(stage)
+            }
+        }
+        .onChange(of: $intro.wrappedValue) {
+            if var stage = stageController.stage {
+                stage.intro = self.intro
+                stageController.replaceStage(stage)
+            }
+        }
 
     }
 }
@@ -255,7 +280,7 @@ struct SegmentView: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
         .frame(height: (UIScreen.main.bounds.height - 240)/3)
-        .onChange(of: segmentTitle) {
+        .onChange(of: $segmentTitle.wrappedValue) {
             if var stage = stageController.stage, var segments = stage.segments {
                 segments = segments.map { segment in
                     if segment.id != self.segment.id {
@@ -271,7 +296,7 @@ struct SegmentView: View {
                 stageController.replaceStage(stage)
             }
         }
-        .onChange(of: segmentContent) {
+        .onChange(of: $segmentContent.wrappedValue) {
             if var stage = stageController.stage, var segments = stage.segments {
                 segments = segments.map { segment in
                     if segment.id != self.segment.id {
@@ -407,7 +432,6 @@ struct SegmentCreatorView: View {
         if var stage = stageController.stage {
             if var segments = stage.segments {
                 segments.append(newSegment)
-                print(segments)
                 stage.segments = segments
             } else {
                 stage.segments = [newSegment]

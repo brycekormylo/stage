@@ -77,7 +77,6 @@ struct CollectionEditView: View {
             
         }
         .onChange(of: title) {
-            print(title)
             collectionData.title = self.title
         }
         .onChange(of: self.$selectedImage.wrappedValue) {
