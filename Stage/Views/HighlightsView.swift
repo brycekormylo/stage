@@ -110,7 +110,7 @@ private struct ChangeHighlightOrderButton: View {
                     Image(systemName: "arrow.up.arrow.down")
                         .foregroundStyle(theme.text)
                 }
-                .modifier(SideMountedButton(backgroundColor: theme.accent))
+                .modifier(SideMountedButton(theme.accent, bordered: true))
                 .transition(.move(edge: .trailing))
             }
         }
@@ -137,7 +137,7 @@ struct NewImageButton: View {
                     Image(systemName: "plus")
                         .foregroundStyle(theme.text)
                     }
-                .modifier(SideMountedButton(backgroundColor: theme.button))
+                .modifier(SideMountedButton(theme.button))
             }
 
         }

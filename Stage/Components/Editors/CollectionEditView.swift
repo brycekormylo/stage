@@ -123,7 +123,7 @@ struct CollectionEditView: View {
                         Button(action: { dismiss() }) {
                             Image(systemName: "checkmark")
                         }
-                        .modifier(SideMountedButton(backgroundColor: theme.button))
+                        .modifier(SideMountedButton(theme.button))
                         .zIndex(2.0)
                     }
                 }

@@ -42,6 +42,7 @@ struct ContactSheet: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
+    @EnvironmentObject var auth: AuthController
     
     @State private var email: String = "Email"
 //    @State private var twitter: String = "Twitter"
@@ -60,7 +61,7 @@ struct ContactSheet: View {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
                     }
-                    .modifier(SideMountedButton(backgroundColor: theme.backgroundAccent))
+                    .modifier(SideMountedButton(theme.backgroundAccent))
                 }
                 .padding(.vertical)
                 Group {
@@ -93,6 +94,11 @@ struct ContactSheet: View {
                 .font(.custom("Quicksand-Medium", size: 18))
                 .padding(.horizontal)
                 Spacer()
+            }
+        }
+        .task {
+            if let email = auth.session?.user.email {
+                self.email = email
             }
         }
         .onAppear {

@@ -33,7 +33,7 @@ struct AuthView: View {
                         Image(systemName: "xmark")
                             .foregroundColor(theme.text)
                     }
-                    .modifier(SideMountedButton(backgroundColor: theme.backgroundAccent))
+                    .modifier(SideMountedButton(theme.backgroundAccent))
                 }
                 VStack (spacing: 16) {
                     Text("Welcome to Stage")

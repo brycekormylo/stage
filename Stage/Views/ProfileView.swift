@@ -49,7 +49,7 @@ struct ProfileView: View {
     
     var body: some View {
         ZStack {
-            if stageController.isEditEnabled && arrowUp {
+            if stageController.isEditEnabled {
                 editButtons
             }
             scrollView
@@ -96,8 +96,8 @@ struct ProfileView: View {
                 }
                 info
                 if let segments = stageController.stage?.segments {
-                    let formattedSegments = segments.filter({ $0.email == nil }).chunked(into: 3)
-                    ForEach(formattedSegments, id: \.self) { segmentChunk in
+                    let formattedSegments = segments.filter({ $0.email == nil })
+                    ForEach(formattedSegments.chunked(into: 3), id: \.self) { segmentChunk in
                         ProfilePageFrame {
                             ForEach(segmentChunk) { segment in
                                 SegmentView(segment)
@@ -105,6 +105,11 @@ struct ProfileView: View {
                             if segmentChunk.count < 3 {
                                 ContactButton()
                             }
+                        }
+                    }
+                    if formattedSegments.count % 3 == 0 {
+                        ProfilePageFrame {
+                            ContactButton()
                         }
                     }
                 }
@@ -140,7 +145,6 @@ struct ProfileView: View {
             SegmentOrderChangerButton()
                 .padding(.bottom, 204)
             NewSegmentButton()
-                .padding(.bottom, 148)
         }
         .zIndex(1)
         .transition(.move(edge: .trailing))
@@ -178,7 +182,7 @@ struct ProfileView: View {
             Spacer()
             
         }
-        .frame(height: UIScreen.main.bounds.height*(0.314))
+        .frame(height: (UIScreen.main.bounds.height-120)/3)
         .foregroundStyle(theme.text)
         .onChange(of: $name.wrappedValue) {
             if var stage = stageController.stage {
@@ -316,6 +320,7 @@ struct SegmentView: View {
 }
 
 struct NewSegmentButton: View {
+    
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
     
@@ -327,10 +332,11 @@ struct NewSegmentButton: View {
                 if presentNewSegmentCreator {
                     VStack {
                         SegmentCreatorView(isPresented: $presentNewSegmentCreator)
+                            .padding(.top, 120)
                         Spacer()
                     }
-                    .padding(.top, 120)
-                    .transition(.move(edge: .trailing))
+                    .ignoresSafeArea()
+                    .background(.ultraThinMaterial.opacity(0.4))
                 } else {
                     VStack {
                         Spacer()
@@ -342,14 +348,14 @@ struct NewSegmentButton: View {
                                 Image(systemName: "plus")
                                     .foregroundStyle(theme.text)
                             }
-                            .modifier(SideMountedButton(backgroundColor: theme.button))
+                            .modifier(SideMountedButton(theme.button))
                         }
-                        .padding(.bottom, 120)
+                        .padding(.bottom, 268)
                     }
                 }
             }
         }
-        .zIndex(1)
+        .zIndex(10)
         .animation(
             .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: presentNewSegmentCreator)
     }
@@ -382,9 +388,10 @@ struct SegmentCreatorView: View {
                         .foregroundColor(theme.text.opacity(0.6))
                         .font(.custom("Quicksand-Medium", size: 18))
                 }
+                .font(.custom("Quicksand-Medium", size: 18))
                 .padding()
-                .background(theme.button.opacity(0.1))
-                .cornerRadius(8)
+                .background(theme.background)
+                .cornerRadius(12)
             TextEditor(text: $content)
                 .placeholder(when: content.isEmpty) {
                     VStack {
@@ -393,29 +400,40 @@ struct SegmentCreatorView: View {
                             .font(.custom("Quicksand-Medium", size: 18))
                         Spacer()
                     }
-                    .padding()
+                    .padding(2)
                 }
+                .font(.custom("Quicksand-Medium", size: 18))
+                .padding()
                 .scrollContentBackground(.hidden)
                 .background {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(theme.button.opacity(0.1))
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(theme.background)
                 }
                 .multilineTextAlignment(.leading)
                 .frame(maxHeight: 120)
             HStack {
                 Spacer()
                 Button(action: { isPresented = false }) {
-                    Image(systemName: "xmark")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .strokeBorder(theme.accent, lineWidth: 1.4)
+                        Image(systemName: "xmark")
+                    }
                 }
-                .modifier(CircleButton())
+                .frame(width: 55, height: 55)
                 Button(action: {
                     submitNewSegment()
                     isPresented = false
                 }) {
-                    Image(systemName: "checkmark")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(theme.button)
+                        Image(systemName: "checkmark")
+                    }
                 }
                 .disabled(title.isEmpty)
-                .modifier(CircleButton())
+                .frame(width: 110, height: 55)
+                .padding(4)
             }
         }
         .padding()

@@ -35,18 +35,16 @@ struct SlidingImage: View {
                             result.image?
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: scrollDirection == .vertical ? 0 : initialHeight * 2.5,
-                                       height: scrollDirection == .vertical ? initialHeight * 2.5 : 0)
+                                .frame(width: scrollDirection == .vertical ? 0 : initialHeight * 1.08,
+                                       height: scrollDirection == .vertical ? initialHeight * 1.72 : 0)
                                 .offset(scrollDirection == .vertical ?
-                                        CGSize(width: 0, height: -(geo.frame(in: .global).midY/2 - initialHeight*0.8)) :
-                                            CGSize(width: -(geo.frame(in: .global).midX/2 - initialHeight / 3), height: 0))
+                                        CGSize(width: 0, height: -(geo.frame(in: .global).midY/2 - initialHeight/2)) :
+                                            CGSize(width: -(geo.frame(in: .global).midX/2 - initialHeight / 3.5), height: 0))
                         )
                         .mask { RoundedRectangle(cornerRadius: 24) }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            if scrollDirection == .horizontal {
-                                return
-                            }
+                            guard scrollDirection != .horizontal else { return }
                             withAnimation {
                                 if isExpanded {
                                     imageSliderController.minimizeAll()

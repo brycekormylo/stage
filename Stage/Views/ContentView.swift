@@ -42,13 +42,12 @@ struct ContentView: View {
         .environmentObject(imgBB)
         .environmentObject(auth)
         .environmentObject(stageController)
-        .onAppear {
-            Task {
-                await auth.startSession()
-                if auth.authChangeEvent != .signedIn {
-                    showIntro = true
-                }
+        .task {
+            await auth.startSession()
+            if auth.authChangeEvent != .signedIn {
+                showIntro = true
             }
+            
         }
         .onChange(of: auth.authChangeEvent) {
             if auth.authChangeEvent == .signedIn {

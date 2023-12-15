@@ -17,6 +17,7 @@
 		021B5A332B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 021B5A302B1C409A00B9E856 /* Montserrat-VariableFont_wght.ttf */; };
 		0221188A2AF86B030098887D /* CollectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022118892AF86B030098887D /* CollectionDetailView.swift */; };
 		0238317C2B07DAB50058C217 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238317B2B07DAB50058C217 /* EditableText.swift */; };
+		023A88342B2B74C6009E8DFC /* SideMountedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A88332B2B74C6009E8DFC /* SideMountedButton.swift */; };
 		023DBD3C2AFDBE5E00AD254D /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DBD3B2AFDBE5E00AD254D /* KeychainManager.swift */; };
 		024EBFF52AF6CBD800D432BC /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF42AF6CBD800D432BC /* CircleButton.swift */; };
 		024EBFF72AF7359500D432BC /* HighlightEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF62AF7359500D432BC /* HighlightEditView.swift */; };
@@ -99,6 +100,7 @@
 		021B5A342B1C49D500B9E856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		022118892AF86B030098887D /* CollectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailView.swift; sourceTree = "<group>"; };
 		0238317B2B07DAB50058C217 /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
+		023A88332B2B74C6009E8DFC /* SideMountedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMountedButton.swift; sourceTree = "<group>"; };
 		023DBD3B2AFDBE5E00AD254D /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		024EBFF42AF6CBD800D432BC /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		024EBFF62AF7359500D432BC /* HighlightEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightEditView.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				0238317B2B07DAB50058C217 /* EditableText.swift */,
 				024EBFF42AF6CBD800D432BC /* CircleButton.swift */,
+				023A88332B2B74C6009E8DFC /* SideMountedButton.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -318,12 +321,12 @@
 		02FC7A772AF449620043FA48 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				027EA3652B23A562007B59C5 /* Auth */,
 				02FC7A012AF428420043FA48 /* ContentView.swift */,
 				02FC7A402AF448A60043FA48 /* ProfileView.swift */,
 				02FC7A422AF448A60043FA48 /* HighlightsView.swift */,
 				02FC7A432AF448A60043FA48 /* CollectionsView.swift */,
 				022118892AF86B030098887D /* CollectionDetailView.swift */,
+				027EA3652B23A562007B59C5 /* Auth */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				02A995792B19546200DEAAC5 /* CollectionEditView.swift in Sources */,
 				02FC7A582AF448AF0043FA48 /* ColorPickerView.swift in Sources */,
 				023DBD3C2AFDBE5E00AD254D /* KeychainManager.swift in Sources */,
+				023A88342B2B74C6009E8DFC /* SideMountedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

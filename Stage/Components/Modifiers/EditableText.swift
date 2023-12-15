@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct EditableField: View {
+    
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
     
     @Binding var content: String
+    @State var presentPopover: Bool = false
     
     var body: some View {
-        Group {
-            if stageController.isEditEnabled {
-                TextField("\(content)", text: $content)
-                    .padding(.vertical, 4)
-                    .background {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(theme.button.opacity(0.05))
-                    }
-                    .multilineTextAlignment(.trailing)
-            } else {
-                Text(content)
+        Text(content)
+            .foregroundStyle(theme.text)
+            .onTapGesture {
+                if stageController.isEditEnabled {
+                    presentPopover = true
+                }
             }
-        }
-        .foregroundStyle(theme.text)
+            .fullScreenCover(isPresented: $presentPopover) {
+                EditTextSheetView(content: $content)
+                    .clearModalBackground()
+            }
     }
 }
 
@@ -37,23 +36,75 @@ struct EditableText: View {
     @EnvironmentObject var stageController: StageController
     
     @Binding var content: String
+    @State var presentPopover: Bool = false
     
     var body: some View {
-        Group {
-            if stageController.isEditEnabled {
-                TextEditor(text: $content)
+        Text(content)
+            .foregroundStyle(theme.text)
+            .onTapGesture {
+                if stageController.isEditEnabled {
+                    presentPopover = true
+                }
+            }
+            .fullScreenCover(isPresented: $presentPopover) {
+                EditTextSheetView(content: $content)
+                    .clearModalBackground()
+            }
+    }
+}
+
+private struct EditTextSheetView: View {
+    
+    @EnvironmentObject var theme: ThemeController
+    @Environment(\.dismiss) private var dismiss
+    
+    @Binding var content: String
+    @State var newContent: String = ""
+    
+    
+    var body: some View {
+        VStack {
+            VStack {
+                TextEditor(text: $newContent)
                     .scrollContentBackground(.hidden)
+                    .padding(4)
                     .background {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(theme.button.opacity(0.05))
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(theme.background)
                     }
                     .multilineTextAlignment(.leading)
-            } else {
-                Text(content)
+                    .font(.custom("Quicksand", size: 18))
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        content = newContent
+                        dismiss()
+                    }) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(theme.button)
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                    .frame(width: 110, height: 55)
+                }
             }
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(theme.backgroundAccent)
+            }
+            .frame(height: 240)
+            Spacer()
         }
-        .foregroundStyle(theme.text)
+        .padding(.top, 120)
+        .padding(20)
+        .background(.ultraThinMaterial.opacity(0.4))
+        .task {
+            self.newContent = content
+        }
     }
+    
 }
 
 

@@ -56,6 +56,7 @@ let grass: Color = Color(hex: 0x8CA694)
 let ocean: Color = Color(hex: 0x20A39E)
 let creamsicle: Color = Color(hex: 0xFFBA49)
 let cindre: Color = Color(hex: 0x121110)
+let whiteSlate: Color = Color(hex:0xF5F0F6)
 
 
 let rainbowColors: [Color] = [
@@ -170,9 +171,9 @@ protocol ColorTheme {
 struct LightTheme: ColorTheme {
     var backgroundAccent: Color = .white
     var border: Color = .black
-    var background: Color = snow
+    var background: Color = whiteSlate
     var accent: Color = creamsicle
-    var text: Color = licorice
+    var text: Color = cindre
     var button: Color = ocean
     var buttonBorder: Color = eerie
     var buttonBackground: Color = ash
@@ -184,11 +185,11 @@ struct DarkTheme: ColorTheme {
     var border: Color = cinereous
     var background: Color = cindre
     var accent: Color = creamsicle
-    var text: Color = snow
+    var text: Color = whiteSlate
     var button: Color = ocean
     var buttonBorder: Color = grass
     var buttonBackground: Color = eerie
-    var shadow: Color = cindre
+    var shadow: Color = cindre.opacity(0.6)
 }
 
 struct ClearBackgroundView: UIViewRepresentable {
@@ -212,7 +213,7 @@ struct ClearBackgroundViewModifier: ViewModifier {
 }
 
 extension View {
-    func clearModalBackground()->some View {
+    func clearModalBackground() -> some View {
         self.modifier(ClearBackgroundViewModifier())
     }
 }

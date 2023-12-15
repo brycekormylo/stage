@@ -97,7 +97,7 @@ struct HighlightEditView: View {
                 }) {
                     Image(systemName: "checkmark")
                 }
-                .modifier(SideMountedButton(backgroundColor: theme.button))
+                .modifier(SideMountedButton(theme.button))
                 .zIndex(2.0)
             }
             Spacer()

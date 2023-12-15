@@ -40,13 +40,14 @@ struct MoreButton: View {
                             showConfirmation = true
                         }) {
                             ZStack {
-                                Rectangle()
+                                RoundedRectangle(cornerRadius: 12)
                                     .fill(theme.backgroundAccent)
-                                    .cornerRadius(16)
+                                    .strokeBorder(theme.accent, lineWidth: 1.4)
+                                    .cornerRadius(12)
                                     .frame(width: height, height: height)
                                     .shadow(color: theme.shadow, radius: 4)
-                                Image(systemName: "xmark")
-                                    .foregroundStyle(theme.text)
+                                Image(systemName: "trash")
+                                    .foregroundStyle(Color.red)
                             }
                         }
                         .confirmationDialog("Discard changes?", isPresented: $showConfirmation) {
@@ -68,6 +69,7 @@ struct MoreButton: View {
                         if stageController.isEditEnabled {
                             Text("Save")
                                 .foregroundStyle(theme.text)
+                                .font(.custom("Quicksand-Medium", size: 18))
                         }
                         Image(systemName: stageController.isEditEnabled ? "checkmark" : "ellipsis")
                             .foregroundStyle(theme.text)

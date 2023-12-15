@@ -41,7 +41,7 @@ struct AccountView: View {
                     Image(systemName: "xmark")
                         .foregroundStyle(theme.text)
                 }
-                .modifier(SideMountedButton(backgroundColor: theme.button))
+                .modifier(SideMountedButton(theme.button))
             }
             .padding(.top, 36)
             VStack(spacing: 20) {
@@ -123,7 +123,7 @@ struct AccountView: View {
         .background {
             RoundedRectangle(cornerRadius: 12)
                 .fill(theme.backgroundAccent)
-                .strokeBorder(theme.button)
+                .strokeBorder(theme.accent)
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
         }
     }

@@ -27,6 +27,7 @@ struct BannerImage: View {
                     .ignoresSafeArea()
             } else {
                 Rectangle()
+                    .fill(theme.backgroundAccent)
             }
         }
         .onTapGesture {

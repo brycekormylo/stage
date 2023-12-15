@@ -15,6 +15,7 @@ struct CollectionsView: View {
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
+                Spacer(minLength: 64)
                 LazyVStack {
                     Spacer(minLength: 64)
                     title
@@ -34,13 +35,10 @@ struct CollectionsView: View {
                     Spacer()
                     NewCollectionButton()
                 }
-                .padding(.bottom, 120)
-                .zIndex(1)
-                .transition(.move(edge: .trailing))
+                .zIndex(10)
             }
         }
-        .animation(
-            .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: stageController.isEditEnabled)
+        .ignoresSafeArea()
     }
     
     var title: some View {
@@ -67,10 +65,11 @@ private struct NewCollectionButton: View {
                 if presentCollectionCreator {
                     VStack {
                         CollectionCreatorView(isPresented: $presentCollectionCreator)
+                            .padding(.top, 120)
                         Spacer()
                     }
-                    .padding(.top, 120)
-                    .transition(.move(edge: .trailing))
+                    .ignoresSafeArea()
+                    .background(.ultraThinMaterial.opacity(0.4))
                 } else {
                     VStack {
                         Spacer()
@@ -82,14 +81,14 @@ private struct NewCollectionButton: View {
                                 Image(systemName: "plus")
                                     .foregroundStyle(theme.text)
                             }
-                            .modifier(SideMountedButton(backgroundColor: theme.button))
+                            .modifier(SideMountedButton(theme.button))
                         }
-                        .padding(.bottom, 120)
+                        .padding(.bottom, 204)
                     }
                 }
             }
         }
-        .zIndex(1)
+        .zIndex(10)
         .animation(
             .interactiveSpring(response: 0.45, dampingFraction: 0.69, blendDuration: 0.74), value: presentCollectionCreator)
     }
@@ -109,7 +108,7 @@ struct CollectionCreatorView: View {
         VStack {
             HStack {
                 Text("New Collection")
-                    .font(.custom("Quicksand-Medium", size: 24))
+                    .font(.custom("Quicksand", size: 24))
                 Spacer()
             }
             .padding(.horizontal)
@@ -117,25 +116,34 @@ struct CollectionCreatorView: View {
                 .placeholder(when: title.isEmpty) {
                     Text("Title")
                         .foregroundColor(theme.text.opacity(0.6))
-                        .font(.custom("Quicksand-Medium", size: 18))
+                        .font(.custom("Quicksand", size: 18))
                 }
+                .font(.custom("Quicksand", size: 18))
                 .padding()
                 .background(theme.background)
-                .cornerRadius(8)
+                .cornerRadius(12)
             HStack {
                 Spacer()
                 Button(action: { isPresented = false }) {
-                    Image(systemName: "xmark")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .strokeBorder(theme.accent, lineWidth: 1.4)
+                        Image(systemName: "xmark")
+                    }
                 }
-                .modifier(CircleButton())
-                Button(action: { 
+                .frame(width: 55, height: 55)
+                Button(action: {
                     submitNewCollection()
                     isPresented = false
                 }) {
-                    Image(systemName: "checkmark")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(theme.button)
+                        Image(systemName: "checkmark")
+                    }
                 }
-                .disabled(title.isEmpty)
-                .modifier(CircleButton())
+                .frame(width: 110, height: 55)
+                .padding(4)
             }
         }
         .padding()
@@ -188,7 +196,7 @@ struct CollectionPreviewRow: View {
     
     var body: some View {
         VStack {
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 0) {
                 Spacer()
                 if stageController.isEditEnabled {
                     newCollectionImageButton
@@ -270,12 +278,13 @@ struct CollectionPreviewRow: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(theme.button.opacity(0.4))
+                    .fill(theme.backgroundAccent)
+                    .strokeBorder(theme.button.opacity(0.4), lineWidth: 1.4)
                     .frame(width: 48, height: 48)
                 Image(systemName: "pencil")
+                    .foregroundStyle(theme.text)
             }
         }
-        .foregroundStyle(theme.text.opacity(0.8))
         .scaleEffect(0.75)
         .fullScreenCover(isPresented: $presentEditView) {
             CollectionEditView(collectionData: $collectionData)
@@ -290,7 +299,8 @@ struct CollectionPreviewRow: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(theme.accent.opacity(0.4))
+                    .fill(theme.backgroundAccent)
+                    .strokeBorder(theme.accent.opacity(0.4), lineWidth: 1.4)
                     .frame(width: 48, height: 48)
                 Image(systemName: "plus")
                     .foregroundStyle(theme.text)
