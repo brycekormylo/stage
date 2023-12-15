@@ -21,14 +21,9 @@ struct BannerImage: View {
     
     var body: some View {
         StickyHeader {
-            if imageURL != nil {
-                CachedAsyncImage(url: imageURL)
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea()
-            } else {
-                Rectangle()
-                    .fill(theme.backgroundAccent)
-            }
+            CachedAsyncImage(url: imageURL)
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
         }
         .onTapGesture {
             isImagePickerPresented.toggle()
@@ -56,7 +51,12 @@ struct BannerImage: View {
                 }
             }
         }
-        .onChange(of: $stageController.stage.wrappedValue?.header) {
+        .onChange(of: stageController.stage) {
+            if let bannerImage = stageController.stage?.header {
+                imageURL = bannerImage
+            }
+        }
+        .onAppear {
             if let bannerImage = stageController.stage?.header {
                 imageURL = bannerImage
             }

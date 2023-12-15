@@ -22,6 +22,8 @@
 		024EBFF52AF6CBD800D432BC /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF42AF6CBD800D432BC /* CircleButton.swift */; };
 		024EBFF72AF7359500D432BC /* HighlightEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EBFF62AF7359500D432BC /* HighlightEditView.swift */; };
 		025980AF2B0296A20065F69E /* StickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025980AE2B0296A20065F69E /* StickyHeader.swift */; };
+		025F89722B2CBF68000E3930 /* CollectionOrderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F89712B2CBF68000E3930 /* CollectionOrderEditView.swift */; };
+		025F89742B2CCEC5000E3930 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F89732B2CCEC5000E3930 /* ActivityIndicator.swift */; };
 		02630B5F2AFEEA500091DFD7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02630B5E2AFEEA500091DFD7 /* Extensions.swift */; };
 		026AC4C42B1A8F50001B7D2E /* SegmentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */; };
 		027817852AFC6169002A9B31 /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027817842AFC6169002A9B31 /* MoreButton.swift */; };
@@ -105,6 +107,8 @@
 		024EBFF42AF6CBD800D432BC /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		024EBFF62AF7359500D432BC /* HighlightEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightEditView.swift; sourceTree = "<group>"; };
 		025980AE2B0296A20065F69E /* StickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeader.swift; sourceTree = "<group>"; };
+		025F89712B2CBF68000E3930 /* CollectionOrderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOrderEditView.swift; sourceTree = "<group>"; };
+		025F89732B2CCEC5000E3930 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		02630B5E2AFEEA500091DFD7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentEditView.swift; sourceTree = "<group>"; };
 		027817842AFC6169002A9B31 /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 			children = (
 				024EBFF62AF7359500D432BC /* HighlightEditView.swift */,
 				02A995782B19546200DEAAC5 /* CollectionEditView.swift */,
+				025F89712B2CBF68000E3930 /* CollectionOrderEditView.swift */,
 				026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */,
 			);
 			path = Editors;
@@ -322,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				02FC7A012AF428420043FA48 /* ContentView.swift */,
+				025F89732B2CCEC5000E3930 /* ActivityIndicator.swift */,
 				02FC7A402AF448A60043FA48 /* ProfileView.swift */,
 				02FC7A422AF448A60043FA48 /* HighlightsView.swift */,
 				02FC7A432AF448A60043FA48 /* CollectionsView.swift */,
@@ -505,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025F89742B2CCEC5000E3930 /* ActivityIndicator.swift in Sources */,
 				02FC7A6C2AF448B70043FA48 /* ImageSliderController.swift in Sources */,
 				02FC7A562AF448AF0043FA48 /* ImagePicker.swift in Sources */,
 				02FC7A6A2AF448B70043FA48 /* StageController.swift in Sources */,
@@ -513,6 +520,7 @@
 				027817852AFC6169002A9B31 /* MoreButton.swift in Sources */,
 				02FC7A552AF448AF0043FA48 /* ProfileImage.swift in Sources */,
 				0221188A2AF86B030098887D /* CollectionDetailView.swift in Sources */,
+				025F89722B2CBF68000E3930 /* CollectionOrderEditView.swift in Sources */,
 				02FC7A5A2AF448AF0043FA48 /* ContactButton.swift in Sources */,
 				02630B5F2AFEEA500091DFD7 /* Extensions.swift in Sources */,
 				02FC7A5B2AF448AF0043FA48 /* NavigationBar.swift in Sources */,

@@ -7,49 +7,39 @@
 
 import SwiftUI
 
-struct EditableField: View {
-    
-    @EnvironmentObject var theme: ThemeController
-    @EnvironmentObject var stageController: StageController
-    
-    @Binding var content: String
-    @State var presentPopover: Bool = false
-    
-    var body: some View {
-        Text(content)
-            .foregroundStyle(theme.text)
-            .onTapGesture {
-                if stageController.isEditEnabled {
-                    presentPopover = true
-                }
-            }
-            .fullScreenCover(isPresented: $presentPopover) {
-                EditTextSheetView(content: $content)
-                    .clearModalBackground()
-            }
-    }
-}
-
 struct EditableText: View {
     
     @EnvironmentObject var theme: ThemeController
     @EnvironmentObject var stageController: StageController
     
     @Binding var content: String
+    let placeholder: String
+
     @State var presentPopover: Bool = false
     
     var body: some View {
-        Text(content)
-            .foregroundStyle(theme.text)
-            .onTapGesture {
-                if stageController.isEditEnabled {
-                    presentPopover = true
+        if stageController.isEditEnabled {
+            Button(action: { presentPopover = true }) {
+                if content != "" {
+                    Text(content)
+                } else {
+                    Text(placeholder)
                 }
             }
+            .foregroundStyle(theme.text)
+            .frame(minWidth: 110)
             .fullScreenCover(isPresented: $presentPopover) {
                 EditTextSheetView(content: $content)
                     .clearModalBackground()
             }
+        } else {
+            HStack {
+                Spacer()
+                Text(content)
+                    .foregroundStyle(theme.text)
+            }
+
+        }
     }
 }
 
@@ -109,5 +99,5 @@ private struct EditTextSheetView: View {
 
 
 #Preview {
-    EditableText(content: .constant("Sample"))
+    EditableText(content: .constant("Sample"), placeholder: "Sample")
 }

@@ -31,7 +31,9 @@ struct ContentView: View {
             } else if stageController.stage == nil {
                 ZStack {
                     theme.background
-                    ProgressView()
+                    ActivityIndicator()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(theme.button)
                 }
                 .ignoresSafeArea()
             }
@@ -46,6 +48,7 @@ struct ContentView: View {
             await auth.startSession()
             if auth.authChangeEvent != .signedIn {
                 showIntro = true
+                await stageController.loadStageFromUser()
             }
             
         }

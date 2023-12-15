@@ -14,6 +14,15 @@ struct CollectionsView: View {
     
     var body: some View {
         ZStack {
+            if stageController.isEditEnabled {
+                ZStack() {
+                    NewCollectionButton()
+                    ChangeCollectionOrderButton()
+                        .padding(.bottom, 204)
+                }
+                .zIndex(10)
+                .transition(.move(edge: .trailing))
+            }
             ScrollView(showsIndicators: false) {
                 Spacer(minLength: 64)
                 LazyVStack {
@@ -27,16 +36,10 @@ struct CollectionsView: View {
                     }
                 }
                 .scrollTargetLayout()
+                .padding(.bottom, 100)
             }
             .scrollTargetBehavior(.viewAligned)
             .zIndex(0)
-            if stageController.isEditEnabled {
-                VStack() {
-                    Spacer()
-                    NewCollectionButton()
-                }
-                .zIndex(10)
-            }
         }
         .ignoresSafeArea()
     }
@@ -83,7 +86,7 @@ private struct NewCollectionButton: View {
                             }
                             .modifier(SideMountedButton(theme.button))
                         }
-                        .padding(.bottom, 204)
+                        .padding(.bottom, 268)
                     }
                 }
             }
@@ -95,7 +98,7 @@ private struct NewCollectionButton: View {
     
 }
 
-struct CollectionCreatorView: View {
+private struct CollectionCreatorView: View {
     
     @Binding var isPresented: Bool
     
@@ -171,7 +174,7 @@ struct CollectionCreatorView: View {
     }
 }
 
-struct CollectionPreviewRow: View {
+private struct CollectionPreviewRow: View {
     
     let collection: ImageCollection
     let imageHeight: CGFloat
@@ -217,18 +220,33 @@ struct CollectionPreviewRow: View {
                         Spacer(minLength: 80)
                     }
                 }
-                .scrollTargetLayout()
             }
-            .scrollTargetBehavior(.viewAligned)
             .safeAreaPadding(.horizontal, UIScreen.main.bounds.width * 0.06)
             .frame(height: imageHeight)
         }
         .padding(.bottom)
         .onTapGesture {
-            presentDetailView.toggle()
+            if !stageController.isEditEnabled {
+                presentDetailView.toggle()
+            }
         }
         .fullScreenCover(isPresented: $presentDetailView) {
             CollectionDetailView(collection: collectionData)
+        }
+        .onChange(of: collectionData.title) {
+            if var stage = stageController.stage, var collections = stage.collections {
+                collections = collections.map { collection in
+                    if collection.id != collectionData.id {
+                        return collection
+                    } else {
+                        var modifiedCollection = collection
+                        modifiedCollection.title = collectionData.title
+                        return modifiedCollection
+                    }
+                }
+                stage.collections = collections
+                stageController.replaceStage(stage)
+            }
         }
         .onChange(of: collectionData.content) {
             if var stage = stageController.stage, var collections = stage.collections {
@@ -312,4 +330,31 @@ struct CollectionPreviewRow: View {
             ImagePicker(image: self.$selectedImage)
         }
     }
+}
+
+private struct ChangeCollectionOrderButton: View {
+    
+    @EnvironmentObject var stageController: StageController
+    @EnvironmentObject var theme: ThemeController
+    
+    @State private var presentReorderSheet = false
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: { presentReorderSheet.toggle() }) {
+                    Image(systemName: "arrow.up.arrow.down")
+                        .foregroundStyle(theme.text)
+                }
+                .modifier(SideMountedButton(theme.accent, bordered: true))
+                .transition(.move(edge: .trailing))
+            }
+        }
+        .fullScreenCover(isPresented: $presentReorderSheet) {
+            CollectionOrderEditView()
+        }
+    }
+    
 }

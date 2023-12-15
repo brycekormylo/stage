@@ -20,8 +20,6 @@ class StageController: ObservableObject {
     let supabase: SupabaseClient = SupabaseClient(supabaseURL: Secrets.supabaseURL, supabaseKey: Secrets.supabaseAnonKey)
     let auth = AuthController.shared
     let remoteStorageController = RemoteStorageController()
-    
-    let sampleSegments = [Segment(id: UUID(), title: "About the dogs", content: "Millie adores Charlie, their tails wagging furiously whenever they're together, and their playful antics create an unbreakable bond of canine affection."), Segment(id: UUID(), title: "What they do", content: "She just loves charlie so damn much it is the cutest funniest thing on earth"), Segment(id: UUID(), title: "Why it's cute", content: "She just loves charlie so damn much it is the cutest funniest thing on earth")]
 
     private (set) var originalStage: Stage?
     
@@ -129,7 +127,7 @@ class StageController: ObservableObject {
     func createNewStage() async {
         Task {
             if let userID = auth.session?.user.id {
-                let newStage = Stage(id: UUID(), userID: userID, name: "New Stage", profession: "Profession", intro: "Intro")
+                let newStage = Stage(id: UUID(), userID: userID)
                 let compressedStage = newStage.compressed()
                 let query = supabase.database
                     .from("stages")

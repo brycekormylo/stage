@@ -43,24 +43,26 @@ class ImageCache {
 
 
 struct CachedAsyncImage: View {
+    
     let url: URL?
+    @EnvironmentObject private var theme: ThemeController
     
     var body: some View {
-
         if let url = url, let image = ImageCache.shared.getImage(url: url) {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } else {
-            AsyncImage(url: url) { phase in
-                phase.image?
+            AsyncImage(url: url) { image in
+                image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .onAppear {
-                        ImageCache.shared.setImages(images: [url!: phase.image!])
+                        ImageCache.shared.setImages(images: [url!: image])
                     }
-                }
+            } placeholder: {
+                theme.backgroundAccent
+            }
         }
-        
     }
 }

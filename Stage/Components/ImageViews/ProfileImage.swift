@@ -34,15 +34,6 @@ struct ProfileImage: View {
             CachedAsyncImage(url: imageURL)
                 .scaledToFill()
                 .frame(width: size, height: size)
-                .overlay {
-                    ZStack {
-                        theme.backgroundAccent.ignoresSafeArea()
-                        ProgressView()
-                            .foregroundStyle(theme.text)
-                            .scaleEffect(2.0)
-                    }
-                    .opacity(isUploading ? 1.0 : 0.0)
-                }
                 .clipShape(Circle())
         }
         .onTapGesture {
@@ -71,7 +62,12 @@ struct ProfileImage: View {
                 }
             }
         }
-        .onChange(of: $stageController.stage.wrappedValue?.profileImage) {
+        .onChange(of: stageController.stage) {
+            if let profileImage = stageController.stage?.profileImage {
+                imageURL = profileImage
+            }
+        }
+        .task {
             if let profileImage = stageController.stage?.profileImage {
                 imageURL = profileImage
             }

@@ -76,8 +76,10 @@ struct CollectionEditView: View {
             collectionData = data
             
         }
-        .onChange(of: title) {
+        .onChange(of: $title.wrappedValue) {
+            print(title)
             collectionData.title = self.title
+            print(collectionData.title)
         }
         .onChange(of: self.$selectedImage.wrappedValue) {
             if let image = selectedImage {
@@ -111,7 +113,7 @@ struct CollectionEditView: View {
                 ZStack {
                     HStack {
                         TextField("", text: $title)
-                            .font(.title2)
+                            .font(.custom("Quicksand-Medium", size: 32))
                             .foregroundStyle(theme.text)
                         Spacer()
                         deleteCollectionButton
@@ -139,6 +141,7 @@ struct CollectionEditView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(theme.backgroundAccent)
+                    .strokeBorder(theme.accent, lineWidth: 1.4)
                     .frame(width: 55, height: 55)
                 
                 Image(systemName: "trash")

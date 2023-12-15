@@ -59,9 +59,9 @@ struct ContactSheet: View {
                         .padding()
                     Spacer()
                     Button(action: { dismiss() }) {
-                        Image(systemName: "xmark")
+                        Image(systemName: "checkmark")
                     }
-                    .modifier(SideMountedButton(theme.backgroundAccent))
+                    .modifier(SideMountedButton(theme.button))
                 }
                 .padding(.vertical)
                 Group {
@@ -72,7 +72,7 @@ struct ContactSheet: View {
                         }
                         HStack {
                             Spacer()
-                            EditableText(content: $email)
+                            EditableText(content: $email, placeholder: "Email")
                                 .frame(width: UIScreen.main.bounds.width*3/4, height: 48)
                                 .multilineTextAlignment(.trailing)
                         }
@@ -118,7 +118,6 @@ struct ContactSheet: View {
         }
     }
 }
-
 
 #Preview {
     ContactButton()

@@ -14,12 +14,11 @@ struct ProfileView: View {
     @EnvironmentObject var auth: AuthController
     
     @State var arrowUp: Bool = false
-    @State var bannerHeight: CGFloat = 320
     @State var profileImageSize: CGFloat = 164
     
-    @State var name: String = "--"
-    @State var profession: String = "--"
-    @State var intro: String = "--"
+    @State var name: String = ""
+    @State var profession: String = ""
+    @State var intro: String = ""
     
     @State var segments: [Segment] = []
     
@@ -161,24 +160,23 @@ struct ProfileView: View {
             Spacer()
             HStack {
                 Spacer()
-                EditableField(content: $name)
-                    .font(.custom("Quicksand-Medium", size: 36))
+                EditableText(content: $name, placeholder: "Name")
             }
+            .font(.custom("Quicksand-Medium", size: 36))
             .padding(.horizontal, 24)
             HStack {
                 Spacer()
-                EditableField(content: $profession)
-                    .font(.custom("Quicksand-Light", size: 18))
+                EditableText(content: $profession, placeholder: "Profession")
                     .opacity(0.6)
             }
+            .font(.custom("Quicksand-Light", size: 18))
             .padding(.horizontal, 24)
             Spacer()
             CaptionView {
-                EditableText(content: $intro)
-                    .font(.custom("Quicksand-Medium", size: 18))
+                EditableText(content: $intro, placeholder: "Intro")
                     .padding(.vertical, 4)
             }
-            .transition(.move(edge: .leading))
+            .font(.custom("Quicksand-Medium", size: 18))
             Spacer()
             
         }
@@ -230,10 +228,8 @@ struct CaptionView<Content: View>: View {
         HStack {
             content
         }
-        .frame(height: 80)
-        .padding()
-        .cornerRadius(18)
-        .padding(.horizontal, 8)
+        .padding(.horizontal)
+        .frame(width: UIScreen.main.bounds.width, height: 80)
     }
 }
 
@@ -265,21 +261,26 @@ struct SegmentView: View {
         StyledStack {
             HStack {
                 Spacer()
-                EditableField(content: $segmentTitle)
+                EditableText(content: $segmentTitle, placeholder: "Segment Title")
                     .font(.custom("Quicksand-Medium", size: 24))
+                    .padding()
+                
             }
-            Group {
-                Spacer()
-                EditableText(content: $segmentContent)
-                    .font(.custom("Quicksand-Medium", size: 18))
-                Spacer()
-            }
+            Spacer()
+            EditableText(content: $segmentContent, placeholder: "Segment Body")
+                .font(.custom("Quicksand-Medium", size: 18))
+                .padding(.horizontal, 4)
+
+            
+            Spacer()
+
         }
+        .multilineTextAlignment(.center)
         .padding()
         .background {
             theme.backgroundAccent
                 .opacity(0.1)
-                .cornerRadius(18)
+                .cornerRadius(12)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
