@@ -47,7 +47,7 @@ struct CollectionOrderEditView: View {
                         .onDrag {
                             return NSItemProvider()
                         }
-                        .frame(height: 120)
+                        .frame(height: 60)
                         .listRowBackground(theme.background)
                     }
                     .onMove(perform: viewModel.move)

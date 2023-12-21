@@ -50,13 +50,17 @@ struct ContentView: View {
                 showIntro = true
                 await stageController.loadStageFromUser()
             }
-            
         }
         .onChange(of: auth.authChangeEvent) {
             if auth.authChangeEvent == .signedIn {
                 showIntro = false
             } else {
                 showIntro = true
+            }
+        }
+        .onChange(of: stageController.stage) {
+            if stageController.stage != nil {
+                showIntro = false
             }
         }
         .animation(

@@ -76,6 +76,10 @@ class StageController: ObservableObject {
         restore()
     }
     
+    func clearStage() {
+        self.stage = nil
+    }
+    
     func loadStageFromUser(_ id: UUID? = nil) async {
         if let userID = id ?? auth.session?.user.id {
             let query = supabase.database
@@ -92,6 +96,59 @@ class StageController: ObservableObject {
             } catch {
                 print("Loading Stage error: \(error)")
             }
+        }
+    }
+    
+    func getProfileImageFromID(_ stageID: UUID) async -> URL? {
+        let query = supabase.database
+            .from("stages")
+            .select()
+            .match(query: ["id": stageID])
+        
+        do {
+            let results: [CompressedStage] = try await query.execute().value
+            if let firstResult = results.first {
+                return firstResult.decompressed()?.profileImage
+            } else {
+                print("No results found")
+            }
+        } catch {
+            print("Loading Stage error: \(error)")
+        }
+        
+        return nil
+    }
+    
+    func loadStageFromID(_ stageID: UUID) async {
+        let query = supabase.database
+            .from("stages")
+            .select()
+            .match(query: ["id": stageID])
+        do {
+            let results: [CompressedStage] = try await query.execute().value
+            if let firstResult = results.first {
+                self.stage = firstResult.decompressed()
+            } else {
+                print("No results found")
+            }
+        } catch {
+            print("Loading Stage error: \(error)")
+        }
+    
+    }
+    
+    func getStageNames(by searchInput: String) async -> [StageName] {
+        let query = supabase.database
+            .rpc(fn: "get_stage_names_by_input", params: ["search_input": searchInput])
+        
+        do {
+            let result: [StageName] = try await query.execute().value
+            
+            return result
+            
+        } catch {
+            print(error)
+            return []
         }
     }
     

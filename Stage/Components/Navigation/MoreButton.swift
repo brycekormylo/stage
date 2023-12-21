@@ -120,9 +120,13 @@ struct MoreButton: View {
     
     var accountButton: some View {
         Button(action: {
-            presentAccountView.toggle()
+            if auth.authChangeEvent == .signedIn {
+                stageController.clearStage()
+            } else {
+                presentAccountView.toggle()
+            }
         }) {
-            Image(systemName: "person")
+            Image(systemName: auth.authChangeEvent == .signedIn ? "person" : "xmark")
         }
         .sheet(
             isPresented: $presentAccountView,

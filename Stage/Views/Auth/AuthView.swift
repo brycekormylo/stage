@@ -16,10 +16,12 @@ struct AuthView: View {
     @State var error: Error?
     @State var errorMessage: String?
     @State var loginInProgress: Bool = false
+    @State var presentSearch: Bool = false
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var auth: AuthController
     @EnvironmentObject var theme: ThemeController
+    @EnvironmentObject var stageController: StageController
     
     enum Mode {
         case signIn, signUp
@@ -115,6 +117,19 @@ struct AuthView: View {
                         Text(error)
                     }
                     buttons
+                    HStack {
+                        Rectangle()
+                            .fill(theme.text.opacity(0.2))
+                            .frame(width: .infinity, height: 1)
+                        Text("or")
+                            .foregroundStyle(theme.text)
+                        Rectangle()
+                            .fill(theme.text.opacity(0.2))
+                            .frame(width: .infinity, height: 1)
+                    }
+                    .padding(.vertical, 16)
+                    .frame(maxWidth: UIScreen.main.bounds.width/4)
+                    searchField
                     Spacer()
                 }
                 .padding()
@@ -193,8 +208,34 @@ struct AuthView: View {
         }
         .background {
             RoundedRectangle(cornerRadius: 12)
-                .stroke(theme.accent, lineWidth: 1.4)
+                .fill(theme.backgroundAccent)
+                .strokeBorder(theme.accent, lineWidth: 1.4)
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
+        }
+    }
+    
+    var searchField: some View {
+        HStack {
+            Button(action: { presentSearch = true}) {
+                HStack {
+                    Spacer()
+                    Text("Find someone?")
+                        .foregroundStyle(theme.text)
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(theme.button)
+                    Spacer()
+                }
+                .padding(16)
+                
+            }
+            .background {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(theme.backgroundAccent)
+                    .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
+            }
+        }
+        .sheet(isPresented: $presentSearch) {
+            SearchView()
         }
     }
 }

@@ -19,6 +19,9 @@ struct AccountView: View {
     @State var inEditMode: Bool = false
     @State var confirmed: Bool = false
     
+    @State var stageName: String = "cutestuff"
+    @State var presentUsernameChanger: Bool = false
+    
     enum Mode {
         case signIn, signUp
     }
@@ -26,6 +29,17 @@ struct AccountView: View {
     var body: some View {
         createBody()
             .background(theme.background)
+            .task {
+                if let stageID = stageController.stage?.id {
+                    print(stageID)
+                    await auth.syncStageName(for: stageID)
+                    if let stageName = auth.stageName {
+                        self.stageName = stageName
+                    } else {
+                        self.stageName = ""
+                    }
+                }
+            }
     }
     
     func createBody() -> some View {
@@ -47,6 +61,7 @@ struct AccountView: View {
             VStack(spacing: 20) {
                 buildField("Email", content: auth.session?.user.email)
                 buildField("Creation Date", content: auth.session?.user.createdAt.formatted())
+                buildUsernameChanger("Stage Name")
                 buildButtons()
                 Spacer()
             }
@@ -54,6 +69,52 @@ struct AccountView: View {
         }
         .font(.custom("Quicksand-Medium", size: 18))
     }
+    
+    func buildUsernameChanger(_ fieldLabel: String, editable: Bool = false) -> some View {
+        ZStack {
+            HStack {
+                Button(action: { presentUsernameChanger = true }) {
+                    HStack {
+                        if stageName != "" {
+                            Text("@\(stageName.lowercased())")
+                        } else {
+                            Text("Tap to set up")
+                        }
+                        Image(systemName: "pencil")
+                            .scaleEffect(0.8)
+                            .padding(8)
+                            .background {
+                                Circle()
+                                    .strokeBorder(theme.button.opacity(0.8), lineWidth: 1.4)
+                            }
+                            .padding(.horizontal)
+                    }
+                }
+                .foregroundStyle(theme.text)
+                .frame(height: 64)
+                .frame(minWidth: 110)
+                .fullScreenCover(isPresented: $presentUsernameChanger, 
+                                 onDismiss: {
+                    Task {
+                        if let id = stageController.stage?.id {
+                            await auth.setStageName(to: stageName, for: id)
+                        }
+                    }
+                }) {
+                    EditUsernameSheetView(content: $stageName)
+                        .clearModalBackground()
+                }
+                Spacer()
+            }
+            HStack {
+                Text(fieldLabel)
+                    .foregroundColor(theme.text.opacity(0.6))
+                    .offset(x: 0, y: -30)
+                Spacer()
+            }
+        }
+    }
+
     
     func buildField(_ fieldLabel: String, content: String? = "", editable: Bool = false) -> some View {
         ZStack {
@@ -127,6 +188,67 @@ struct AccountView: View {
                 .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
         }
     }
+}
+
+private struct EditUsernameSheetView: View {
+    
+    @EnvironmentObject var theme: ThemeController
+    @Environment(\.dismiss) private var dismiss
+    
+    @Binding var content: String
+    @State var newContent: String = ""
+    
+    
+    var body: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Text("Use this to share your profile!")
+                        .font(.custom("Quicksand", size: 18))
+                        .padding(.bottom)
+                    Spacer()
+                }
+                TextField(content, text: $newContent)
+                    .scrollContentBackground(.hidden)
+                    .textCase(.lowercase)
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(theme.background)
+                    }
+                    .multilineTextAlignment(.leading)
+                    .font(.custom("Quicksand", size: 18))
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        content = newContent
+                        dismiss()
+                    }) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(theme.button)
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                    .frame(width: 110, height: 55)
+                }
+            }
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(theme.backgroundAccent)
+            }
+            .frame(height: 240)
+            Spacer()
+        }
+        .padding(.top, 120)
+        .padding(20)
+        .background(.ultraThinMaterial.opacity(0.4))
+        .task {
+            self.newContent = content
+        }
+    }
+    
 }
 
 #Preview {

@@ -25,6 +25,8 @@ class AuthController: ObservableObject {
     private var error: Error?
     @Published private(set) var session: Session?
     @Published private(set) var authChangeEvent: AuthChangeEvent?
+    @Published private(set) var stageName: String?
+    @Published private(set) var viewOnly: Bool = false
     
     func startSession() async {
         do {
@@ -63,9 +65,33 @@ class AuthController: ObservableObject {
                 self.session = nil
                 clearStoredSession()
             } catch {
-                print(error)
+                print(error.localizedDescription)
             }
         }
+    }
+    
+    func syncStageName(for stageID: UUID) async {
+
+        let query = supabase.database
+            .rpc(fn: "get_stage_name", params: ["stage_id_param": stageID.uuidString.lowercased()])
+        do {
+            stageName = try await query.execute().value
+            print("Stage Name: \(stageName ?? "Not found")")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func setStageName(to name: String, for stageID: UUID) async {
+        let query = supabase.database
+            .rpc(fn: "update_stage_name", params: ["stage_id_param": stageID.uuidString.lowercased(), "new_name_param": name])
+        do {
+            try await query.execute()
+        } catch {
+            print(error)
+        }
+        await syncStageName(for: stageID)
+        
     }
     
     func createNewUser(email: String, password: String) async throws {

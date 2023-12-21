@@ -28,6 +28,7 @@
 		026AC4C42B1A8F50001B7D2E /* SegmentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */; };
 		027817852AFC6169002A9B31 /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027817842AFC6169002A9B31 /* MoreButton.swift */; };
 		02A995792B19546200DEAAC5 /* CollectionEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A995782B19546200DEAAC5 /* CollectionEditView.swift */; };
+		02AC1E122B33B6CD0030082D /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC1E112B33B6CD0030082D /* SearchView.swift */; };
 		02D32E122B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */; };
 		02D32E132B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */; };
 		02D32E142B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */; };
@@ -113,6 +114,7 @@
 		026AC4C32B1A8F50001B7D2E /* SegmentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentEditView.swift; sourceTree = "<group>"; };
 		027817842AFC6169002A9B31 /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 		02A995782B19546200DEAAC5 /* CollectionEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionEditView.swift; sourceTree = "<group>"; };
+		02AC1E112B33B6CD0030082D /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		02D32E0D2B1D4F5000DEEDA6 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		02D32E0E2B1D4F5000DEEDA6 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
 		02D32E0F2B1D4F5000DEEDA6 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				02FC7A422AF448A60043FA48 /* HighlightsView.swift */,
 				02FC7A432AF448A60043FA48 /* CollectionsView.swift */,
 				022118892AF86B030098887D /* CollectionDetailView.swift */,
+				02AC1E112B33B6CD0030082D /* SearchView.swift */,
 				027EA3652B23A562007B59C5 /* Auth */,
 			);
 			path = Views;
@@ -531,6 +534,7 @@
 				024EBFF52AF6CBD800D432BC /* CircleButton.swift in Sources */,
 				02FC7A022AF428420043FA48 /* ContentView.swift in Sources */,
 				020833BB2B059FE700AE71E4 /* ImageCache.swift in Sources */,
+				02AC1E122B33B6CD0030082D /* SearchView.swift in Sources */,
 				02FC7A332AF428D40043FA48 /* Stage.swift in Sources */,
 				025980AF2B0296A20065F69E /* StickyHeader.swift in Sources */,
 				02FC7A442AF448A60043FA48 /* AuthView.swift in Sources */,

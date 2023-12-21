@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CompressedStage: Codable, Identifiable{
+struct CompressedStage: Codable, Identifiable {
     var id: UUID = UUID()
     var user_id: UUID
     var content: String
@@ -147,4 +147,9 @@ struct Segment: Codable, Identifiable, Hashable {
     var content: String?
     var email: String?
     
+}
+
+struct StageName: Codable, Hashable {
+    let stage_id: UUID
+    let stage_name: String
 }

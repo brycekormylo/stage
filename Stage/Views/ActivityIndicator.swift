@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivityIndicator: View {
     
     @State private var isAnimating: Bool = false
+    @State private var animationAmount = 1.0
     
     var body: some View {
         GeometryReader { (geometry: GeometryProxy) in
@@ -21,13 +22,16 @@ struct ActivityIndicator: View {
                         .offset(y: calcYOffset(geometry))
                 }.frame(width: geometry.size.width, height: geometry.size.height)
                     .rotationEffect(!self.isAnimating ? .degrees(0) : .degrees(360))
-                    .animation(.timingCurve(0.5, 0.15 + Double(index) / 5, 0.25, 1, duration: 1.5).repeatForever(autoreverses: false))
-  
+                    .animation(
+                        .timingCurve(0.5, 0.15 + Double(index) / 5, 0.25, 1, duration: 1.5).repeatForever(autoreverses: false),
+                        value: animationAmount
+                    )
             }
         }
         .aspectRatio(1, contentMode: .fit)
         .onAppear {
             self.isAnimating = true
+            self.animationAmount = 1.5
         }
     }
     
