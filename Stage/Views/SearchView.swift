@@ -68,6 +68,9 @@ struct SearchView: View {
                     if let searchResults = results {
                         ForEach(searchResults, id: \.self) { result in
                             SearchResult(result: result)
+                                .onTapGesture {
+                                    dismiss()
+                                }
                         }
                     } else {
                         Text("No results")

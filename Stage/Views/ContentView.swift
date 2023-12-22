@@ -28,7 +28,7 @@ struct ContentView: View {
             if showIntro {
                 AuthView()
                     .transition(.move(edge: .bottom))
-            } else if stageController.stage == nil {
+            } else if showLoadingScreen {
                 ZStack {
                     theme.background
                     ActivityIndicator()
@@ -48,18 +48,22 @@ struct ContentView: View {
             await auth.startSession()
             if auth.authChangeEvent != .signedIn {
                 showIntro = true
-                await stageController.loadStageFromUser()
             }
         }
         .onChange(of: auth.authChangeEvent) {
             if auth.authChangeEvent == .signedIn {
                 showIntro = false
+                Task {
+                    await stageController.loadStageFromUser()
+                }
             } else {
                 showIntro = true
             }
         }
         .onChange(of: stageController.stage) {
-            if stageController.stage != nil {
+            if stageController.stage == nil {
+                showIntro = true
+            } else {
                 showIntro = false
             }
         }

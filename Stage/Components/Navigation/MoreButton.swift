@@ -120,7 +120,7 @@ struct MoreButton: View {
     
     var accountButton: some View {
         Button(action: {
-            if auth.authChangeEvent == .signedIn {
+            if auth.authChangeEvent != .signedIn {
                 stageController.clearStage()
             } else {
                 presentAccountView.toggle()

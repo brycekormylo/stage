@@ -120,12 +120,12 @@ struct AuthView: View {
                     HStack {
                         Rectangle()
                             .fill(theme.text.opacity(0.2))
-                            .frame(width: .infinity, height: 1)
+                            .frame(height: 1)
                         Text("or")
                             .foregroundStyle(theme.text)
                         Rectangle()
                             .fill(theme.text.opacity(0.2))
-                            .frame(width: .infinity, height: 1)
+                            .frame(height: 1)
                     }
                     .padding(.vertical, 16)
                     .frame(maxWidth: UIScreen.main.bounds.width/4)
@@ -234,7 +234,7 @@ struct AuthView: View {
                     .shadow(color: theme.shadow, radius: 6, x: 4, y: 4)
             }
         }
-        .sheet(isPresented: $presentSearch) {
+        .fullScreenCover(isPresented: $presentSearch) {
             SearchView()
         }
     }
